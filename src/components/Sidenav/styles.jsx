@@ -3,7 +3,7 @@ import { Box, IconButton as IconButtonMUI, Backdrop as BackdropMUI } from '@mui/
 
 export const Backdrop = styled(BackdropMUI)({
   position: 'fixed',
-  zIndex: 1,
+  zIndex: 998,
   top: 0,
   left: 0,
   width: '100%',
@@ -17,7 +17,7 @@ export const SidenavWrapper = styled(Box, {
   flexDirection: 'column',
   alignItems: 'center',
   position: 'fixed',
-  zIndex: 1,
+  zIndex: 999,
   top: '50%',
   transform: 'translateY(-50%)',
   left: '16px',

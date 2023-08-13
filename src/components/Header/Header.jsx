@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { styled } from '@mui/system';
 import Link from 'next/link';
 import { Box, Typography, Button } from '@mui/material';
 import TextLogo from '@/components/SvgIcons/TextLogo';
@@ -8,21 +11,45 @@ import SearchIcon from '@/components/SvgIcons/SearchIcon';
 import HomeIcon from '@mui/icons-material/Home';
 import CallIcon from '@mui/icons-material/Call';
 
+const Header = styled('header', {
+  shouldForwardProp: (prop) => prop !== 'isSticky'
+})(({ isSticky }) => ({
+  position: 'sticky',
+  top: '16px',
+  zIndex: 10,
+  display: 'flex',
+  justifyContent: 'space-between',
+  transition: 'all .25s',
+  backdropFilter: isSticky ? 'blur(1.875rem)' : 'initial',
+  alignItems: 'center',
+  flex: '0 0 auto',
+  background: isSticky ? 'rgba(255, 255, 255, 0.8)' : 'initial',
+  boxShadow: isSticky ? 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem' : 'initial',
+  py: 1,
+  px: 3,
+  borderRadius: '6px'
+  // boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
+}));
+
 export default function () {
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    document.body.addEventListener('scroll', onScroll);
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const onScroll = () => {
+    if (document.body.scrollTop > 0) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flex: '0 0 auto',
-        // background: '#fff',
-        py: 1,
-        px: 3,
-        borderRadius: '6px'
-        // boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
-      }}
-    >
+    <Header isSticky={isSticky}>
       <Box
         sx={{
           display: 'flex',
@@ -117,6 +144,6 @@ export default function () {
 
         <TextLogo />
       </Box>
-    </Box>
+    </Header>
   );
 }

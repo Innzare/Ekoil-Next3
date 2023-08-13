@@ -1,13 +1,13 @@
 'use client';
 
+import Lottie from 'lottie-react';
 import Image from 'next/image';
-import { Box, Grid, Container, Typography, Button } from '@mui/material';
 import Link from 'next/link';
+import { Box, Grid, Container, Typography, Button } from '@mui/material';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 import OilBarrelIcon from '@mui/icons-material/OilBarrel';
-import Lottie from 'lottie-react';
 import Engine from '@/app/assets/engine.json';
-import styles from './styles/page.module.css';
+import WeProduceBlock from '@/components/WeProduceBlock/WeProduceBlock';
 
 export default function Home() {
   return (
@@ -51,6 +51,7 @@ export default function Home() {
           mt: -10,
           mx: 5,
           p: 3,
+          pt: 6,
           borderRadius: '6px',
           boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
         }}
@@ -80,7 +81,7 @@ export default function Home() {
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={8}>
             <Typography
-              variant="h3"
+              variant="h4"
               sx={{
                 textTransform: 'uppercase',
                 color: '#2b2b2b',
@@ -96,7 +97,7 @@ export default function Home() {
             </Typography>
             <Typography
               sx={{
-                fontSize: '24px',
+                fontSize: '22px',
                 fontWeight: 'bold',
                 lineHeight: '1.3',
                 flex: '0 1 50%',
@@ -112,23 +113,100 @@ export default function Home() {
                 Узнайте больше
               </Button>
             </Link>
-
-            {/* <Typography
-              sx={{
-                mt: 2
-              }}
-            >
-              Наша компания специализируется на производстве и оптовой реализации высококачественных смазочных
-              материалов под торговой маркой EKOIL. Многолетний опыт и сотрудничество с ведущими предприятиями отрасли
-              позволили зарекомендовать себя как надёжного партнёра и завоевать доверие многих клиентов.
-            </Typography> */}
           </Grid>
 
           <Grid item xs={4}>
-            <Lottie style={{ height: '300px' }} animationData={Engine} />
+            <Lottie style={{ height: '250px' }} animationData={Engine} />
           </Grid>
         </Grid>
       </Box>
+
+      <Typography
+        variant="h2"
+        sx={{
+          mt: 6,
+          mb: 4,
+          fontWeight: 'bold',
+          fontSize: '32px'
+        }}
+      >
+        Мы производим
+      </Typography>
+
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <WeProduceBlock></WeProduceBlock>
+        </Grid>
+        <Grid item xs={4}>
+          <WeProduceBlock></WeProduceBlock>
+        </Grid>
+        <Grid item xs={4}>
+          <WeProduceBlock></WeProduceBlock>
+        </Grid>
+      </Grid>
+
+      <Typography
+        variant="h2"
+        sx={{
+          mt: 6,
+          mb: 4,
+          fontWeight: 'bold',
+          fontSize: '32px'
+        }}
+      >
+        Почему мы
+      </Typography>
+
+      <Box
+        sx={{
+          padding: '16px',
+          borderRadius: '6px',
+          backgroundColor: '#fff',
+          boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
+        }}
+      ></Box>
+
+      <Typography
+        variant="h2"
+        sx={{
+          mt: 6,
+          mb: 4,
+          fontWeight: 'bold',
+          fontSize: '32px'
+        }}
+      >
+        Наше производство
+      </Typography>
+
+      <Box
+        sx={{
+          padding: '16px',
+          borderRadius: '6px',
+          backgroundColor: '#fff',
+          boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
+        }}
+      ></Box>
+
+      <Typography
+        variant="h2"
+        sx={{
+          mt: 6,
+          mb: 4,
+          fontWeight: 'bold',
+          fontSize: '32px'
+        }}
+      >
+        Связаться
+      </Typography>
+
+      <Box
+        sx={{
+          padding: '16px',
+          borderRadius: '6px',
+          backgroundColor: '#fff',
+          boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
+        }}
+      ></Box>
     </main>
   );
 }

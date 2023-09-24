@@ -12,22 +12,37 @@ export const Backdrop = styled(BackdropMUI)({
 
 export const SidenavWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'isOpen'
-})(({ isOpen }) => ({
+})(({ theme, isOpen }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  justifyContent: 'space-between',
   position: 'fixed',
   zIndex: 999,
   top: '50%',
   transform: 'translateY(-50%)',
   left: '16px',
-  transition: 'width .25s ease',
+  transition: '.25s ease',
   width: isOpen ? '250px' : '70px',
   height: 'calc(100vh - 2rem)',
   padding: '16px',
   borderRadius: '6px',
-  background: '#fff',
-  boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
+  background: theme.palette.background.paper,
+  boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem',
+
+  [theme.breakpoints.down('md')]: {
+    left: isOpen ? '16px' : '-100%',
+    width: '250px'
+  }
+}));
+
+export const SidenavTop = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isOpen'
+})(({ theme, isOpen }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  width: '100%'
 }));
 
 export const OnlyTextLogoWrapper = styled(Box, {
@@ -40,16 +55,18 @@ export const OnlyTextLogoWrapper = styled(Box, {
   transition: 'all .25s ease-in-out'
 }));
 
-export const IconButton = styled(IconButtonMUI)({
+export const IconButton = styled(IconButtonMUI)(({ theme }) => ({
   position: 'absolute',
   top: '62px',
   right: 0,
   transform: 'translateX(50%)',
   zIndex: 1,
-  background: '#cae3fb',
+  background: theme.palette.background.primary,
   padding: '2px',
+  color: theme.palette.icon.default,
 
   '&:hover': {
-    background: '#d7e9fa'
+    background: theme.palette.background.primary,
+    opacity: '0.9'
   }
-});
+}));

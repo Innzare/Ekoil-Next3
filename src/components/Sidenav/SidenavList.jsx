@@ -6,7 +6,7 @@ import SidenavListItem from './SidenavListItem';
 export const List = styled('ul')({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: '8px',
   width: '100%'
 });
 

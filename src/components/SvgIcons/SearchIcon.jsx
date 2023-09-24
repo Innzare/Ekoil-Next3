@@ -5,9 +5,10 @@ export default function SearchIcon() {
     <svg
       id="fi_3126554"
       enableBackground="new 0 0 511.977 511.977"
-      height="28"
+      height="58"
       viewBox="0 0 511.977 511.977"
-      width="28"
+      width="58"
+      fill="#fff"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>

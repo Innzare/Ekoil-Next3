@@ -14,8 +14,8 @@ export const sidenav = [
     icon: HomeIcon
   },
   {
-    title: 'Производство',
-    path: '/production',
+    title: 'Компания',
+    path: '/company',
     icon: FactoryIcon
   },
   {
@@ -32,11 +32,6 @@ export const sidenav = [
     title: 'Сертификаты',
     path: '/sertificates',
     icon: VerifiedIcon
-  },
-  {
-    title: 'Компания',
-    path: '/about',
-    icon: InfoIcon
   },
   {
     title: 'Где купить',

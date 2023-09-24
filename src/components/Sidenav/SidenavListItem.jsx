@@ -4,9 +4,9 @@ import { usePathname } from 'next/navigation';
 import { styled } from '@mui/system';
 import { Typography } from '@mui/material';
 
-export const ListItem = styled('li', {
+const ListItem = styled('li', {
   shouldForwardProp: (prop) => prop !== 'isCurrentPath'
-})(({ isCurrentPath }) => ({
+})(({ theme, isCurrentPath }) => ({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
@@ -16,14 +16,22 @@ export const ListItem = styled('li', {
   transition: '.25s',
   whiteSpace: 'nowrap',
   cursor: 'pointer',
-  color: '#000000b5',
-  color: isCurrentPath ? '#0288d1' : '#000000b5',
-  background: isCurrentPath ? '#c8e6ff' : 'transparent',
+  color: theme.palette.icon.default,
+  background: isCurrentPath ? theme.palette.background.primary : 'transparent',
 
   '&:hover': {
-    background: '#c8e6ff',
-    color: '#0288d1'
+    background: theme.palette.background.primary
   }
+}));
+
+const ListItemText = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== 'isOpen'
+})(({ theme, isOpen }) => ({
+  transition: '.25s',
+  visibility: isOpen ? 'visible' : 'hidden',
+  opacity: isOpen ? '1' : '0',
+  transform: isOpen ? 'translateX(0)' : 'translateX(-10px)',
+  color: theme.palette.text.primary
 }));
 
 export default function SidenavListItem({ item, isOpen }) {
@@ -38,17 +46,7 @@ export default function SidenavListItem({ item, isOpen }) {
       <ListItem isCurrentPath={isCurrentPath}>
         <Icon color="inherit" sx={{ mr: 2 }} />
 
-        <Typography
-          sx={{
-            transition: '.25s',
-            visibility: isOpen ? 'visible' : 'hidden',
-            opacity: isOpen ? '1' : '0',
-            transform: isOpen ? 'translateX(0)' : 'translateX(-10px)',
-            color: '#000'
-          }}
-        >
-          {title}
-        </Typography>
+        <ListItemText isOpen={isOpen}>{title}</ListItemText>
       </ListItem>
     </Link>
   );

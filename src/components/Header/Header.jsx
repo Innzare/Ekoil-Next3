@@ -1,38 +1,27 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/system';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Link from 'next/link';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import TextLogo from '@/components/SvgIcons/TextLogo';
 import OilsIcon from '@/components/SvgIcons/OilsIcon';
+import OilBarrelIcon from '@mui/icons-material/OilBarrel';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import SertificateIcon from '@/components/SvgIcons/SertificateIcon';
-import SearchIcon from '@/components/SvgIcons/SearchIcon';
-import HomeIcon from '@mui/icons-material/Home';
+// import SearchIcon from '@/components/SvgIcons/SearchIcon';
 import CallIcon from '@mui/icons-material/Call';
+import { Header, HeaderNav } from './styles';
 
-const Header = styled('header', {
-  shouldForwardProp: (prop) => prop !== 'isSticky'
-})(({ isSticky }) => ({
-  position: 'sticky',
-  top: '16px',
-  zIndex: 10,
-  display: 'flex',
-  justifyContent: 'space-between',
-  transition: 'all .25s',
-  backdropFilter: isSticky ? 'blur(1.875rem)' : 'initial',
-  alignItems: 'center',
-  flex: '0 0 auto',
-  background: isSticky ? 'rgba(255, 255, 255, 0.8)' : 'initial',
-  boxShadow: isSticky ? 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem' : 'initial',
-  py: 1,
-  px: 3,
-  borderRadius: '6px'
-  // boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
-}));
-
-export default function () {
+export default function (props) {
+  const { onToggleSidenav } = props;
   const [isSticky, setIsSticky] = useState(false);
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     document.body.addEventListener('scroll', onScroll);
@@ -50,100 +39,44 @@ export default function () {
 
   return (
     <Header isSticky={isSticky}>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2
-        }}
-      >
-        {/* <Box
-          sx={{
-            display: 'flex',
-            // flexDirection: 'column',
-            gap: 2,
-            justifyContent: 'center',
-            alignItems: 'center',
-            p: 1.5,
-            borderRadius: '6px',
-            backgroundColor: '#c8e6ff',
-            boxShadow: '0px 2px 3px 0px rgba(0,0,0,0.2)'
-          }}
-        >
-          <CallIcon />
-          <Typography>Свяжитесь с нами!</Typography>
-        </Box> */}
-
-        <Button
-          color="success"
-          sx={{
-            display: 'flex',
-            gap: 2
-          }}
-        >
-          <CallIcon />
+      {isTablet ? (
+        <IconButton aria-label="delete" onClick={onToggleSidenav}>
+          <MenuOpenIcon />
+        </IconButton>
+      ) : (
+        <Button sx={{ textTransform: 'initial' }} color="success" startIcon={<CallIcon sx={{ mr: 1 }} />}>
           Свяжитесь с нами!
         </Button>
+      )}
+      {/* <Button sx={{ textTransform: 'initial' }} color="success" startIcon={<CallIcon sx={{ mr: 1 }} />}>
+        Свяжитесь с нами!
+      </Button> */}
 
-        {/* <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 2
-          }}
-        >
-          <CallIcon /> +7(987)-123-45-67
-        </Box> */}
-      </Box>
-
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 6
-        }}
-      >
+      <HeaderNav>
         <Link href="/search">
-          <Button
-            size="small"
-            sx={{
-              display: 'flex',
-              gap: 2
-            }}
-          >
-            <SearchIcon />
+          <Button sx={{ textTransform: 'initial' }} variant="text" startIcon={<SearchIcon />}>
             Подобрать масло
           </Button>
         </Link>
 
-        <Link href="/sertificates">
-          <Button
-            size="small"
-            sx={{
-              display: 'flex',
-              gap: 2
-            }}
-          >
-            <SertificateIcon />
+        {/* <Link href="/sertificates">
+          <Button startIcon={<SertificateIcon sx={{ mr: 1 }} />}>
             Сертификаты
           </Button>
-        </Link>
+        </Link> */}
 
         <Link href="/products">
-          <Button
-            size="small"
-            sx={{
-              display: 'flex',
-              gap: 2
-            }}
-          >
-            <OilsIcon />
+          <Button sx={{ textTransform: 'initial' }} variant="text" startIcon={<OilBarrelIcon />}>
             Каталог
           </Button>
         </Link>
 
-        <TextLogo />
-      </Box>
+        {!isMobile && (
+          <Link href="/search">
+            <TextLogo color={theme.palette.common.mode} />
+          </Link>
+        )}
+      </HeaderNav>
     </Header>
   );
 }

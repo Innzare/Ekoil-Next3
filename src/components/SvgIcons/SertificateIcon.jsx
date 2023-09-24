@@ -5,15 +5,15 @@ export default function SertificateIcon() {
     <svg
       id="fi_11553549"
       enableBackground="new 0 0 550 550"
-      height="28"
+      height="48"
       viewBox="0 0 550 550"
-      width="28"
+      width="48"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g
         style={{
           fill: 'none',
-          stroke: '#000',
+          stroke: '#fff',
           strokeLinecap: 'round',
           strokeLinejoin: 'round',
           strokeMiterlimit: 10,

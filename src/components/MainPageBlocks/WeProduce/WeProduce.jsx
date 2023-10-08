@@ -48,12 +48,12 @@ export default function About() {
 
   return (
     <>
-      <SectionTitle text="Мы производим" />
+      <SectionTitle text="Наша продукция" />
 
       <Box>
         <Grid
           container
-          spacing={2}
+          spacing={4}
           sx={{
             mt: {
               sm: 0,

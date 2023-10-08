@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 
 export const Swiper = styled(SwiperMUI)(({ theme }) => ({
   width: '100%',
-  height: '600px',
+  height: '500px',
 
   [theme.breakpoints.down('sm')]: {
     height: '300px'

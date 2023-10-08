@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Box, Typography } from '@mui/material';
 
 export default function ActionButton(props) {
-  const { orientation = 'vertical', text = '', icon: Icon, href } = props;
+  const { orientation = 'vertical', title = '', text = '', icon: Icon, href } = props;
 
   return (
     <Link href={href}>
@@ -17,7 +17,7 @@ export default function ActionButton(props) {
           position: 'relative',
           width: orientation === 'vertical' ? '200px' : '400px',
           height: '200px',
-          borderRadius: '12px',
+          borderRadius: '6px',
           background: '#1021863d',
           backdropFilter: 'blur(15px)',
           overflow: 'hidden',
@@ -41,10 +41,10 @@ export default function ActionButton(props) {
           }
         }}
       >
-        <Icon />
-        <Typography color="#fff" variant="h6">
+        <Typography color="#fff" variant="h6" sx={{ textTransform: 'uppercase' }}>
           {text}
         </Typography>
+        <Icon />
       </Box>
     </Link>
   );

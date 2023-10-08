@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 import './Loader.css';
 
-export default function Loader() {
+export default function Loader({ customClass }) {
   const [activeClass, setActiveClass] = useState('');
 
   useEffect(() => {
@@ -14,6 +14,7 @@ export default function Loader() {
 
   return (
     <Box
+      className={customClass}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -25,7 +26,13 @@ export default function Loader() {
         width: '100%',
         height: '100%',
         zIndex: 1000,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        opacity: 1,
+        transition: 'opacity 0.5s ease-out',
+
+        '&.fade-out': {
+          opacity: 0
+        }
       }}
     >
       <Box sx={{ mt: -7 }}>

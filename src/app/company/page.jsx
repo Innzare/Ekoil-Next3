@@ -29,12 +29,12 @@ export default function Production() {
         <Card elevation={3}>
           <Box
             sx={{
-              // backgroundImage: 'url(https://aimol.ru/bitrix/templates/aspro_max/images/09/company_top.jpg)',
+              backgroundImage: 'url(https://aimol.ru/bitrix/templates/aspro_max/images/09/company_top.jpg)',
               height: '300px',
               p: 5
             }}
           >
-            <SectionTitle text="О компании" />
+            <SectionTitle text="О компании" isLight />
           </Box>
 
           <Box sx={{ p: 3 }}>

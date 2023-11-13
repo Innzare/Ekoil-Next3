@@ -10,6 +10,7 @@ import Footer from '@/components/Footer/Footer';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 import Loader from '@/components/Loader/Loader';
 import { MaterialUIControllerProvider } from '@/context';
+import '@/app/styles/global.css';
 
 const MainContent = styled(Box)(({ theme }) => ({
   marginLeft: '88px',

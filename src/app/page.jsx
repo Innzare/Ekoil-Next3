@@ -26,68 +26,6 @@ export default function Home() {
 
       <Box sx={{ mb: 5 }}>
         <SectionWrapper>
-          <VectorMap
-            map={worldMerc}
-            zoomOnScroll={false}
-            zoomButtons={false}
-            markersSelectable
-            backgroundColor="transparent"
-            selectedMarkers={['1', '3']}
-            markers={[
-              {
-                name: 'USA',
-                latLng: [40.71296415909766, -74.00437720027804]
-              },
-              {
-                name: 'Germany',
-                latLng: [51.17661451970939, 10.97947735117339]
-              },
-              {
-                name: 'Brazil',
-                latLng: [-7.596735421549542, -54.781694323779185]
-              },
-              {
-                name: 'Russia',
-                latLng: [62.318222797104276, 89.81564777631716]
-              },
-              {
-                name: 'China',
-                latLng: [22.320178999475512, 114.17161225541399]
-              }
-            ]}
-            regionStyle={{
-              initial: {
-                fill: '#dee2e7',
-                'fill-opacity': 1,
-                stroke: 'none',
-                'stroke-width': 0,
-                'stroke-opacity': 0
-              }
-            }}
-            markerStyle={{
-              initial: {
-                fill: '#e91e63',
-                stroke: '#ffffff',
-                'stroke-width': 5,
-                'stroke-opacity': 0.5,
-                r: 7
-              },
-              hover: {
-                fill: 'E91E63',
-                stroke: '#ffffff',
-                'stroke-width': 5,
-                'stroke-opacity': 0.5
-              },
-              selected: {
-                fill: 'E91E63',
-                stroke: '#ffffff',
-                'stroke-width': 5,
-                'stroke-opacity': 0.5
-              }
-            }}
-            onRegionTipShow={() => false}
-            onMarkerTipShow={() => false}
-          />
           <Box
             sx={{
               display: 'flex',
@@ -116,7 +54,9 @@ export default function Home() {
             >
               <DigitsCounter val={150} time={7} />
               {/* <span>150</span> */}
-              <p>наименований продукции</p>
+              <p>
+                наименований <br /> продукции
+              </p>
             </Typography>
 
             {/* <DigitsCounter val={666} time={1} /> */}
@@ -141,7 +81,9 @@ export default function Home() {
             >
               <DigitsCounter val={100} time={7} />
               {/* <span>100</span> */}
-              <p>тысяч тонн продукции в год</p>
+              <p>
+                тысяч тонн <br /> продукции в год
+              </p>
             </Typography>
           </Box>
           <Grid container spacing={8}>

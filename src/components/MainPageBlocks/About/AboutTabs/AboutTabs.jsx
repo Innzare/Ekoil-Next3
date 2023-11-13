@@ -3,13 +3,11 @@
 import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Box, Typography, Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import Assortment from './Tabs/Assortment';
 import Specialisation from './Tabs/Specialisation';
 import WhyWe from './Tabs/WhyWe';
 import Company from './Tabs/Company';
-import PhoneIcon from '@mui/icons-material/Phone';
-import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
 import QuestionMarkOutlinedIcon from '@mui/icons-material/QuestionMarkOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';

@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'DINPro';
+  src: url('../assets/DINPro.woff2') format('woff2'), url('../assets/DINPro.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINPro';
+  src: url('../assets/DINPro-Medium.woff2') format('woff2'), url('../assets/DINPro-Medium.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINPro';
+  src: url('../assets/DINPro-Bold.woff2') format('woff2'), url('../assets/DINPro-Bold.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}

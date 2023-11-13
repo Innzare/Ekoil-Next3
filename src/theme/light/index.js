@@ -29,13 +29,18 @@ export default createTheme({
     }
   },
 
+  typography: {
+    fontFamily: ['DINPro', 'Roboto', '"Open Sans"'].join(',')
+  },
+
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         '*': {
           margin: 0,
           padding: 0,
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          fontFamily: 'DINPro'
         },
         'html, body': {
           maxWidth: '100vw',

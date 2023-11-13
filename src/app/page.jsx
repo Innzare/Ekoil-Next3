@@ -8,12 +8,12 @@ import About from '@/components/MainPageBlocks/About/About';
 import WeProduce from '@/components/MainPageBlocks/WeProduce/WeProduce';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import DigitsCounter from '@/components/DigitsCounter/DigitsCounter';
-import { SectionWrapper, Map } from './mainPageStyles';
-import Lottie from 'lottie-react';
-import Assembly from '@/app/assets/assembly-line.json';
-import { VectorMap } from '@react-jvectormap/core';
-import { worldMerc } from '@react-jvectormap/world';
-import FactoryIcon from '@mui/icons-material/Factory';
+import { SectionWrapper } from './mainPageStyles';
+// import Lottie from 'lottie-react';
+// import Assembly from '@/app/assets/assembly-line.json';
+// import { VectorMap } from '@react-jvectormap/core';
+// import { worldMerc } from '@react-jvectormap/world';
+// import FactoryIcon from '@mui/icons-material/Factory';
 
 export default function Home() {
   return (
@@ -34,7 +34,7 @@ export default function Home() {
               mt: -12
             }}
           >
-            <Typography
+            <Box
               color="initial"
               sx={{
                 display: 'flex',
@@ -57,11 +57,11 @@ export default function Home() {
               <p>
                 наименований <br /> продукции
               </p>
-            </Typography>
+            </Box>
 
             {/* <DigitsCounter val={666} time={1} /> */}
 
-            <Typography
+            <Box
               color="initial"
               sx={{
                 display: 'flex',
@@ -84,7 +84,7 @@ export default function Home() {
               <p>
                 тысяч тонн <br /> продукции в год
               </p>
-            </Typography>
+            </Box>
           </Box>
           <Grid container spacing={8}>
             <Grid item md={12}>

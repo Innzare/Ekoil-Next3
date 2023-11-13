@@ -1,13 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import React from 'react';
 import { Box, Typography, Card, Grid, Tab, Tabs } from '@mui/material';
-import QuestionMarkOutlinedIcon from '@mui/icons-material/QuestionMarkOutlined';
-import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
-import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
-import AdsClickOutlinedIcon from '@mui/icons-material/AdsClickOutlined';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 
@@ -35,7 +29,7 @@ export default function Production() {
         <Card elevation={3}>
           <Box
             sx={{
-              backgroundImage: 'url(https://aimol.ru/bitrix/templates/aspro_max/images/09/company_top.jpg)',
+              // backgroundImage: 'url(https://aimol.ru/bitrix/templates/aspro_max/images/09/company_top.jpg)',
               height: '300px',
               p: 5
             }}

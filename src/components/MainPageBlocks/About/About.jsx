@@ -25,7 +25,7 @@ import 'swiper/css/effect-fade';
 // import required modules
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
-import Group from '@/app/assets/Group.png';
+// import Group from '@/app/assets/Group.png';
 import gaz from '@/app/assets/gaz.png';
 import {
   AboutWithBackground,

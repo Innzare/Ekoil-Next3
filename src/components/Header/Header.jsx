@@ -30,7 +30,7 @@ export default function (props) {
   }, []);
 
   const onScroll = () => {
-    if (document.body.scrollTop > 0) {
+    if (document.body.scrollTop > 120) {
       setIsSticky(true);
     } else {
       setIsSticky(false);
@@ -38,45 +38,94 @@ export default function (props) {
   };
 
   return (
-    <Header isSticky={isSticky}>
-      {isTablet ? (
-        <IconButton aria-label="delete" onClick={onToggleSidenav}>
-          <MenuOpenIcon />
-        </IconButton>
-      ) : (
-        <Button sx={{ textTransform: 'initial' }} color="success" startIcon={<CallIcon sx={{ mr: 1 }} />}>
-          Свяжитесь с нами!
-        </Button>
-      )}
-      {/* <Button sx={{ textTransform: 'initial' }} color="success" startIcon={<CallIcon sx={{ mr: 1 }} />}>
-        Свяжитесь с нами!
-      </Button> */}
-
-      <HeaderNav>
-        <Link href="/search">
-          <Button sx={{ textTransform: 'initial' }} variant="text" startIcon={<SearchIcon />}>
-            Подобрать масло
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          pl: 0,
+          pr: 4
+          // gap: 2,
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 3,
+            mx: 3,
+            py: 1,
+            flex: 1,
+            borderBottom: '1px solid #ccc'
+          }}
+        >
+          <Button sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }} variant="text">
+            О нас
           </Button>
-        </Link>
-
-        {/* <Link href="/sertificates">
-          <Button startIcon={<SertificateIcon sx={{ mr: 1 }} />}>
-            Сертификаты
+          <Button sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }} variant="text">
+            Документы
           </Button>
-        </Link> */}
-
-        <Link href="/products">
-          <Button sx={{ textTransform: 'initial' }} variant="text" startIcon={<OilBarrelIcon />}>
-            Каталог
+          <Button sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }} variant="text">
+            Частые вопросы
           </Button>
-        </Link>
+          <Button sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }} variant="text">
+            Контакты
+          </Button>
+        </Box>
 
         {!isMobile && (
           <Link href="/search">
             <TextLogo color={theme.palette.common.mode} />
           </Link>
         )}
-      </HeaderNav>
-    </Header>
+      </Box>
+
+      <Header isSticky={isSticky}>
+        {isTablet ? (
+          <IconButton aria-label="delete" onClick={onToggleSidenav}>
+            <MenuOpenIcon />
+          </IconButton>
+        ) : (
+          <Button
+            sx={{ textTransform: 'initial' }}
+            variant="outlined"
+            color="success"
+            startIcon={<CallIcon sx={{ mr: 1 }} />}
+          >
+            Свяжитесь с нами!
+          </Button>
+        )}
+        {/* <Button sx={{ textTransform: 'initial' }} color="success" startIcon={<CallIcon sx={{ mr: 1 }} />}>
+        Свяжитесь с нами!
+      </Button> */}
+
+        <HeaderNav>
+          <Link href="/search">
+            <Button sx={{ textTransform: 'initial' }} variant="outlined" startIcon={<SearchIcon />}>
+              Подобрать масло
+            </Button>
+          </Link>
+
+          {/* <Link href="/sertificates">
+          <Button startIcon={<SertificateIcon sx={{ mr: 1 }} />}>
+            Сертификаты
+          </Button>
+        </Link> */}
+
+          <Link href="/products">
+            <Button sx={{ textTransform: 'initial' }} variant="outlined" startIcon={<OilBarrelIcon />}>
+              Каталог
+            </Button>
+          </Link>
+
+          {/* {!isMobile && (
+          <Link href="/search">
+            <TextLogo color={theme.palette.common.mode} />
+          </Link>
+        )} */}
+        </HeaderNav>
+      </Header>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, IconButton } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export default function ActionButton(props) {
   const { orientation = 'vertical', title = '', text = '', icon: Icon, href } = props;
@@ -11,12 +12,16 @@ export default function ActionButton(props) {
         sx={{
           display: 'flex',
           flexDirection: orientation === 'vertical' ? 'column' : 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: 'space-between',
+          // alignItems: 'center',
           gap: orientation === 'vertical' ? 1 : 4,
+          p: 4,
           position: 'relative',
           width: orientation === 'vertical' ? '200px' : '400px',
-          height: '200px',
+          // height: '200px',
+          // backgroundSize: 'cover',
+          // backgroundPosition: 'center',
+          backgroundImage: `url('https://gazpromneft-oil.ru/static/default/img/promo-search-bg-2.png')`,
           borderRadius: '6px',
           background: '#1021863d',
           backdropFilter: 'blur(15px)',
@@ -41,9 +46,20 @@ export default function ActionButton(props) {
           }
         }}
       >
-        <Typography color="#fff" variant="h6" sx={{ textTransform: 'uppercase' }}>
-          {text}
-        </Typography>
+        <Box>
+          <Typography color="#eee" variant="h6" sx={{ textTransform: 'uppercase', mb: 2 }}>
+            {title}
+          </Typography>
+          <Typography color="#fff" fontWeight="900" variant="h6" sx={{ textTransform: 'uppercase' }}>
+            {text}
+          </Typography>
+
+          {/* <ArrowForwardIcon fontSize="32" color="secondary" /> */}
+          {/* <IconButton aria-label="delete" size="large" color="#fff">
+            <ArrowForwardIcon fontSize="inherit" />
+          </IconButton> */}
+        </Box>
+
         <Icon />
       </Box>
     </Link>

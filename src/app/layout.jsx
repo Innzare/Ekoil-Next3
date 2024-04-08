@@ -38,6 +38,13 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
 
   const onToggleSidenav = () => {
     setIsOpen(!isOpen);
@@ -47,7 +54,6 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <body className={inter.className}>
         {/* <Loader /> */}
-
         <MaterialUIControllerProvider>
           <ThemeRegistry options={{ key: 'mui' }}>
             <Box sx={{ height: '100%' }}>
@@ -56,7 +62,7 @@ export default function RootLayout({ children }) {
               <MainContent>
                 <Header onToggleSidenav={onToggleSidenav} />
 
-                <Box sx={{ flex: '1 0 auto' }}>{children}</Box>
+                <Box sx={{ flex: '1 0 auto', mb: 4, mt: 1 }}>{children}</Box>
 
                 <Footer />
               </MainContent>

@@ -10,12 +10,13 @@ export const Header = styled('header', {
   display: 'flex',
   justifyContent: 'space-between',
   transition: 'all .25s',
-  backdropFilter: isSticky ? 'blur(1.875rem)' : 'initial',
+  // backdropFilter: isSticky ? 'blur(1.875rem)' : 'initial',
   alignItems: 'center',
   flex: '0 0 auto',
-  background: isSticky ? theme.palette.background.paperAlpha : 'initial',
+  // background: isSticky ? theme.palette.background.paperAlpha : 'initial',
+  background: isSticky ? '#fff' : 'initial',
   boxShadow: isSticky ? theme.shadows[2] : 'initial',
-  padding: '0px 24px',
+  padding: '24px',
   borderRadius: '6px',
 
   // [theme.breakpoints.down('sm')]: {

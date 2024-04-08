@@ -2,187 +2,202 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Box, Grid, Container, Typography, Button } from '@mui/material';
+import { Box, Grid, Typography, Button } from '@mui/material';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 import OilBarrelIcon from '@mui/icons-material/OilBarrel';
 import SearchIcon from '@/components/SvgIcons/SearchIcon';
 import OilsIcon from '@/components/SvgIcons/OilsIcon';
 import SertificateIcon from '@/components/SvgIcons/SertificateIcon';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ActionButton from './ActionButton/ActionButton';
+import ActionButton from '../HeroSection/ActionButton/ActionButton';
 import AboutTabs from './AboutTabs/AboutTabs';
 import Lottie from 'lottie-react';
 import Engine from '@/app/assets/engine.json';
+import GroupIcon from '@mui/icons-material/Group';
+import DescriptionIcon from '@mui/icons-material/Description';
+import CommuteIcon from '@mui/icons-material/Commute';
+import BoltIcon from '@mui/icons-material/Bolt';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import SettingsIcon from '@mui/icons-material/Settings';
+import PeopleIcon from '@mui/icons-material/People';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import Logo from '@/components/SvgIcons/Logo';
 
 import { styled } from '@mui/system';
 
-import { Swiper as SwiperModule, SwiperSlide as SwiperSlideModule } from 'swiper/react';
+// import { Swiper as SwiperModule, SwiperSlide as SwiperSlideModule } from 'swiper/react';
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
+// import 'swiper/css/effect-fade';
 
-// import required modules
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+// // import required modules
+// import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
-// import Group from '@/app/assets/Group.png';
-import gaz from '@/app/assets/gaz.png';
-import {
-  AboutWithBackground,
-  AboutWithBackgroundText,
-  AboutLayer,
-  IconWrapper,
-  AboutLayerTitle,
-  AboutLayerSubTitle
-} from './styles';
+// const FEATURES = [
+//   {
+//     icon: BoltIcon,
+//     title: 'Lorem ipsum dolar',
+//     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+//   },
+//   {
+//     icon: CheckCircleOutlineIcon,
+//     title: 'Lorem ipsum dolar',
+//     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+//   },
+//   {
+//     icon: AccessTimeIcon,
+//     title: 'Lorem ipsum dolar',
+//     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+//   },
+//   {
+//     icon: SettingsIcon,
+//     title: 'Lorem ipsum dolar',
+//     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+//   },
+//   {
+//     icon: PeopleIcon,
+//     title: 'Lorem ipsum dolar',
+//     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+//   },
+//   {
+//     icon: EngineeringIcon,
+//     title: 'Lorem ipsum dolar',
+//     text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+//   }
+// ];
 
-export const Swiper = styled(SwiperModule)(({ theme }) => ({
-  width: '70%',
-  height: '100px',
-  // backgroundColor: '#fff',
-  margin: 0,
-  marginTop: '64px',
-  padding: '16px',
-  borderRadius: '8px',
-  background: 'rgb(132 132 132 / 34%)',
-  backdropFilter: 'blur(10px)',
-  marginBottom: '30px'
-}));
-export const SwiperSlide = styled(SwiperSlideModule)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  color: '#fff',
-  fontSize: '24px'
-}));
+// // import Group from '@/app/assets/Group.png';
+// import gaz from '@/app/assets/gaz.png';
+// import ekoil from '@/app/assets/ekoil-bckg.jpg';
+// import {
+//   AboutWithBackground,
+//   AboutWithBackgroundText,
+//   AboutLayer,
+//   IconWrapper,
+//   AboutLayerTitle,
+//   AboutLayerSubTitle
+// } from './styles';
+// import SectionTitle from '@/components/SectionTitle/SectionTitle';
+
+// export const Swiper = styled(SwiperModule)(({ theme }) => ({
+//   width: '70%',
+//   height: '100px',
+//   // backgroundColor: '#fff',
+//   margin: 0,
+//   marginTop: '64px',
+//   padding: '16px',
+//   borderRadius: '8px',
+//   background: 'rgb(132 132 132 / 34%)',
+//   backdropFilter: 'blur(10px)',
+//   marginBottom: '30px'
+// }));
+// export const SwiperSlide = styled(SwiperSlideModule)(({ theme }) => ({
+//   display: 'flex',
+//   alignItems: 'center',
+//   color: '#fff',
+//   fontSize: '24px'
+// }));
 
 export default function About() {
   return (
-    <>
-      <AboutWithBackground>
+    <Box
+      sx={
+        {
+          // backgroundSize: 'cover',
+          // backgroundPosition: 'center',
+          // backgroundImage: `url('https://gazpromneft-oil.ru/static/default/img/map.png')`
+        }
+      }
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '32px'
+        }}
+      >
         <Box
           sx={{
-            position: 'absolute',
-            top: '40%',
-            left: '50%',
-            width: '100%',
-            height: '100%',
-            transform: 'translate(-50%, -50%)',
-            backgroundImage: `url('${gaz.src}')`,
-            // backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url('${Group.src}')`,
-            // backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url(https://haynes.com/en-gb/sites/default/files/styles/unaltered_webp/public/Engine%20oil%20guide.jpg?itok=bzBvsWaD&timestamp=1644232820)`,
-            backgroundSize: 'contain',
+            minWidth: '500px',
+            height: 'auto',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#e9e9e9',
+            borderRadius: '8px',
+            backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            maskImage: 'radial-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)'
+            backgroundImage: `url('https://img.freepik.com/free-photo/factory-workshop-interior-machines-glass-industry-background-process-production_645730-553.jpg?t=st=1711538215~exp=1711541815~hmac=3b5a4b9e8cad993716e3fd06f613c7836851b0614e92735771501d20e5e24324&w=2000')`
           }}
         ></Box>
-        <Box
-          sx={{
-            mb: '100px'
-          }}
-        >
-          <OnlyTextLogo color="red" width="300" height="90" />
-
-          <AboutWithBackgroundText color="#ccc" variant="h4">
-            Высококачественные смазочные материалы
-          </AboutWithBackgroundText>
-
-          <Typography
-            sx={{
-              position: 'relative',
-              color: '#ccc',
-              mt: 2,
-              textTransform: 'uppercase',
-              fontWeight: 'bold',
-              fontSize: '28px'
-            }}
-          >
-            Для надежной работы вашей техники
-          </Typography>
-
-          <Button variant="contained" size="large" endIcon={<ArrowForwardIcon />} sx={{ mt: 8 }}>
-            Узнайте больше
-          </Button>
-
-          {/* <Swiper
-            direction={'vertical'}
-            spaceBetween={30}
-            loop
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false
-            }}
-            pagination={{
-              clickable: true
-            }}
-            modules={[Navigation, Pagination, Autoplay]}
-            className="mySwiper"
-          >
-            <SwiperSlide>
-              Широкий ассортимент смазочных материалов моторных, трансмиссионных, гидравлических, а также промывочных
-              масел
-            </SwiperSlide>
-            <SwiperSlide>Более 150 наименований продукции для всех секторов рынка</SwiperSlide>
-            <SwiperSlide>Допуски ведущих производителей техники.</SwiperSlide>
-            <SwiperSlide>Продукция компании имеет одобрения и допуски ведущих производителей техники.</SwiperSlide>
-          </Swiper> */}
-        </Box>
 
         <Box>
-          <Typography
-            sx={{
-              position: 'relative',
-              color: '#fff',
-              mb: 4,
-              textTransform: 'uppercase',
-              fontWeight: 'bold',
-              fontSize: '32px'
-            }}
-          >
-            Подобрать масло:
+          <Typography variant="h3" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
+            Lorem ipsum dolor
           </Typography>
 
-          <Box
-            sx={{
-              display: 'flex',
-              gap: 6
-            }}
-          >
-            <ActionButton orientation="horizontal" href="/search" icon={SearchIcon} text="По требованиям" />
-            <ActionButton orientation="horizontal" href="/products" icon={OilsIcon} text="Каталог" />
+          <Typography variant="h6" color="#6c6c6c" fontWeight="500" sx={{ lineHeight: 1.5 }}>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam consequuntur velit nam eum in,
+            doloremque aspernatur ab nisi consectetur doloribus accusamus et iure magni fugit modi dolorem odit
+            architecto adipisci.
+          </Typography>
 
-            {/* <Box
-              sx={{
-                display: 'flex',
-                gap: 6
-              }}
-            >
-              <ActionButton orientation="vertical" href="/products" icon={OilsIcon} text="Каталог" />
-              <ActionButton orientation="vertical" href="/sertificates" icon={SertificateIcon} text="Сертификаты" />
-            </Box> */}
-          </Box>
-        </Box>
-      </AboutWithBackground>
+          <Grid container spacing={2} sx={{ mt: 3 }}>
+            <Grid item xs={6} sx={{ p: 4 }}>
+              <GroupIcon color="primary" fontSize="large" sx={{ mb: 1 }} />
+              <Typography variant="h6" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
+                Lorem ipsum dolor
+              </Typography>
+              <Typography variant="body" color="#6c6c6c" fontWeight="400">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
+              </Typography>
+            </Grid>
 
-      <AboutLayer>
-        <IconWrapper>
-          <OilBarrelIcon color="#fff" fontSize="large" />
-        </IconWrapper>
+            <Grid item xs={6} sx={{ p: 4 }}>
+              <DescriptionIcon color="primary" fontSize="large" sx={{ mb: 1 }} />
+              <Typography variant="h6" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
+                Lorem ipsum dolor
+              </Typography>
+              <Typography variant="body" color="#6c6c6c" fontWeight="400">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
+              </Typography>
+            </Grid>
 
-        <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12}>
-            <AboutLayerSubTitle>Коротко о главном:</AboutLayerSubTitle>
+            <Grid item xs={6} sx={{ p: 4 }}>
+              <CommuteIcon color="primary" fontSize="large" sx={{ mb: 1 }} />
+              <Typography variant="h6" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
+                Lorem ipsum dolor
+              </Typography>
+              <Typography variant="body" color="#6c6c6c" fontWeight="400">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
+              </Typography>
+            </Grid>
 
-            <AboutTabs />
-
-            <Link href="/about">
-              <Button variant="outlined" fontSize="large" endIcon={<ArrowForwardIcon />} sx={{ mt: 4 }}>
-                Подробнее
-              </Button>
-            </Link>
+            <Grid item xs={6} sx={{ p: 4 }}>
+              <SettingsIcon color="primary" fontSize="large" sx={{ mb: 1 }} />
+              <Typography variant="h6" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
+                Lorem ipsum dolor
+              </Typography>
+              <Typography variant="body" color="#6c6c6c" fontWeight="400">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-      </AboutLayer>
-    </>
+        </Box>
+      </Box>
+
+      <Link href="/about">
+        <Button
+          variant="outlined"
+          disableElevation
+          size="large"
+          endIcon={<ArrowForwardIcon />}
+          sx={{ mt: 4, py: 2, px: 4 }}
+        >
+          О компании
+        </Button>
+      </Link>
+    </Box>
   );
 }

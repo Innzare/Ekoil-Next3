@@ -1,137 +1,76 @@
 'use client';
 
 import React from 'react';
-import { Box, Typography, Grid, Button } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Box } from '@mui/material';
 import HomePageSlider from '@/components/HomePageSlider/HomePageSlider';
 import About from '@/components/MainPageBlocks/About/About';
+import HeroSection from '@/components/MainPageBlocks/HeroSection/HeroSection';
+import Production from '@/components/MainPageBlocks/Production/Production';
 import WeProduce from '@/components/MainPageBlocks/WeProduce/WeProduce';
-import SectionTitle from '@/components/SectionTitle/SectionTitle';
-import DigitsCounter from '@/components/DigitsCounter/DigitsCounter';
+import Advantages from '@/components/MainPageBlocks/Advantages/Advantages';
+import News from '@/components/MainPageBlocks/News/News';
+import Contacts from '@/components/MainPageBlocks/Contacts/Contacts';
+import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 import { SectionWrapper } from './mainPageStyles';
-// import Lottie from 'lottie-react';
-// import Assembly from '@/app/assets/assembly-line.json';
-// import { VectorMap } from '@react-jvectormap/core';
-// import { worldMerc } from '@react-jvectormap/world';
-// import FactoryIcon from '@mui/icons-material/Factory';
 
 export default function Home() {
   return (
     <main>
+      {/* <Box
+        sx={{
+          height: '500px'
+        }}
+      >
+        <MapLoader />
+      </Box> */}
       <Box sx={{ mb: 5 }}>
-        <About />
-      </Box>
-
-      <SectionTitle text="Производство" />
-
-      <Box sx={{ mb: 5 }}>
-        <SectionWrapper>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: 2,
-              mt: -12
-            }}
-          >
-            <Box
-              color="initial"
-              sx={{
-                display: 'flex',
-                gap: 2,
-                alignItems: 'flex-end',
-                fontSize: '18px',
-                fontWeight: 'bold',
-                '& span': {
-                  fontSize: '130px',
-                  fontWeight: 'bold',
-                  color: '#01a4e4'
-                },
-                '& p': {
-                  mb: 6
-                }
-              }}
-            >
-              <DigitsCounter val={150} time={7} />
-              {/* <span>150</span> */}
-              <p>
-                наименований <br /> продукции
-              </p>
-            </Box>
-
-            {/* <DigitsCounter val={666} time={1} /> */}
-
-            <Box
-              color="initial"
-              sx={{
-                display: 'flex',
-                gap: 2,
-                alignItems: 'flex-end',
-                fontSize: '18px',
-                fontWeight: 'bold',
-                '& span': {
-                  fontSize: '130px',
-                  fontWeight: 'bold',
-                  color: '#01a4e4'
-                },
-                '& p': {
-                  mb: 6
-                }
-              }}
-            >
-              <DigitsCounter val={100} time={7} />
-              {/* <span>100</span> */}
-              <p>
-                тысяч тонн <br /> продукции в год
-              </p>
-            </Box>
-          </Box>
-          <Grid container spacing={8}>
-            <Grid item md={12}>
-              <Typography color="initial">
-                Масла под брендом EKOIL Lubricants производятся на производственной площадке в Уфе (Республика
-                Башкортостан). Система менеджмента Компании и ее производственных активов соответствует требованиям
-                международных стандартов ISO 9001.
-              </Typography>
-
-              <Typography color="initial">Собственная аккредитованная лаборатория.</Typography>
-
-              <Typography color="initial">
-                Многообразие фасовок (1,5,10,30,100,216,5 л) и форм отгрузки (авто и железнодорожным транспортом)
-                позволяет выбрать наиболее подходящий и удобный для Вас вариант.
-              </Typography>
-            </Grid>
-
-            {/* <Grid item md={4}>
-        <Lottie style={{ height: '150px' }} animationData={Assembly} loop={false} />
-      </Grid> */}
-          </Grid>
-
-          <Button variant="outlined" fontSize="large" endIcon={<ArrowForwardIcon />} sx={{ mt: 4 }}>
-            Узнать подробнее
-          </Button>
-        </SectionWrapper>
-      </Box>
-
-      <Box sx={{ mb: 5 }}>
-        <WeProduce />
+        <HeroSection />
       </Box>
 
       <Box sx={{ mb: 5 }}>
         <HomePageSlider />
       </Box>
 
-      <SectionTitle text="Новости компании" />
+      <SectionWrapper>
+        <Box sx={{ mb: 8 }}>
+          <About />
+        </Box>
 
-      <Box sx={{ mb: 5 }}>
-        <SectionWrapper></SectionWrapper>
-      </Box>
+        <Box sx={{ mb: 8, position: 'relative' }}>
+          <Advantages />
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '-32px',
+              bottom: '-100%',
+              width: '100%',
+              height: '100%',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundImage: `url('https://gazpromneft-oil.ru/static/default/img/bg-m.jpg')`
+            }}
+          ></Box>
+        </Box>
 
-      <SectionTitle text="Связаться" />
+        <Box sx={{ mb: 8 }}>
+          <Production />
+        </Box>
 
-      <Box sx={{ mb: 5 }}>
-        <SectionWrapper></SectionWrapper>
-      </Box>
+        <Box sx={{ mb: 8 }}>
+          <WeProduce />
+        </Box>
+
+        <Box sx={{ mb: 8 }}>
+          <News />
+        </Box>
+
+        <Box sx={{ mb: 8 }}>
+          <Contacts />
+        </Box>
+
+        <FeedbackBlock />
+      </SectionWrapper>
     </main>
   );
 }

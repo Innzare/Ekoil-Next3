@@ -1,14 +1,16 @@
 import React from 'react';
 
-export default function OilsIcon() {
+export default function OilsIcon(props) {
+  const { color = '#fff', width = '48', height = '48' } = props;
+
   return (
     <svg
       id="fi_2908923"
       enableBackground="new 0 0 64 64"
-      height="48"
+      width={width}
+      height={height}
       viewBox="0 0 64 64"
-      width="48"
-      fill="#fff"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>

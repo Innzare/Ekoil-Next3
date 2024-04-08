@@ -1,25 +1,64 @@
 'use client';
 
 import React from 'react';
-import { Box, Typography, Card, Grid, Tab, Tabs } from '@mui/material';
+import { Box, Typography, Card, Grid, tabClasses, Divider } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
+import AboutTab from './Tabs/AboutTab';
+import NewsTab from './Tabs/NewsTab';
+import ProductionTab from './Tabs/ProductionTab';
+import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
+
+import BaseTabs from '@mui/base/Tabs';
+import BaseTabsList from '@mui/base/TabsList';
+import TabPanel from '@mui/base/TabPanel';
+import BaseTab from '@mui/base/Tab';
+import styled from '@emotion/styled';
+
+export const Tabs = styled(BaseTabs)({
+  marginBottom: '32px'
+});
+
+export const TabsList = styled(BaseTabsList)({
+  display: 'flex',
+  gap: '42px',
+  marginBottom: '40px'
+});
+
+export const Tab = styled(BaseTab)({
+  display: 'inline-block',
+  padding: '8px 32px',
+  backgroundColor: 'transparent',
+  border: '1px solid #ccc',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  textAlign: 'left',
+
+  [`&.${tabClasses.selected}`]: {
+    backgroundColor: '#fff',
+    border: '1px solid #0072E5',
+    color: '#0072E5'
+  }
+});
 
 export default function Production() {
-  const AboutBlock = ({ title, subTitle }) => {
+  const TabItem = ({ value, title, subTitle }) => {
     return (
-      <Box
+      <Tab
+        value={value}
         sx={{
           display: 'inline-block',
           p: 4,
-          border: '1px solid #dfebfd',
+          backgroundColor: 'transparent',
+          border: 'none',
           borderRadius: '4px',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          textAlign: 'left'
         }}
       >
         <Typography sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>{title}</Typography>
         <Typography>{subTitle}</Typography>
-      </Box>
+      </Tab>
     );
   };
 
@@ -43,13 +82,38 @@ export default function Production() {
               sx={{
                 fontSize: '32px',
                 fontWeight: 'bold',
-                mb: 4
+                mb: 4,
+                color: '#666'
               }}
             >
               Премиальные смазочные материлы высокого качества
             </Typography>
 
-            <Grid container spacing={2} alignItems="center">
+            <Tabs defaultValue={1} sx={{ mb: 4 }}>
+              <TabsList>
+                <TabItem value={1} title="О компании" subTitle="Наша история" />
+                <TabItem value={2} title="Производство" subTitle="Наши технологии" />
+                <TabItem value={3} title="Новости" subTitle="Последние события" />
+              </TabsList>
+
+              <Divider sx={{ mb: 2 }}></Divider>
+
+              <TabPanel value={1}>
+                <AboutTab />
+              </TabPanel>
+
+              <TabPanel value={2}>
+                <ProductionTab />
+              </TabPanel>
+
+              <TabPanel value={3}>
+                <NewsTab />
+              </TabPanel>
+            </Tabs>
+
+            <FeedbackBlock />
+
+            {/* <Grid container spacing={2} alignItems="center">
               <Grid item col={4}>
                 <AboutBlock title="О компании" subTitle="Узнайте больше о нашей истории" />
               </Grid>
@@ -59,7 +123,7 @@ export default function Production() {
               <Grid item col={4}>
                 <AboutBlock title="О компании" />
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
 
           {/* {renderTabs()}

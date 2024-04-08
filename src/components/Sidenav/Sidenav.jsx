@@ -47,7 +47,7 @@ export default function Sidenav(props) {
           <SidenavList isOpen={isOpen} />
         </SidenavTop>
 
-        <ThemeModeSwitch />
+        {/* <ThemeModeSwitch /> */}
       </SidenavWrapper>
     </>
   );

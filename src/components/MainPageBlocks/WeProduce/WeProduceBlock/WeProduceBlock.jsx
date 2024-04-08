@@ -10,21 +10,23 @@ import {
 } from './styles';
 
 export default function WeProduceBlock({ item }) {
-  const lottieRef = useRef(null);
+  const { icon: Icon } = item;
+  // const lottieRef = useRef(null);
 
-  useEffect(() => {
-    lottieRef?.current?.setSpeed(0.75);
-  }, []);
+  // useEffect(() => {
+  //   lottieRef?.current?.setSpeed(0.75);
+  // }, []);
 
   return (
     <WeProduceBlockWrapper
-      onMouseEnter={() => {
-        lottieRef.current.stop();
-        lottieRef.current.play();
-      }}
+    // onMouseEnter={() => {
+    //   lottieRef.current.stop();
+    //   lottieRef.current.play();
+    // }}
     >
-      <Image>
-        <Lottie lottieRef={lottieRef} style={{ height: '150px' }} animationData={item.icon} loop={false} />
+      <Image className="image-wrapper">
+        <Icon color="red" />
+        {/* <Lottie lottieRef={lottieRef} style={{ height: '150px' }} animationData={item.icon} loop={false} /> */}
       </Image>
 
       <WeProduceBlockText>

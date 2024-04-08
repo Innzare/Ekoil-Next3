@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
-import { Chrono } from 'react-chrono';
+// import { Chrono } from 'react-chrono';
 
 export default function AboutTab() {
   const items = [
@@ -120,7 +120,7 @@ export default function AboutTab() {
 
       <SectionTitle text="История развития" />
 
-      <Chrono items={items} mode="VERTICAL_ALTERNATING" disableToolbar />
+      {/* <Chrono items={items} mode="VERTICAL_ALTERNATING" disableToolbar /> */}
     </Box>
   );
 }

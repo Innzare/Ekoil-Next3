@@ -3,7 +3,12 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
-import { Chrono } from 'react-chrono';
+// import type { Chrono as ChronoType } from "react-chrono";
+import dynamic from 'next/dynamic';
+
+export const Chrono = dynamic(() => import('react-chrono').then((lib) => lib.Chrono), {
+  ssr: false
+});
 
 export default function AboutTab() {
   const items = [

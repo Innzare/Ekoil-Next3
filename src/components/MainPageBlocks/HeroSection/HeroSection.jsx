@@ -18,6 +18,8 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import CommuteIcon from '@mui/icons-material/Commute';
 import SettingsIcon from '@mui/icons-material/Settings';
 
+import Background from './Background';
+
 import { styled } from '@mui/system';
 
 import { Swiper as SwiperModule, SwiperSlide as SwiperSlideModule } from 'swiper/react';
@@ -31,6 +33,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 // import Group from '@/app/assets/Group.png';
 import gaz from '@/app/assets/gaz.png';
+import ekoilBarrel from '@/app/assets/ekoil-barrel.png';
 import ekoil from '@/app/assets/ekoil-bckg.jpg';
 import {
   AboutWithBackground,
@@ -64,6 +67,7 @@ export const SwiperSlide = styled(SwiperSlideModule)(({ theme }) => ({
 export default function HeroSection() {
   return (
     <AboutWithBackground>
+      <Background />
       <Box
         sx={{
           position: 'absolute',
@@ -72,18 +76,20 @@ export default function HeroSection() {
           width: '100%',
           height: '100%',
           transform: 'translate(-50%, -50%)',
-          backgroundImage: `url('${gaz.src}')`,
+          backgroundImage: `url('${ekoilBarrel.src}')`,
           // backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url('${Group.src}')`,
           // backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url(https://haynes.com/en-gb/sites/default/files/styles/unaltered_webp/public/Engine%20oil%20guide.jpg?itok=bzBvsWaD&timestamp=1644232820)`,
-          backgroundSize: '85%',
-          backgroundPosition: 'center right',
+          backgroundSize: '35%',
+          backgroundPosition: '100% 100%',
           backgroundRepeat: 'no-repeat',
           maskImage: 'radial-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)'
         }}
       ></Box>
       <Box
         sx={{
-          mb: '100px'
+          position: 'reslative',
+          zIndex: 10,
+          mb: '50px'
         }}
       >
         <OnlyTextLogo color="red" width="300" height="90" />
@@ -140,7 +146,7 @@ export default function HeroSection() {
       </Box>
 
       <Box>
-        <Typography
+        {/* <Typography
           sx={{
             position: 'relative',
             color: '#fff',
@@ -151,7 +157,7 @@ export default function HeroSection() {
           }}
         >
           Подобрать масло:
-        </Typography>
+        </Typography> */}
 
         <Box
           sx={{
@@ -159,7 +165,7 @@ export default function HeroSection() {
             gap: 6
           }}
         >
-          <ActionButton orientation="horizontal" href="/search" icon={SearchIcon} title="Поиск" text="По требованиям" />
+          {/* <ActionButton orientation="horizontal" href="/search" icon={SearchIcon} title="Поиск" text="По требованиям" /> */}
           <ActionButton orientation="horizontal" href="/products" icon={OilsIcon} title="Масла" text="Каталог" />
 
           {/* <Box

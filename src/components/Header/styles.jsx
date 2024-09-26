@@ -6,7 +6,7 @@ export const Header = styled('header', {
 })(({ theme, isSticky }) => ({
   position: 'sticky',
   top: '16px',
-  zIndex: 10,
+  zIndex: 100,
   display: 'flex',
   justifyContent: 'space-between',
   transition: 'all .25s',

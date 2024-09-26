@@ -38,7 +38,7 @@ export default function News() {
         })}
       </Grid>
 
-      <Link href="/about">
+      <Link href="/company">
         <Button
           variant="outlined"
           disableElevation

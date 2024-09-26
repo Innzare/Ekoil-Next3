@@ -60,18 +60,41 @@ export default function (props) {
             borderBottom: '1px solid #ccc'
           }}
         >
-          <Button sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }} variant="text">
-            О нас
-          </Button>
-          <Button sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }} variant="text">
-            Документы
-          </Button>
-          <Button sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }} variant="text">
-            Частые вопросы
-          </Button>
-          <Button sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }} variant="text">
-            Контакты
-          </Button>
+          <Link href="/company">
+            <Button
+              sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
+              variant="text"
+            >
+              О нас
+            </Button>
+          </Link>
+
+          <Link href="/sertificates">
+            <Button
+              sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
+              variant="text"
+            >
+              Документы
+            </Button>
+          </Link>
+
+          <Link href="/company">
+            <Button
+              sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
+              variant="text"
+            >
+              Частые вопросы
+            </Button>
+          </Link>
+
+          <Link href="/contacts">
+            <Button
+              sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
+              variant="text"
+            >
+              Контакты
+            </Button>
+          </Link>
         </Box>
 
         {!isMobile && (

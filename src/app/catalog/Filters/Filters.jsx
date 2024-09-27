@@ -3,6 +3,7 @@ import { Box, Button, Checkbox, Divider, FormControlLabel, FormGroup } from '@mu
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 const FILTERS = [
   {
@@ -143,18 +144,32 @@ export default function Filters() {
         minWidth: '250px',
         borderRadius: '6px',
 
-        padding: '12px 16px',
-        // backgroundColor: '#f5f5f5'
-        border: '1px solid #d6d6d6'
+        padding: '16px 20px',
+        backgroundColor: '#f5f5f5'
+        // border: '1px solid #d6d6d6'
       }}
     >
-      <h4>Фильтры:</h4>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          backgroundColor: '#0052cc12',
+          p: 1,
+          borderRadius: '4px',
+          color: '#0052cc'
+        }}
+      >
+        <h4>Фильтры:</h4>
+
+        <FilterAltIcon />
+      </Box>
 
       <Box sx={{ mt: 3 }}>
         {FILTERS.map((filter, index) => {
           return (
             <>
-              <h3>{filter.name}</h3>
+              <h3 style={{ color: '#0052cc' }}>{filter.name}</h3>
 
               <FilterFields options={filter.options} />
 

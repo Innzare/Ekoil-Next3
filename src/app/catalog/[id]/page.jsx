@@ -63,16 +63,18 @@ export default function CatalogItem() {
             </Button>
           </Box>
 
-          <Box sx={{ display: 'flex', gap: '40px' }}>
-            <img
-              src={data?.img.src}
-              alt={data?.name}
-              width="500"
-              height="500"
-              style={{
-                filter: 'drop-shadow(0px 10px 8px rgba(0,0,0,0.5))'
-              }}
-            />
+          <Box sx={{ display: 'flex', gap: '40px', alignItems: 'flex-start' }}>
+            <Box sx={{ backgroundColor: '#f5f5f5', borderRadius: '6px' }}>
+              <img
+                src={data?.img.src}
+                alt={data?.name}
+                width="500"
+                height="500"
+                style={{
+                  filter: 'drop-shadow(0px 10px 8px rgba(0,0,0,0.5))'
+                }}
+              />
+            </Box>
 
             <Box>
               <h2>Описание</h2>

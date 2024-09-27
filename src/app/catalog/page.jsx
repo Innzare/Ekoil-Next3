@@ -66,7 +66,7 @@ export default function Catalog() {
 
   const onCloseProductDialogClick = () => {
     setIsDialogOpen(false);
-    setSelectedProduct(null);
+    // setSelectedProduct(null);
   };
 
   const onProductPreviewClick = (product) => {
@@ -206,15 +206,41 @@ export default function Catalog() {
         <DialogActions
           sx={{
             p: 2,
-            gap: '16px'
+            gap: '16px',
+            display: 'flex',
+            justifyContent: 'space-between'
           }}
         >
-          <Button size="large" variant="outlined" onClick={onCloseProductDialogClick}>
-            Скачать TDS
-            <DescriptionOutlinedIcon sx={{ ml: 2 }} />
-          </Button>
-          <Button size="large" variant="outlined" startIcon={<SubjectOutlinedIcon />} onClick={handleNavigate}>
-            Подробнее
+          <Box
+            sx={{
+              gap: '16px',
+              display: 'flex'
+            }}
+          >
+            <Button
+              sx={{ textTransform: 'initial' }}
+              size="large"
+              variant="contained"
+              disableElevation
+              onClick={onCloseProductDialogClick}
+            >
+              Скачать TDS
+              <DescriptionOutlinedIcon sx={{ ml: 2 }} />
+            </Button>
+            <Button
+              sx={{ textTransform: 'initial' }}
+              size="large"
+              variant="contained"
+              disableElevation
+              startIcon={<SubjectOutlinedIcon />}
+              onClick={handleNavigate}
+            >
+              Подробнее
+            </Button>
+          </Box>
+
+          <Button sx={{ textTransform: 'initial' }} size="large" variant="outlined" onClick={onCloseProductDialogClick}>
+            Закрыть
           </Button>
         </DialogActions>
       </Dialog>

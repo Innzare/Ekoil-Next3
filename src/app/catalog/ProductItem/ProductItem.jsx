@@ -51,6 +51,11 @@ export default function ProductItem(props) {
           width: '100%'
         }}
       >
+        <Tooltip title="Скачать TDS">
+          <Button sx={{ textTransform: 'initial' }} variant="outlined">
+            <DescriptionOutlinedIcon />
+          </Button>
+        </Tooltip>
         <Button
           sx={{ textTransform: 'initial' }}
           variant="outlined"
@@ -61,12 +66,6 @@ export default function ProductItem(props) {
         </Button>
         {/* <Link href="/catalog/2">
         </Link> */}
-
-        <Tooltip title="Скачать TDS">
-          <Button sx={{ textTransform: 'initial' }} variant="outlined">
-            <DescriptionOutlinedIcon />
-          </Button>
-        </Tooltip>
 
         {/* <IconButton color="primary">
           <DescriptionIcon />

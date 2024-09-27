@@ -22,6 +22,7 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import Categories from './Categories/Categories';
 import Filters from './Filters/Filters';
 import ViewModeButtons from './ViewModeButtons/ViewModeButtons';
+import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 
 import { ITEMS, CATEGORIES } from '@/consts/products';
 import { useRouter } from 'next/navigation';
@@ -118,10 +119,10 @@ export default function Catalog() {
                 />
               </Box>
 
-              <Grid container spacing={4} rowSpacing={4} sx={{ marginTop: '0px' }}>
+              <Grid container spacing={4} sx={{ marginTop: '0px' }}>
                 {ITEMS.map((item, index) => {
                   return viewMode === 'grid' ? (
-                    <Grid key={index} item xs={12} sm={6} md={gridViewMode === 'grid-three-line' ? 4 : 3}>
+                    <Grid key={index} item xs={12} sm={12} md={6} lg={gridViewMode === 'grid-three-line' ? 4 : 3}>
                       <ProductItem data={item} onProductPreviewClick={onProductPreviewClick} />
                     </Grid>
                   ) : (
@@ -132,6 +133,9 @@ export default function Catalog() {
                 })}
               </Grid>
             </Box>
+          </Box>
+          <Box sx={{ mt: 8 }}>
+            <FeedbackBlock />
           </Box>
         </Box>
       </Card>
@@ -185,10 +189,10 @@ export default function Catalog() {
 
             <Box>
               <h2>Описание</h2>
-              <Box sx={{ mb: 3, mt: 1 }}>{selectedProduct?.desciption}</Box>
+              <Box sx={{ mb: 3, mt: 1 }}>{selectedProduct?.description}</Box>
 
               {/* <h2>Область прменения</h2>
-              <Box sx={{ mb: 3, mt: 1 }}>{selectedProduct?.desciption}</Box> */}
+              <Box sx={{ mb: 3, mt: 1 }}>{selectedProduct?.description}</Box> */}
 
               <h2>Спецификации</h2>
               <Box sx={{ mb: 3, mt: 1 }}>API SP, ILSAC GF-6B</Box>

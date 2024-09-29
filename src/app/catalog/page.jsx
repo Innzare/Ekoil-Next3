@@ -145,6 +145,7 @@ export default function Catalog() {
         onClose={onCloseProductDialogClick}
         scroll="paper"
         maxWidth="md"
+        disableScrollLock
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >

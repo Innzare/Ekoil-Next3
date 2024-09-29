@@ -7,6 +7,7 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
+import EmailIcon from '@mui/icons-material/Email';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -62,16 +63,20 @@ export default function CatalogItem() {
     );
   }
 
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+  function createData(indication, method, value) {
+    return { indication, method, value };
   }
 
   const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9)
+    createData('Плотность при 15°C, кг/м3', 'ASTM D1298', 842),
+    createData('Вязкость кинематическая при 100°C, мм /с', 'ASTM D445', 10.3),
+    createData('Вязкость кинематическая при 40°C, мм /с', 'ASTM D445', 62),
+    createData('Индекс вязкости', 'ASTM D2270', 179),
+    createData('Температура застывания, °C', 'ASTM D97', -40),
+    createData('Температура вспышки в открытом тигле, °C', 'ASTM D92', 224),
+    createData('Щелочное число, мг КОН/г', 'ASTM D2896', 11.1),
+    createData('Сульфатная зольность, %', 'ASTM D874', 1.2),
+    createData('Испаряемость по методу NOACK, %', 'ASTM D5800', 0, 2)
   ];
 
   return (
@@ -93,19 +98,35 @@ export default function CatalogItem() {
 
           <Box sx={{ display: 'flex', gap: '8px', justifyContent: 'space-between' }}>
             <SectionTitle text={`${data?.name} ${data?.subtitle}`} />
-            <Button
-              sx={{ mb: 4 }}
-              onClick={onGoBackClick}
-              variant="contained"
-              disableElevation
-              size="small"
-              color="primary"
-            >
-              <Typography fontWeight={900} sx={{ mr: 2 }}>
-                Скачать PDF
-              </Typography>
-              <PictureAsPdfIcon />
-            </Button>
+
+            <Box sx={{ display: 'flex', gap: '8px' }}>
+              <Button
+                sx={{ mb: 4 }}
+                onClick={onGoBackClick}
+                variant="contained"
+                disableElevation
+                size="small"
+                color="primary"
+              >
+                <Typography fontWeight={900} sx={{ mr: 2 }}>
+                  Скачать PDF
+                </Typography>
+                <PictureAsPdfIcon />
+              </Button>
+              <Button
+                sx={{ mb: 4 }}
+                onClick={onGoBackClick}
+                variant="contained"
+                disableElevation
+                size="small"
+                color="primary"
+              >
+                <Typography fontWeight={900} sx={{ mr: 2 }}>
+                  Отправить PDF на почту
+                </Typography>
+                <EmailIcon />
+              </Button>
+            </Box>
           </Box>
 
           <Box sx={{ display: 'flex', gap: '40px', alignItems: 'flex-start' }}>
@@ -136,7 +157,11 @@ export default function CatalogItem() {
                   width: '100%',
                   backgroundColor: '#f5f5f5',
                   borderTopLeftRadius: '6px',
-                  borderTopRightRadius: '6px'
+                  borderTopRightRadius: '6px',
+
+                  '& .Mui-selected': {
+                    backgroundColor: '#0052cc1c'
+                  }
                 }}
               >
                 <Tab
@@ -172,59 +197,64 @@ export default function CatalogItem() {
                   }}
                 />
               </Tabs>
-              <TabPanel value={tabValue} index={0}>
-                Рекомендовано к всесезонному использованию в бензиновых и дизельных двигателях автомобилей
-                Mercedes-Benz, BMW, Porsche, Volkswagen, Renault как в гарантийный, так и послегарантийный период
-                эксплуатации. Также подходит для применения в двигателях других автопроизводителей, требующих масел
-                уровня API SN, ACEA A3/B4.
-              </TabPanel>
-              <TabPanel value={tabValue} index={1}>
-                <ul>
-                  <li>
-                    Препятствует образованию высокотемпературных отложений, что обеспечивает поддержание чистоты деталей
-                    и надежную работу двигателя􏰈
-                  </li>
-                  <li>
-                    Защищает от износа, снижают расход масла благодаря высокой стабильности к сдвигу и сохранению масла
-                    в своем классе вязкости􏰈
-                  </li>
-                  <li>
-                    Обеспечивает надежный пуск двигателя при низких температурах, быстрое образование необходимой
-                    масляной пленки на трущихся парах и защиту деталей двигателя от износа.
-                  </li>
-                </ul>
-              </TabPanel>
-              <TabPanel value={tabValue} index={2}>
-                <Box sx={{ mb: 3, mt: 1 }}>API SP, ILSAC GF-6B</Box>
-              </TabPanel>
-              <TabPanel value={tabValue} index={3}>
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows.map((row) => (
-                        <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                          <TableCell component="th" scope="row">
-                            {row.name}
+
+              <Box sx={{ border: '2px solid #f5f5f5', borderBottomLeftRadius: '6px', borderBottomRightRadius: '6px' }}>
+                <TabPanel value={tabValue} index={0}>
+                  Рекомендовано к всесезонному использованию в бензиновых и дизельных двигателях автомобилей
+                  Mercedes-Benz, BMW, Porsche, Volkswagen, Renault как в гарантийный, так и послегарантийный период
+                  эксплуатации. Также подходит для применения в двигателях других автопроизводителей, требующих масел
+                  уровня API SN, ACEA A3/B4.
+                </TabPanel>
+                <TabPanel value={tabValue} index={1}>
+                  <ul>
+                    <li>
+                      Препятствует образованию высокотемпературных отложений, что обеспечивает поддержание чистоты
+                      деталей и надежную работу двигателя􏰈
+                    </li>
+                    <li>
+                      Защищает от износа, снижают расход масла благодаря высокой стабильности к сдвигу и сохранению
+                      масла в своем классе вязкости􏰈
+                    </li>
+                    <li>
+                      Обеспечивает надежный пуск двигателя при низких температурах, быстрое образование необходимой
+                      масляной пленки на трущихся парах и защиту деталей двигателя от износа.
+                    </li>
+                  </ul>
+                </TabPanel>
+                <TabPanel value={tabValue} index={2}>
+                  <Box sx={{ mb: 3, mt: 1 }}>API SP, ILSAC GF-6B</Box>
+                </TabPanel>
+                <TabPanel value={tabValue} index={3}>
+                  <TableContainer component={Paper}>
+                    <Table sx={{ width: '100%' }} aria-label="simple table">
+                      <TableHead>
+                        <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
+                          <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
+                            Показатель
                           </TableCell>
-                          <TableCell align="right">{row.calories}</TableCell>
-                          <TableCell align="right">{row.fat}</TableCell>
-                          <TableCell align="right">{row.carbs}</TableCell>
-                          <TableCell align="right">{row.protein}</TableCell>
+                          <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
+                            Метод испытания
+                          </TableCell>
+                          <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
+                            Значение
+                          </TableCell>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </TabPanel>
+                      </TableHead>
+                      <TableBody>
+                        {rows.map((row) => (
+                          <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableCell align="center" component="th" scope="row">
+                              {row.indication}
+                            </TableCell>
+                            <TableCell align="center">{row.method}</TableCell>
+                            <TableCell align="center">{row.value}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </TabPanel>
+              </Box>
             </Box>
           </Box>
 

@@ -23,16 +23,16 @@ export const sidenav = [
     path: '/products',
     icon: OilBarrelIcon
   },
-  {
-    title: 'Подбор',
-    path: '/search',
-    icon: FilterAltIcon
-  },
-  {
-    title: 'Сертификаты',
-    path: '/sertificates',
-    icon: VerifiedIcon
-  },
+  // {
+  //   title: 'Подбор',
+  //   path: '/search',
+  //   icon: FilterAltIcon
+  // },
+  // {
+  //   title: 'Сертификаты',
+  //   path: '/sertificates',
+  //   icon: VerifiedIcon
+  // },
   {
     title: 'Где купить',
     path: '/location',

@@ -1,7 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Card, Grid, tabClasses, Divider } from '@mui/material';
+
+import { Tab, Tabs } from '@mui/material';
+
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 import AboutTab from './Tabs/AboutTab';
@@ -9,43 +12,67 @@ import NewsTab from './Tabs/NewsTab';
 import ProductionTab from './Tabs/ProductionTab';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 
-import BaseTabs from '@mui/base/Tabs';
-import BaseTabsList from '@mui/base/TabsList';
-import TabPanel from '@mui/base/TabPanel';
-import BaseTab from '@mui/base/Tab';
+// import BaseTabs from '@mui/material/Tabs';
+// import BaseTabsList from '@mui/lab/TabList';
+// import TabPanel from '@mui/lab/TabPanel';
+// import TabContext from '@mui/lab/TabContext';
+// import BaseTab from '@mui/material/Tab';
 import styled from '@emotion/styled';
 
-export const Tabs = styled(BaseTabs)({
-  marginBottom: '32px'
-});
+// export const Tabs = styled(BaseTabs)({
+//   marginBottom: '32px'
+// });
 
-export const TabsList = styled(BaseTabsList)({
-  display: 'flex',
-  gap: '42px',
-  marginBottom: '40px'
-});
+// export const Tabs = styled(BaseTabs)({
+//   display: 'flex',
+//   gap: '42px',
+//   marginBottom: '40px'
+// });
 
-export const Tab = styled(BaseTab)({
-  display: 'inline-block',
-  padding: '8px 32px',
-  backgroundColor: 'transparent',
-  border: '1px solid #ccc',
-  borderRadius: '4px',
-  cursor: 'pointer',
-  textAlign: 'left',
+// export const Tab = styled(BaseTab)({
+//   display: 'inline-block',
+//   padding: '8px 32px',
+//   backgroundColor: 'transparent',
+//   border: '1px solid #ccc',
+//   borderRadius: '4px',
+//   cursor: 'pointer',
+//   textAlign: 'left',
 
-  [`&.${tabClasses.selected}`]: {
-    backgroundColor: '#fff',
-    border: '1px solid #0072E5',
-    color: '#0072E5'
-  }
-});
+//   [`&.${tabClasses.selected}`]: {
+//     backgroundColor: '#fff',
+//     border: '1px solid #0072E5',
+//     color: '#0072E5'
+//   }
+// });
 
 export default function Production() {
-  const TabItem = ({ value, title, subTitle }) => {
+  const [value, setValue] = useState(0);
+
+  function TabPanel(props) {
+    const { children, id, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== id}
+        id={`vertical-tabpanel-${id}`}
+        aria-labelledby={`vertical-tab-${id}`}
+        {...other}
+      >
+        {value === id && (
+          <Box sx={{ p: 3 }}>
+            <Box>{children}</Box>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  const TabItem = ({ id, title, subTitle }) => {
     return (
       <Tab
-        value={value}
+        id={id}
+        label={title}
         sx={{
           display: 'inline-block',
           p: 4,
@@ -56,10 +83,16 @@ export default function Production() {
           textAlign: 'left'
         }}
       >
-        <Typography sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>{title}</Typography>
-        <Typography>{subTitle}</Typography>
+        {/* <Typography sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>{title}</Typography>
+        <Typography>{subTitle}</Typography> */}
       </Tab>
     );
+  };
+
+  const handleChange = (event, newValue) => {
+    console.log(123);
+
+    setValue(newValue);
   };
 
   return (
@@ -89,27 +122,94 @@ export default function Production() {
               Премиальные смазочные материлы высокого качества
             </Typography>
 
-            <Tabs defaultValue={1} sx={{ mb: 4 }}>
-              <TabsList>
-                <TabItem value={1} title="О компании" subTitle="Наша история" />
-                <TabItem value={2} title="Производство" subTitle="Наши технологии" />
-                <TabItem value={3} title="Новости" subTitle="Последние события" />
-              </TabsList>
+            <Tabs value={value} onChange={handleChange} sx={{}}>
+              <Tab
+                sx={{
+                  display: 'inline-block',
+                  mr: 2,
+                  padding: '8px 32px',
+                  backgroundColor: 'transparent',
+                  border: '1px solid #ccc',
+                  borderBottom: 0,
+                  borderTopLeftRadius: '6px',
+                  borderTopRightRadius: '6px',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  fontSize: '18px',
+                  fontWeight: 700
 
-              <Divider sx={{ mb: 2 }}></Divider>
+                  // [`&.${tabClasses.selected}`]: {
+                  //   backgroundColor: '#fff',
+                  //   border: '1px solid #0072E5',
+                  //   color: '#0072E5'
+                  // }
+                }}
+                id={0}
+                label="О компании"
+              />
+              <Tab
+                sx={{
+                  display: 'inline-block',
+                  mr: 2,
+                  padding: '8px 32px',
+                  backgroundColor: 'transparent',
+                  border: '1px solid #ccc',
+                  borderBottom: 0,
+                  borderTopLeftRadius: '6px',
+                  borderTopRightRadius: '6px',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  fontSize: '18px',
+                  fontWeight: 700
 
-              <TabPanel value={1}>
-                <AboutTab />
-              </TabPanel>
+                  // [`&.${tabClasses.selected}`]: {
+                  //   backgroundColor: '#fff',
+                  //   border: '1px solid #0072E5',
+                  //   color: '#0072E5'
+                  // }
+                }}
+                id={1}
+                label="Производство"
+              />
+              <Tab
+                sx={{
+                  display: 'inline-block',
+                  mr: 2,
+                  padding: '8px 32px',
+                  backgroundColor: 'transparent',
+                  border: '1px solid #ccc',
+                  borderBottom: 0,
+                  borderTopLeftRadius: '6px',
+                  borderTopRightRadius: '6px',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  fontSize: '18px',
+                  fontWeight: 700
 
-              <TabPanel value={2}>
-                <ProductionTab />
-              </TabPanel>
-
-              <TabPanel value={3}>
-                <NewsTab />
-              </TabPanel>
+                  // [`&.${tabClasses.selected}`]: {
+                  //   backgroundColor: '#fff',
+                  //   border: '1px solid #0072E5',
+                  //   color: '#0072E5'
+                  // }
+                }}
+                id={2}
+                label="Новости"
+              />
             </Tabs>
+
+            <Divider color="#ccc" sx={{ mb: 2 }}></Divider>
+
+            <TabPanel id={0}>
+              <AboutTab />
+            </TabPanel>
+
+            <TabPanel id={1}>
+              <ProductionTab />
+            </TabPanel>
+
+            <TabPanel id={2}>
+              <NewsTab />
+            </TabPanel>
 
             <FeedbackBlock />
 

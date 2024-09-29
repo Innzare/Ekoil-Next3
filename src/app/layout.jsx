@@ -11,6 +11,7 @@ import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 import Loader from '@/components/Loader/Loader';
 import { MaterialUIControllerProvider } from '@/context';
 import '@/app/styles/global.css';
+import { motion } from 'framer-motion';
 
 const MainContent = styled(Box)(({ theme }) => ({
   marginLeft: '88px',

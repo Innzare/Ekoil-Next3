@@ -5,9 +5,8 @@ import { Box, Button, Card, Tab, Tabs, Tooltip, Typography } from '@mui/material
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
-import EmailIcon from '@mui/icons-material/Email';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -109,22 +108,9 @@ export default function CatalogItem() {
                 color="primary"
               >
                 <Typography fontWeight={900} sx={{ mr: 2 }}>
-                  Скачать PDF
+                  Скачать TDS
                 </Typography>
-                <PictureAsPdfIcon />
-              </Button>
-              <Button
-                sx={{ mb: 4 }}
-                onClick={onGoBackClick}
-                variant="contained"
-                disableElevation
-                size="small"
-                color="primary"
-              >
-                <Typography fontWeight={900} sx={{ mr: 2 }}>
-                  Отправить PDF на почту
-                </Typography>
-                <EmailIcon />
+                <FileDownloadIcon />
               </Button>
             </Box>
           </Box>

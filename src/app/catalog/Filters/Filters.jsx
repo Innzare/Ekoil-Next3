@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Box, Button, Checkbox, Divider, FormControlLabel, FormGroup } from '@mui/material';
 

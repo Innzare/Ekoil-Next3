@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { Box, Card } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';

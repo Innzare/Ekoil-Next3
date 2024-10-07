@@ -13,33 +13,33 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle';
 const FEATURES = [
   {
     icon: BoltIcon,
-    title: 'Lorem ipsum dolar',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+    title: 'Современные пакеты присадок',
+    text: 'Ведущих мировых производителей'
   },
   {
     icon: CheckCircleOutlineIcon,
-    title: 'Lorem ipsum dolar',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+    title: 'Высококачественные базовые масла',
+    text: '(PAO, VHVI)'
   },
   {
     icon: AccessTimeIcon,
-    title: 'Lorem ipsum dolar',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+    title: 'Собственная лаборатория',
+    text: 'Контроль качества сырья и выпускаемой продукции на всех этапах'
   },
   {
     icon: SettingsIcon,
-    title: 'Lorem ipsum dolar',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+    title: 'Гибкость завода',
+    text: 'Разработка новых продуктов и рецептур, соответствующих запросу рынка'
   },
   {
     icon: PeopleIcon,
-    title: 'Lorem ipsum dolar',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+    title: 'Приемлемая цена',
+    text: 'При том же качестве по сравнению с мировыми брендами'
   },
   {
     icon: EngineeringIcon,
-    title: 'Lorem ipsum dolar',
-    text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+    title: 'Большой опыт работы',
+    text: 'Более 25 лет на рынке смазочных материалов'
   }
 ];
 

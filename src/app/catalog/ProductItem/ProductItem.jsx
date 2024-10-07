@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { Product, ProductImg, ProductTitle, ProductSubTitle, PreviewButton } from './style';
 import { Box, Button, IconButton, Card, Grid, Typography, Tooltip } from '@mui/material';
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';

@@ -117,7 +117,7 @@ export default React.memo(() => {
 
         {path}
         <defs>
-          {gradientDefs}
+          {/* {gradientDefs} */}
 
           <radialGradient
             id="paint0_radial_242_278"

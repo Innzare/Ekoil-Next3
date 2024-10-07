@@ -101,11 +101,11 @@ export default function Products() {
               p: 5
             }}
           >
-            <SectionTitle text="Продукты" isLight />
+            <SectionTitle text="Продукция" isLight />
           </Box>
 
           <Box sx={{ p: 3 }}>
-            <Grid container spacing={4} sx={{ mb: 8 }}>
+            {/* <Grid container spacing={4} sx={{ mb: 8 }}>
               {renderWeProduceBlocks()}
             </Grid>
 
@@ -119,7 +119,7 @@ export default function Products() {
                   </Grid>
                 );
               })}
-            </Grid>
+            </Grid> */}
 
             <FeedbackBlock />
           </Box>

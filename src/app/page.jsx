@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import HomePageSlider from '@/components/HomePageSlider/HomePageSlider';
 import About from '@/components/MainPageBlocks/About/About';
 import HeroSection from '@/components/MainPageBlocks/HeroSection/HeroSection';
@@ -11,6 +11,9 @@ import Advantages from '@/components/MainPageBlocks/Advantages/Advantages';
 import News from '@/components/MainPageBlocks/News/News';
 import Contacts from '@/components/MainPageBlocks/Contacts/Contacts';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
+import ScrollableSlider from '@/components/ScrollableSlider/ScrollableSlider';
+import Logo from '@/components/SvgIcons/Logo';
+import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 import { SectionWrapper } from './mainPageStyles';
 
 export default function Home() {
@@ -23,12 +26,27 @@ export default function Home() {
       >
         <MapLoader />
       </Box> */}
+
+      <Box sx={{ mb: 5 }}>
+        <HomePageSlider />
+      </Box>
+
       <Box sx={{ mb: 5 }}>
         <HeroSection />
       </Box>
 
       <Box sx={{ mb: 5 }}>
-        <HomePageSlider />
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: 2 }}>
+            <Logo color="#000" />
+            <OnlyTextLogo />
+          </Box>
+
+          <Typography variant="h4" fontWeight={700} textAlign="center">
+            Рекомендован
+          </Typography>
+        </Box>
+        <ScrollableSlider />
       </Box>
 
       <SectionWrapper>
@@ -38,7 +56,7 @@ export default function Home() {
 
         <Box sx={{ mb: 8, position: 'relative' }}>
           <Advantages />
-          <Box
+          {/* <Box
             sx={{
               position: 'absolute',
               left: '-32px',
@@ -50,12 +68,12 @@ export default function Home() {
               backgroundPosition: 'center',
               backgroundImage: `url('https://gazpromneft-oil.ru/static/default/img/bg-m.jpg')`
             }}
-          ></Box>
+          ></Box> */}
         </Box>
 
-        <Box sx={{ mb: 8 }}>
+        {/* <Box sx={{ mb: 8 }}>
           <Production />
-        </Box>
+        </Box> */}
 
         <Box sx={{ mb: 8 }}>
           <WeProduce />

@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Box, Grid, Button } from '@mui/material';
+import { Box, Grid2 as Grid, Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import WeProduceBlock from './WeProduceBlock/WeProduceBlock';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
@@ -12,6 +12,12 @@ import CommercialCar from '@/components/SvgIcons/CommercialCar';
 import SpecialCar from '@/components/SvgIcons/SpecialCar';
 import IndustryIcon from '@/components/SvgIcons/IndustryIcon';
 import AntiFreezeIcon from '@/components/SvgIcons/AntiFreezeIcon';
+import Auto from '@/app/assets/auto2.jpg';
+import Snowbike from '@/app/assets/snowbike.jpg';
+import Truck from '@/app/assets/truck2.jpg';
+import Transmission from '@/app/assets/transmission2.jpg';
+import Indust from '@/app/assets/indust.jpg';
+import Antifreeze from '@/app/assets/antifreeze.webp';
 import OilsIcon from '@/components/SvgIcons/OilsIcon';
 import {
   WeProduceBlockWrapper,
@@ -34,37 +40,43 @@ export default function About() {
     {
       title: 'Для легкового транспорта',
       // description: 'Passenger Vehicle Lubricants – масла для легкового транспорта',
-      icon: Car
+      icon: Auto
     },
     {
       title: 'Для коммерческого транспорта',
       // description: 'Commercial Vehicle Lubricants – масла для коммерческого транспорта',
-      icon: CommercialCar
+      icon: Truck
     },
     {
       title: 'Для специальной техники',
       // description:
       //   'Industrial Lubricants – масла, предназначенные для применения в различном промышленном оборудовании',
-      icon: SpecialCar
+      icon: Snowbike
+    },
+    {
+      title: 'Трансмиссионные масла',
+      // description:
+      //   'Industrial Lubricants – масла, предназначенные для применения в различном промышленном оборудовании',
+      icon: Transmission
     },
     {
       title: 'Для индустрии',
       // description:
       //   'Industrial Lubricants – масла, предназначенные для применения в различном промышленном оборудовании',
-      icon: IndustryIcon
+      icon: Indust
     },
     {
       title: 'Антифризы',
       // description:
       //   'Industrial Lubricants – масла, предназначенные для применения в различном промышленном оборудовании',
-      icon: AntiFreezeIcon
+      icon: Antifreeze
     }
   ];
 
   const renderWeProduceBlocks = () => {
     return weProduceItems.map((item) => {
       return (
-        <Grid item xs={12} sm={4} key={item.title}>
+        <Grid size={4} key={item.title}>
           <WeProduceBlock item={item} />
         </Grid>
       );
@@ -73,9 +85,13 @@ export default function About() {
 
   return (
     <>
-      <SectionTitle text="Наша продукция" />
+      <SectionTitle text="Продукция" />
 
-      <Box>
+      <Grid container spacing={2}>
+        {renderWeProduceBlocks()}
+      </Grid>
+
+      {/* <Box>
         <Grid
           container
           spacing={4}
@@ -86,14 +102,13 @@ export default function About() {
             }
           }}
         >
-          {renderWeProduceBlocks()}
+          {renderWeProduceBlocks()} */}
 
-          <Grid item xs={12} sm={4}>
+      {/* <Grid item xs={12} sm={4}>
             <Link href="/products">
               <WeProduceBlockWrapper>
                 <Image className="image-wrapper">
                   <OilsIcon color="#000" width="68" height="68" />
-                  {/* <Lottie lottieRef={lottieRef} style={{ height: '150px' }} animationData={item.icon} loop={false} /> */}
                 </Image>
 
                 <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', mt: 2 }}>
@@ -116,14 +131,14 @@ export default function About() {
               </WeProduceBlockWrapper>
             </Link>
           </Grid>
-        </Grid>
+        </Grid> */}
 
-        {/* <Link href="/products">
+      {/* <Link href="/products">
           <Button variant="outlined" fontSize="large" endIcon={<ArrowForwardIcon />} sx={{ mt: 4, py: 2, px: 4 }}>
             Перейти в каталог
           </Button>
         </Link> */}
-      </Box>
+      {/* </Box> */}
     </>
   );
 }

@@ -80,16 +80,15 @@ export default function HeroSection() {
           // backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url('${Group.src}')`,
           // backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url(https://haynes.com/en-gb/sites/default/files/styles/unaltered_webp/public/Engine%20oil%20guide.jpg?itok=bzBvsWaD&timestamp=1644232820)`,
           backgroundSize: '35%',
-          backgroundPosition: '100% 100%',
+          backgroundPosition: '100% 70%',
           backgroundRepeat: 'no-repeat',
           maskImage: 'radial-gradient(rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%)'
         }}
       ></Box>
       <Box
         sx={{
-          position: 'reslative',
-          zIndex: 10,
-          mb: '50px'
+          position: 'relative',
+          zIndex: 10
         }}
       >
         <OnlyTextLogo color="red" width="300" height="90" />
@@ -120,29 +119,6 @@ export default function HeroSection() {
         >
           Узнайте больше
         </Button>
-
-        {/* <Swiper
-        direction={'vertical'}
-        spaceBetween={30}
-        loop
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false
-        }}
-        pagination={{
-          clickable: true
-        }}
-        modules={[Navigation, Pagination, Autoplay]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          Широкий ассортимент смазочных материалов моторных, трансмиссионных, гидравлических, а также промывочных
-          масел
-        </SwiperSlide>
-        <SwiperSlide>Более 150 наименований продукции для всех секторов рынка</SwiperSlide>
-        <SwiperSlide>Допуски ведущих производителей техники.</SwiperSlide>
-        <SwiperSlide>Продукция компании имеет одобрения и допуски ведущих производителей техники.</SwiperSlide>
-      </Swiper> */}
       </Box>
 
       <Box>
@@ -166,7 +142,7 @@ export default function HeroSection() {
           }}
         >
           {/* <ActionButton orientation="horizontal" href="/search" icon={SearchIcon} title="Поиск" text="По требованиям" /> */}
-          <ActionButton orientation="horizontal" href="/products" icon={OilsIcon} title="Масла" text="Каталог" />
+          {/* <ActionButton orientation="horizontal" href="/products" icon={OilsIcon} title="Масла" text="Каталог" /> */}
 
           {/* <Box
           sx={{

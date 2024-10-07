@@ -7,6 +7,9 @@ import typography from './components/typography';
 export default createTheme({
   mode: 'dark',
   palette: {
+    light: {
+      main: '#fff'
+    },
     primary: {
       main: '#0052cc'
     },
@@ -55,7 +58,7 @@ export default createTheme({
           textDecoration: 'none'
         }
       }
-    },
-    MuiButton: { ...button }
+    }
+    // MuiButton: { ...button }
   }
 });

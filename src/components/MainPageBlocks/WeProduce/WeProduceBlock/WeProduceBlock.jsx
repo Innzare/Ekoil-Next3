@@ -19,20 +19,20 @@ export default function WeProduceBlock({ item }) {
 
   return (
     <WeProduceBlockWrapper
-    // onMouseEnter={() => {
-    //   lottieRef.current.stop();
-    //   lottieRef.current.play();
-    // }}
+      image={Icon}
+      // onMouseEnter={() => {
+      //   lottieRef.current.stop();
+      //   lottieRef.current.play();
+      // }}
     >
-      <Image className="image-wrapper">
+      {/* <Image className="image-wrapper">
         <Icon color="red" />
-        {/* <Lottie lottieRef={lottieRef} style={{ height: '150px' }} animationData={item.icon} loop={false} /> */}
-      </Image>
+      </Image> */}
 
-      <WeProduceBlockText>
-        <WeProduceBlockTitle variant="h6">{item.title}</WeProduceBlockTitle>
+      <WeProduceBlockTitle variant="h6">{item.title}</WeProduceBlockTitle>
+      {/* <WeProduceBlockText>
         <WeProduceBlockSubTitle>{item.description}</WeProduceBlockSubTitle>
-      </WeProduceBlockText>
+      </WeProduceBlockText> */}
     </WeProduceBlockWrapper>
   );
 }

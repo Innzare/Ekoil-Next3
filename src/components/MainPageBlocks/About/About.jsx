@@ -134,53 +134,55 @@ export default function About() {
 
         <Box>
           <Typography variant="h3" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
-            Lorem ipsum dolor
+            Компания ООО «Экойл»
           </Typography>
 
           <Typography variant="h6" color="#6c6c6c" fontWeight="500" sx={{ lineHeight: 1.5 }}>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam consequuntur velit nam eum in,
-            doloremque aspernatur ab nisi consectetur doloribus accusamus et iure magni fugit modi dolorem odit
-            architecto adipisci.
+            Была основана в 1995 году и первоначально занималась научно-исследовательской деятельностью в сфере
+            нефтехимии. По мере накопления базы знаний и опыта в данной сфере начали формироваться первые предложения
+            продуктовой линейки смазочных материалов, соответствующие запросу рынка того времени. Год за годом Компания
+            осваивала производство различных видов смазочных материалов, используя инновационные методики и опираясь на
+            разработки ведущих производителей.
           </Typography>
 
           <Grid container spacing={2} sx={{ mt: 3 }}>
             <Grid item xs={6} sx={{ p: 4 }}>
               <GroupIcon color="primary" fontSize="large" sx={{ mb: 1 }} />
               <Typography variant="h6" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
-                Lorem ipsum dolor
+                Мощность комплекса
               </Typography>
               <Typography variant="body" color="#6c6c6c" fontWeight="400">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                30 тысяч тонн в год
               </Typography>
             </Grid>
 
             <Grid item xs={6} sx={{ p: 4 }}>
               <DescriptionIcon color="primary" fontSize="large" sx={{ mb: 1 }} />
               <Typography variant="h6" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
-                Lorem ipsum dolor
+                Ассортимент
               </Typography>
               <Typography variant="body" color="#6c6c6c" fontWeight="400">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                200+ наименований продукции
               </Typography>
             </Grid>
 
             <Grid item xs={6} sx={{ p: 4 }}>
               <CommuteIcon color="primary" fontSize="large" sx={{ mb: 1 }} />
               <Typography variant="h6" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
-                Lorem ipsum dolor
+                Большой стаж
               </Typography>
               <Typography variant="body" color="#6c6c6c" fontWeight="400">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                30 лет на рынке
               </Typography>
             </Grid>
 
             <Grid item xs={6} sx={{ p: 4 }}>
               <SettingsIcon color="primary" fontSize="large" sx={{ mb: 1 }} />
               <Typography variant="h6" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
-                Lorem ipsum dolor
+                Профессионалы своего дела
               </Typography>
               <Typography variant="body" color="#6c6c6c" fontWeight="400">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                Собственная лаборатория
               </Typography>
             </Grid>
           </Grid>

@@ -30,6 +30,23 @@ export default function WeProduceBlock({ item }) {
       </Image> */}
 
       <WeProduceBlockTitle variant="h6">{item.title}</WeProduceBlockTitle>
+
+      {/* <Box
+        sx={{
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+          width: '170px',
+          height: '170px',
+          zIndex: 1,
+
+          '& img': {
+            width: '100%'
+          }
+        }}
+      >
+        <img src={item.img.src} alt="" />
+      </Box> */}
       {/* <WeProduceBlockText>
         <WeProduceBlockSubTitle>{item.description}</WeProduceBlockSubTitle>
       </WeProduceBlockText> */}

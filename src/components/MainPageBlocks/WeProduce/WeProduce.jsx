@@ -28,6 +28,7 @@ import {
 } from './WeProduceBlock/styles';
 import Tractor from '@/app/assets/tractor.json';
 import Factory from '@/app/assets/factory.json';
+import Tara4 from '@/app/assets/ekoil-tara4.png';
 
 export default function About() {
   const lottieRef = useRef(null);

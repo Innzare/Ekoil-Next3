@@ -90,8 +90,6 @@ export default function Production() {
   };
 
   const handleChange = (event, newValue) => {
-    console.log(123);
-
     setValue(newValue);
   };
 

@@ -16,6 +16,8 @@ import Logo from '@/components/SvgIcons/Logo';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 import { SectionWrapper } from './mainPageStyles';
 
+import Bmw from '@/components/SvgIcons/Cars/bmw';
+
 export default function Home() {
   return (
     <main>
@@ -36,7 +38,7 @@ export default function Home() {
       </Box>
 
       <Box sx={{ mb: 5 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: 2 }}>
             <Logo color="#000" />
             <OnlyTextLogo />

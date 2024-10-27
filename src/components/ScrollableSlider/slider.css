@@ -2,8 +2,8 @@
   --color-text: navy;
   --color-bg: papayawhip;
   --color-bg-accent: #ecdcc0;
-  --size: clamp(10rem, 1rem + 30vmin, 30rem);
-  --gap: calc(var(--size) / 14);
+  --size: clamp(10rem, 1rem + 20vmin, 30rem);
+  --gap: calc(var(--size) / 18);
   --duration: 60s;
   --scroll-start: 0;
   --scroll-end: calc(-100% - var(--gap));
@@ -13,7 +13,7 @@
   :root {
     --color-text: papayawhip;
     --color-bg: rgb(159, 159, 189);
-    --color-bg-accent: #b2b2c7;
+    --color-bg-accent: #e1e1e1;
   }
 }
 
@@ -52,19 +52,6 @@ article {
   }
 }
 
-.marquee--vertical {
-  --mask-direction: to bottom;
-}
-
-.marquee--vertical,
-.marquee--vertical .marquee__group {
-  flex-direction: column;
-}
-
-.marquee--vertical .marquee__group {
-  animation-name: scroll-y;
-}
-
 .marquee--reverse .marquee__group {
   animation-direction: reverse;
   animation-delay: -3s;
@@ -93,17 +80,12 @@ article {
   display: grid;
   place-items: center;
   width: var(--size);
-  fill: var(--color-text);
+  /* fill: var(--color-text); */
   background: var(--color-bg-accent);
+  background: #1a1a1a;
   aspect-ratio: 16/9;
   padding: calc(var(--size) / 10);
   border-radius: 0.5rem;
-}
-
-.marquee--vertical .item {
-  aspect-ratio: 1;
-  width: calc(var(--size) / 1.5);
-  padding: calc(var(--size) / 6);
 }
 
 /* Parent wrapper */
@@ -113,68 +95,4 @@ article {
   gap: var(--gap);
   margin: auto;
   width: 100%;
-}
-
-.wrapper--vertical {
-  flex-direction: row;
-  height: 100vh;
-}
-
-/* Toggle direction button */
-.toggle {
-  --size: 3rem;
-  position: relative;
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  width: var(--size);
-  height: var(--size);
-  font: inherit;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  border-radius: 50%;
-  color: inherit;
-  background-color: var(--color-bg-accent);
-  z-index: 1;
-}
-
-.toggle:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-text);
-}
-
-.toggle span {
-  position: absolute;
-  display: inline-block;
-  top: 50%;
-  left: calc(100% + 0.4em);
-  width: fit-content;
-  white-space: nowrap;
-  transform: translateY(-50%);
-  animation: fade 400ms 4s ease-out forwards;
-  user-select: none;
-}
-
-.toggle .item {
-  --size: 1.5rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: var(--size);
-  height: var(--size);
-  fill: currentcolor;
-  transform: translate(-50%, -50%);
-  transition: transform 300ms cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.toggle--vertical .item {
-  transform: translate(-50%, -50%) rotate(-90deg);
-}
-
-@keyframes fade {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
 }

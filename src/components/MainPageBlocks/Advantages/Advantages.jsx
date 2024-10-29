@@ -9,35 +9,41 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import PeopleIcon from '@mui/icons-material/People';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
+import Barrel from '@/components/SvgIcons/Barrel';
+import Molecule from '@/components/SvgIcons/Molecule';
+import Lab from '@/components/SvgIcons/Lab';
+import Factory from '@/components/SvgIcons/Factory';
+import Money from '@/components/SvgIcons/Money';
+import Time from '@/components/SvgIcons/Time';
 
 const FEATURES = [
   {
-    icon: BoltIcon,
+    icon: Molecule,
     title: 'Современные пакеты присадок',
     text: 'Ведущих мировых производителей'
   },
   {
-    icon: CheckCircleOutlineIcon,
+    icon: Barrel,
     title: 'Высококачественные базовые масла',
     text: '(PAO, VHVI)'
   },
   {
-    icon: AccessTimeIcon,
+    icon: Lab,
     title: 'Собственная лаборатория',
     text: 'Контроль качества сырья и выпускаемой продукции на всех этапах'
   },
   {
-    icon: SettingsIcon,
+    icon: Factory,
     title: 'Гибкость завода',
     text: 'Разработка новых продуктов и рецептур, соответствующих запросу рынка'
   },
   {
-    icon: PeopleIcon,
+    icon: Money,
     title: 'Приемлемая цена',
     text: 'При том же качестве по сравнению с мировыми брендами'
   },
   {
-    icon: EngineeringIcon,
+    icon: Time,
     title: 'Большой опыт работы',
     text: 'Более 25 лет на рынке смазочных материалов'
   }
@@ -75,8 +81,8 @@ export default function Advantages() {
                   p: 3
                 }}
               >
-                <Icon fontSize="large" color="error" sx={{ mb: 2 }} />
-                <Typography variant="h6" color="#fff" fontWeight="700" sx={{ mb: 1 }}>
+                <Icon fontSize="large" color="red" />
+                <Typography variant="h6" color="#fff" fontWeight="700" sx={{ mt: 2, mb: 1 }}>
                   {feature.title}
                 </Typography>
                 <Typography variant="body" color="#aaa" fontWeight="500" align="center">

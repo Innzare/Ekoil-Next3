@@ -6,6 +6,21 @@ import Bmw from '@/components/SvgIcons/Cars/bmw';
 import Wolkswagen from '@/components/SvgIcons/Cars/wolkswagen';
 import Fiat from '@/components/SvgIcons/Cars/fiat';
 import Audi from '@/components/SvgIcons/Cars/audi';
+import Toyota from '@/components/SvgIcons/Cars/toyota';
+import Mitsubishi from '@/components/SvgIcons/Cars/mitsubishi';
+import LandRover from '@/components/SvgIcons/Cars/landRover';
+import Mazda from '@/components/SvgIcons/Cars/mazda';
+import Lexus from '@/components/SvgIcons/Cars/lexus';
+
+import Hyndai from '@/components/SvgIcons/Cars/hyndai';
+import Lada from '@/components/SvgIcons/Cars/lada';
+import Kia from '@/components/SvgIcons/Cars/kia';
+import Ford from '@/components/SvgIcons/Cars/ford';
+import Volvo from '@/components/SvgIcons/Cars/volvo';
+import Renault from '@/components/SvgIcons/Cars/renault';
+import Man from '@/components/SvgIcons/Cars/man';
+import Infinity from '@/components/SvgIcons/Cars/infinity';
+import Chery from '@/components/SvgIcons/Cars/chery';
 
 export default function ScrollableSlider() {
   return (
@@ -28,19 +43,19 @@ export default function ScrollableSlider() {
             <Audi />
           </div>
           <div className="item">
-            <Mers />
+            <Toyota />
           </div>
           <div className="item">
-            <Bmw />
+            <Mitsubishi />
           </div>
           <div className="item">
-            <Wolkswagen />
+            <LandRover />
           </div>
           <div className="item">
-            <Fiat />
+            <Mazda />
           </div>
           <div className="item">
-            <Audi />
+            <Lexus />
           </div>
         </div>
 
@@ -61,19 +76,19 @@ export default function ScrollableSlider() {
             <Audi />
           </div>
           <div className="item">
-            <Mers />
+            <Toyota />
           </div>
           <div className="item">
-            <Bmw />
+            <Mitsubishi />
           </div>
           <div className="item">
-            <Wolkswagen />
+            <LandRover />
           </div>
           <div className="item">
-            <Fiat />
+            <Mazda />
           </div>
           <div className="item">
-            <Audi />
+            <Lexus />
           </div>
         </div>
       </div>
@@ -81,67 +96,67 @@ export default function ScrollableSlider() {
       <div class="marquee marquee--reverse">
         <div class="marquee__group">
           <div className="item">
-            <Mers />
+            <Hyndai />
           </div>
           <div className="item">
-            <Bmw />
+            <Lada />
           </div>
           <div className="item">
-            <Wolkswagen />
+            <Kia />
           </div>
           <div className="item">
-            <Fiat />
+            <Ford />
           </div>
           <div className="item">
-            <Audi />
+            <Volvo />
           </div>
           <div className="item">
-            <Mers />
+            <Renault />
           </div>
           <div className="item">
-            <Bmw />
+            <Man />
           </div>
           <div className="item">
-            <Wolkswagen />
+            <Infinity />
           </div>
           <div className="item">
-            <Fiat />
+            <Chery />
           </div>
           <div className="item">
-            <Audi />
+            <Lexus />
           </div>
         </div>
 
         <div aria-hidden="true" class="marquee__group">
           <div className="item">
-            <Mers />
+            <Hyndai />
           </div>
           <div className="item">
-            <Bmw />
+            <Lada />
           </div>
           <div className="item">
-            <Wolkswagen />
+            <Kia />
           </div>
           <div className="item">
-            <Fiat />
+            <Ford />
           </div>
           <div className="item">
-            <Audi />
+            <Volvo />
           </div>
           <div className="item">
-            <Mers />
+            <Renault />
           </div>
           <div className="item">
-            <Bmw />
+            <Man />
           </div>
           <div className="item">
-            <Wolkswagen />
+            <Infinity />
           </div>
           <div className="item">
-            <Fiat />
+            <Chery />
           </div>
           <div className="item">
-            <Audi />
+            <Lexus />
           </div>
         </div>
       </div>

@@ -29,31 +29,41 @@ export default function Home() {
         <MapLoader />
       </Box> */}
 
-      <Box sx={{ mb: 5 }}>
+      <Box sx={{ mb: 3 }}>
         <HomePageSlider />
       </Box>
 
-      <Box sx={{ mb: 5 }}>
+      {/* <Box sx={{ mb: 5 }}>
         <HeroSection />
-      </Box>
-
-      <Box sx={{ mb: 5 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: 2 }}>
-            <Logo color="#000" />
-            <OnlyTextLogo />
-          </Box>
-
-          <Typography variant="h4" fontWeight={700} textAlign="center">
-            Рекомендован
-          </Typography>
-        </Box>
-        <ScrollableSlider />
-      </Box>
+      </Box> */}
 
       <SectionWrapper>
         <Box sx={{ mb: 8 }}>
           <About />
+
+          <Box sx={{ mb: 5, mt: 2 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                mb: 2,
+                gap: 1
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: 2 }}>
+                <Logo color="#000" />
+                <OnlyTextLogo />
+              </Box>
+
+              <Typography variant="h4" fontWeight={700} textAlign="center">
+                Соответствует требованиям автопроизводителей
+              </Typography>
+            </Box>
+          </Box>
+
+          <ScrollableSlider />
         </Box>
 
         <Box sx={{ mb: 8, position: 'relative' }}>

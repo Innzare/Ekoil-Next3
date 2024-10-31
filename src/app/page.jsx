@@ -10,6 +10,7 @@ import WeProduce from '@/components/MainPageBlocks/WeProduce/WeProduce';
 import Advantages from '@/components/MainPageBlocks/Advantages/Advantages';
 import News from '@/components/MainPageBlocks/News/News';
 import Contacts from '@/components/MainPageBlocks/Contacts/Contacts';
+import OurBuyers from '@/components/MainPageBlocks/OurBuyers/OurBuyers';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 import ScrollableSlider from '@/components/ScrollableSlider/ScrollableSlider';
 import Logo from '@/components/SvgIcons/Logo';
@@ -90,6 +91,10 @@ export default function Home() {
 
         <Box sx={{ mb: 8 }}>
           <WeProduce />
+        </Box>
+
+        <Box sx={{ mb: 8 }}>
+          <OurBuyers />
         </Box>
 
         <Box sx={{ mb: 8 }}>

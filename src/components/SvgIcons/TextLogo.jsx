@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function TextLogo({ color }) {
+export default function TextLogo({ color, width = '200', height = '65' }) {
   return (
-    <svg width="200" height="65" viewBox="0 0 200 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 200 65" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M79.4834 23.625L76.1084 36.2812H81.7334L95.2334 23.625H106.483L86.9717 41.9062L98.1866 63H86.9366L75.7217 41.9062H74.5967L68.9366 63H59.9366L70.4834 23.625H79.4834Z"
         fill="black"

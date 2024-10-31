@@ -14,6 +14,7 @@ import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 import ScrollableSlider from '@/components/ScrollableSlider/ScrollableSlider';
 import Logo from '@/components/SvgIcons/Logo';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
+import TextLogo from '@/components/SvgIcons/TextLogo';
 import { SectionWrapper } from './mainPageStyles';
 
 import Bmw from '@/components/SvgIcons/Cars/bmw';
@@ -54,7 +55,7 @@ export default function Home() {
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: 2 }}>
                 <Logo color="#000" />
-                <OnlyTextLogo />
+                <TextLogo width="110" />
               </Box>
 
               <Typography variant="h4" fontWeight={700} textAlign="center">

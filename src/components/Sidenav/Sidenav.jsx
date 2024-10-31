@@ -10,6 +10,7 @@ import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import SidenavList from './SidenavList';
+import TextLogo from '@/components/SvgIcons/TextLogo';
 import ThemeModeSwitch from '@/components/ThemeModeSwitch/ThemeModeSwitch';
 import { IconButton, SidenavWrapper, Backdrop, OnlyTextLogoWrapper, SidenavTop } from './styles';
 
@@ -30,7 +31,8 @@ export default function Sidenav(props) {
           </Link>
 
           <OnlyTextLogoWrapper isOpen={isOpen}>
-            <OnlyTextLogo color={theme.palette.common.mode} />
+            {/* <OnlyTextLogo color={theme.palette.common.mode} /> */}
+            <TextLogo width="140" height="40" />
           </OnlyTextLogoWrapper>
 
           <Divider

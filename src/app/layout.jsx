@@ -9,6 +9,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 import Loader from '@/components/Loader/Loader';
+import ContactModal from '@/components/ContactModal/ContactModal';
 import { MaterialUIControllerProvider } from '@/context';
 import '@/app/styles/global.css';
 import { motion } from 'framer-motion';
@@ -64,6 +65,8 @@ export default function RootLayout({ children }) {
                 <Header onToggleSidenav={onToggleSidenav} />
 
                 <Box sx={{ flex: '1 0 auto', mb: 4, mt: 1 }}>{children}</Box>
+
+                <ContactModal />
 
                 <Footer />
               </MainContent>

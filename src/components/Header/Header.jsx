@@ -19,8 +19,10 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import EmailIcon from '@mui/icons-material/Email';
+import { useStore } from '@/store';
 
 export default function (props) {
+  const { openContactModal } = useStore();
   const { onToggleSidenav } = props;
   const [isSticky, setIsSticky] = useState(false);
   const theme = useTheme();
@@ -48,6 +50,10 @@ export default function (props) {
     } else {
       setIsSticky(false);
     }
+  };
+
+  const onContactUsClick = () => {
+    openContactModal();
   };
 
   return (
@@ -137,6 +143,7 @@ export default function (props) {
             variant="outlined"
             color="success"
             startIcon={<CallIcon sx={{ mr: 1 }} />}
+            onClick={onContactUsClick}
           >
             Свяжитесь с нами!
           </Button>

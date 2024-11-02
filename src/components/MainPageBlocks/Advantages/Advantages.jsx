@@ -71,7 +71,7 @@ export default function Advantages() {
           const Icon = feature.icon;
 
           return (
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <Box
                 sx={{
                   display: 'flex',
@@ -82,7 +82,7 @@ export default function Advantages() {
                 }}
               >
                 <Icon fontSize="large" color="red" />
-                <Typography variant="h6" color="#fff" fontWeight="700" sx={{ mt: 2, mb: 1 }}>
+                <Typography variant="h6" color="#fff" fontWeight="700" align="center" sx={{ mt: 2, mb: 1 }}>
                   {feature.title}
                 </Typography>
                 <Typography variant="body" color="#aaa" fontWeight="500" align="center">

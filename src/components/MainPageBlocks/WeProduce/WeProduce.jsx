@@ -77,7 +77,7 @@ export default function About() {
   const renderWeProduceBlocks = () => {
     return weProduceItems.map((item) => {
       return (
-        <Grid size={4} key={item.title}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} key={item.title}>
           <WeProduceBlock item={item} />
         </Grid>
       );

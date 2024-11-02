@@ -68,8 +68,8 @@ export default function OurBuyers() {
           justifyContent: 'space-between',
           gap: '16px',
           backgroundColor: '#f5f5f5',
-          borderRadius: '10px',
-          p: '20px 8px'
+          borderRadius: '50px',
+          p: '40px 8px'
         }}
       >
         <IconButton ref={prevRef}>

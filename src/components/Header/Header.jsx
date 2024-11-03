@@ -99,7 +99,7 @@ export default function (props) {
         </Box>
 
         {!isMobile && (
-          <Link href="/search">
+          <Link href="/">
             <TextLogo color={theme.palette.common.mode} />
           </Link>
         )}

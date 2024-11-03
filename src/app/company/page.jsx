@@ -5,6 +5,8 @@ import { Box, Typography, Card, Grid, tabClasses, Divider, Tab, Tabs } from '@mu
 
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
+import TextLogo from '@/components/SvgIcons/TextLogo';
+import Logo from '@/components/SvgIcons/Logo';
 import AboutTab from './Tabs/AboutTab';
 import NewsTab from './Tabs/NewsTab';
 import ProductionTab from './Tabs/ProductionTab';
@@ -104,12 +106,18 @@ export default function Production() {
           >
             {/* <SectionTitle text="О компании" isLight /> */}
 
-            <Typography variant="h4" color="#fff" fontWeight="bold" sx={{ display: 'flex', alignItems: 'center' }}>
-              <OnlyTextLogo color="red" width="150" height="40" /> - качество, которому можно доверять.
-            </Typography>
+            <Box sx={{ maxWidth: '80%', backdropFilter: 'blur(12px)', p: 2, borderRadius: '12px' }}>
+              <Typography
+                variant="h4"
+                color="#fff"
+                fontWeight="bold"
+                sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+              >
+                <Logo color="#fff" />
+                <TextLogo color="#fff" width="150" height="45" /> - качество, которому можно доверять.
+              </Typography>
 
-            <Box sx={{ mt: 4, maxWidth: '80%', backdropFilter: 'blur(12px)', p: 2, borderRadius: '12px' }}>
-              <Typography variant="body1" color="#fff" fontWeight="bold" sx={{ fontSize: '18px' }}>
+              <Typography variant="body1" color="#fff" fontWeight="bold" sx={{ fontSize: '18px', mt: 4 }}>
                 Ekoil Lubricants один из крупных производителей смазочных материалов в Республике Башкортостан,
                 обладающий собственной технологической и производственной базой для выпуска широкого ассортимента
                 продукции. <br />

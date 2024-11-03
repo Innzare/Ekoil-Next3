@@ -134,7 +134,7 @@ export default function About() {
 
         <Box>
           <Typography variant="h3" color="initial" fontWeight="700" sx={{ mb: 2, lineHeight: 1 }}>
-            Компания «Экойл»
+            Компания Ekoil
           </Typography>
 
           <Typography variant="h6" color="#6c6c6c" fontWeight="500" sx={{ lineHeight: 1.5 }}>

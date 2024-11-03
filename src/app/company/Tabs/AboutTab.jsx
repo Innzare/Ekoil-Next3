@@ -10,104 +10,112 @@ export const Chrono = dynamic(() => import('react-chrono').then((lib) => lib.Chr
   ssr: false
 });
 
+// 1) 1995
+// Год основания Компании
+
+// 2) 1997
+// Начало выпуска моторных масел
+
+// 3) 1998
+// Начало выпуска трансмиссионных и индустриальных масел
+
+// 4) 2000
+// Налажено производство смазочных материалов для всех основных отраслей промышленности
+
+// 5) 2005
+// Создание собственной лаборатории для обеспечения входного и выходного контроля качества сырья и выпускаемой продукции
+
+// 6) 2008
+// Получение лицензий API на моторные масла линейки Ekoil Lubricants
+
+// 7) 2010
+// Выход на международный рынок ближнего зарубежья
+
+// 8) 2012
+// Существенное расширение ассортимента выпускаемой продукции.
+// Обновление продуктовой линейки смазочных материалов Ekoil Lubricants с улучшенной рецептурой и новой упаковкой. Компания начала использовать жестяную тару для фасовки производимых масел.
+
+// 9) 2016
+// Модернизация производства с целью увеличения производительности до 30 тысяч тонн в год
+
+// 10) 2022
+// Запуск производства охлаждающих жидкостей (G11, G12)
+
+// 11) 2023
+// Ребрендинг тары. Компания обновила тару для легкомоторных и трансмиссионных масел
+
 export default function AboutTab() {
   const items = [
     {
-      title: 'May 1940',
-      cardTitle: 'Dunkirk',
-      url: 'http://www.history.com',
-      cardSubtitle: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      cardDetailedText: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      media: {
-        type: 'IMAGE',
-        source: {
-          url: 'https://gazpromneft-oil.ru/static/default/img/bg-m.jpg'
-        }
-      }
+      title: '1995',
+      cardTitle: 'Год основания Компании'
     },
     {
-      title: 'May 1940',
-      cardTitle: 'Dunkirk',
-      url: 'http://www.history.com',
-      cardSubtitle: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      cardDetailedText: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      media: {
-        type: 'IMAGE',
-        source: {
-          url: 'https://gazpromneft-oil.ru/static/default/img/bg-m.jpg'
-        }
-      }
+      title: '1997',
+      cardTitle: 'Начало выпуска моторных масел'
     },
     {
-      title: 'May 1940',
-      cardTitle: 'Dunkirk',
-      url: 'http://www.history.com',
-      cardSubtitle: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      cardDetailedText: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      media: {
-        type: 'IMAGE',
-        source: {
-          url: 'https://gazpromneft-oil.ru/static/default/img/bg-m.jpg'
-        }
-      }
+      title: '1998',
+      cardTitle: 'Начало выпуска трансмиссионных и индустриальных масел'
     },
     {
-      title: 'May 1940',
-      cardTitle: 'Dunkirk',
-      url: 'http://www.history.com',
-      cardSubtitle: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      cardDetailedText: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      media: {
-        type: 'IMAGE',
-        source: {
-          url: 'https://gazpromneft-oil.ru/static/default/img/bg-m.jpg'
-        }
-      }
+      title: '2000',
+      cardTitle: 'Налажено производство смазочных материалов для всех основных отраслей промышленности'
     },
     {
-      title: 'May 1940',
-      cardTitle: 'Dunkirk',
-      url: 'http://www.history.com',
-      cardSubtitle: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      cardDetailedText: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      media: {
-        type: 'IMAGE',
-        source: {
-          url: 'https://gazpromneft-oil.ru/static/default/img/bg-m.jpg'
-        }
-      }
+      title: '2005',
+      cardTitle:
+        'Создание собственной лаборатории для обеспечения входного и выходного контроля качества сырья и выпускаемой продукции'
     },
     {
-      title: 'May 1940',
-      cardTitle: 'Dunkirk',
-      url: 'http://www.history.com',
-      cardSubtitle: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      cardDetailedText: 'Men of the British Expeditionary Force (BEF) wade out to..',
-      media: {
-        type: 'IMAGE',
-        source: {
-          url: 'https://gazpromneft-oil.ru/static/default/img/bg-m.jpg'
-        }
-      }
+      title: '2008',
+      cardTitle: 'Получение лицензий API на моторные масла линейки Ekoil Lubricants'
+    },
+    {
+      title: '2010',
+      cardTitle: 'Выход на международный рынок ближнего зарубежья'
+    },
+    {
+      title: '2012',
+      cardTitle:
+        'Существенное расширение ассортимента выпускаемой продукции.Обновление продуктовой линейки смазочных материалов Ekoil Lubricants с улучшенной рецептурой и новой упаковкой. Компания начала использовать жестяную тару для фасовки производимых масел.'
+    },
+    {
+      title: '2016',
+      cardTitle: 'Модернизация производства с целью увеличения производительности до 30 тысяч тонн в год'
+    },
+    {
+      title: '2022',
+      cardTitle: 'Запуск производства охлаждающих жидкостей (G11, G12)'
+    },
+    {
+      title: '2023',
+      cardTitle: 'Ребрендинг тары. Компания обновила тару для легкомоторных и трансмиссионных масел'
     }
   ];
 
   return (
     <Box>
-      <SectionTitle text="О компании" />
+      <SectionTitle text="Наша стратегическая цель" />
 
-      <Box>
-        <Typography variant="h6" sx={{ mb: 2 }} color="initial">
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h6" color="initial">
+          Это обеспечение эффективного и безопасного функционирования Вашей техники. Поэтому мы нацелены на создание
+          премиальных и эффективных смазочных материалов, идеально работающих во всех агрегатах техники – в двигателях,
+          трансмиссиях, гидравлических системах, в любых климатических и эксплуатационных условиях.
+        </Typography>
+
+        {/* <Typography variant="h6" sx={{ mb: 2 }} color="initial">
           Ekoil Lubricants один из крупных производителей смазочных материалов в Республике Башкортостан, обладающий
           собственной технологической и производственной базой для выпуска широкого ассортимента продукции.
-        </Typography>
+        </Typography> */}
 
-        <Typography variant="h6" sx={{ mb: 2 }} color="initial">
+        {/* <Typography variant="h6" sx={{ mb: 2 }} color="initial">
           Мы объединили современные российские и иностранные технологии в сфере производства смазочных материалов для
           получения премиальных высокотехнологичных масел, закрывающих потребность во всех сферах.
-        </Typography>
+        </Typography> */}
 
-        <Typography variant="h6" sx={{ mb: 2 }} color="initial">
+        {/* <Typography variant="h6" sx={{ mb: 2 }} color="initial">
           Производственная площадка Ekoil Lubricants имеет собственную аккредитованную лабораторию, позволяющую
           проводить проверку качества выпускаемой продукции на всех этапах производства.
         </Typography>
@@ -117,17 +125,27 @@ export default function AboutTab() {
           мы нацелены на создание премиальных и эффективных смазочных материалов, идеально работающих во всех агрегатах
           техники – в двигателях, трансмиссиях, гидравлических системах, в любых климатических и эксплуатационных
           условиях.
-        </Typography>
+        </Typography> */}
 
-        <Typography variant="h6" sx={{ mb: 2 }} color="initial">
+        {/* <Typography variant="h6" sx={{ mb: 2 }} color="initial">
           Соответствие продукции мировым стандартам подтверждается тем, что Ekoil выбирают крупнейшие отечественные
           производители техники, такие как: - ПАО «КАМАЗ». - ПАО «НЕФАЗ». - АО «Русская механика».
-        </Typography>
+        </Typography> */}
       </Box>
 
-      <SectionTitle text="История развития" />
+      <SectionTitle text="История развития компании" />
 
-      <Chrono items={items} mode="VERTICAL_ALTERNATING" disableToolbar />
+      <Chrono
+        items={items}
+        mode="HORIZONTAL"
+        // disableToolbar
+        enableQuickJump
+        showAllCardsHorizontal
+        cardHeight="100"
+        cardLess
+        cardPositionHorizontal="BOTTOM"
+        cardWidth="300"
+      />
     </Box>
   );
 }

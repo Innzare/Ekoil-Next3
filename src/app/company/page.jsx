@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Box, Typography, Card, Grid, tabClasses, Divider } from '@mui/material';
-
-import { Tab, Tabs } from '@mui/material';
+import { Box, Typography, Card, Grid, tabClasses, Divider, Tab, Tabs } from '@mui/material';
 
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
@@ -100,16 +98,35 @@ export default function Production() {
           <Box
             sx={{
               backgroundImage: 'url(https://aimol.ru/bitrix/templates/aspro_max/images/09/company_top.jpg)',
-              height: '300px',
+              // height: '400px',
               p: 5
             }}
           >
-            <SectionTitle text="О компании" isLight />
+            {/* <SectionTitle text="О компании" isLight /> */}
+
+            <Typography variant="h4" color="#fff" fontWeight="bold" sx={{ display: 'flex', alignItems: 'center' }}>
+              <OnlyTextLogo color="red" width="150" height="40" /> - качество, которому можно доверять.
+            </Typography>
+
+            <Box sx={{ mt: 4, maxWidth: '80%', backdropFilter: 'blur(12px)', p: 2, borderRadius: '12px' }}>
+              <Typography variant="body1" color="#fff" fontWeight="bold" sx={{ fontSize: '18px' }}>
+                Ekoil Lubricants один из крупных производителей смазочных материалов в Республике Башкортостан,
+                обладающий собственной технологической и производственной базой для выпуска широкого ассортимента
+                продукции. <br />
+                <br />
+                Мы объединили современные российские и иностранные технологии в сфере производства смазочных материалов
+                для получения премиальных высокотехнологичных масел, закрывающих потребность во всех сферах.
+                <br />
+                <br />
+                Использование собственных разработок вместе сырьевой базой позволяет производить продукцию,
+                соответствующую требованиям ведущих мировых производителей техники и международных профессиональных
+                Ассоциаций – API, ACEA, SAE, ILSAC, DIN и др.
+              </Typography>
+            </Box>
           </Box>
 
           <Box sx={{ p: 3 }}>
-            <OnlyTextLogo color="red" width="180" height="50" />
-            <Typography
+            {/* <Typography
               sx={{
                 fontSize: '32px',
                 fontWeight: 'bold',
@@ -118,7 +135,7 @@ export default function Production() {
               }}
             >
               Премиальные смазочные материлы высокого качества
-            </Typography>
+            </Typography> */}
 
             <Tabs value={value} onChange={handleChange} sx={{}}>
               <Tab
@@ -169,7 +186,7 @@ export default function Production() {
                 id={1}
                 label="Производство"
               />
-              <Tab
+              {/* <Tab
                 sx={{
                   display: 'inline-block',
                   mr: 2,
@@ -192,7 +209,7 @@ export default function Production() {
                 }}
                 id={2}
                 label="Новости"
-              />
+              /> */}
             </Tabs>
 
             <Divider color="#ccc" sx={{ mb: 2 }}></Divider>

@@ -56,7 +56,7 @@ export default function Home() {
             >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: 2 }}>
                 <Logo color="#000" />
-                <TextLogo width="110" />
+                <TextLogo width="140" />
               </Box>
 
               <Typography variant="h4" fontWeight={700} textAlign="center">

@@ -6,6 +6,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import OilBarrelIcon from '@mui/icons-material/OilBarrel';
 import FactoryIcon from '@mui/icons-material/Factory';
+import ArticleIcon from '@mui/icons-material/Article';
 
 export const sidenav = [
   {
@@ -37,6 +38,11 @@ export const sidenav = [
     title: 'Где купить',
     path: '/location',
     icon: LocationOnIcon
+  },
+  {
+    title: 'Новости',
+    path: '/news',
+    icon: ArticleIcon
   },
   {
     title: 'Контакты',

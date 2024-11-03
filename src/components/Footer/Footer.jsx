@@ -15,8 +15,11 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import CallIcon from '@mui/icons-material/Call';
+import { useStore } from '@/store';
 
 export default function Footer() {
+  const { openContactModal } = useStore();
+
   return (
     <footer>
       <Box
@@ -52,6 +55,7 @@ export default function Footer() {
               variant="text"
               color="primary"
               startIcon={<CallIcon sx={{ mr: 1 }} />}
+              onClick={openContactModal}
             >
               Обратная связь
             </Button>

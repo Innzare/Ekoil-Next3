@@ -3,7 +3,6 @@ import { Box, Button, Typography } from '@mui/material';
 import { useStore } from '@/store';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 import LogoBackground from '@/components/SvgIcons/LogoBackground';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 

@@ -84,43 +84,16 @@ export default function (props) {
               sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
               variant="text"
             >
-              О нас
+              О компании
             </Button>
           </Link>
 
-          <Link href="/company">
-            <Button
-              sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
-              variant="text"
-            >
-              Производство
-            </Button>
-          </Link>
-
-          <Link href="/company">
-            <Button
-              sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
-              variant="text"
-            >
-              Новости
-            </Button>
-          </Link>
-
-          <Link href="/company">
+          <Link href="/location">
             <Button
               sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
               variant="text"
             >
               Точки продаж
-            </Button>
-          </Link>
-
-          <Link href="/contacts">
-            <Button
-              sx={{ textTransform: 'initial', color: '#000', fontSize: '16px', fontWeight: '700' }}
-              variant="text"
-            >
-              Контакты
             </Button>
           </Link>
         </Box>

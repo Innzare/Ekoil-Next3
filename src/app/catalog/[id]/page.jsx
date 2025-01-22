@@ -16,6 +16,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
+
+import axios from 'axios';
+
 import { ITEMS } from '@/consts/products';
 
 export default function CatalogItem() {
@@ -27,12 +31,17 @@ export default function CatalogItem() {
   const [tabValue, setTabValue] = useState(0);
 
   useEffect(() => {
-    const product = ITEMS.find((item) => item.id === Number(params.id));
+    loadOil();
 
-    console.log(params.id);
-
-    setData(product);
+    // const product = ITEMS.find((item) => item.id === Number(params.id));
+    // setData(product);
   }, []);
+
+  const loadOil = async () => {
+    const { data } = await axios.get(`/api/products/search/${params.id}`);
+
+    setData(data);
+  };
 
   const onGoBackClick = () => {
     router.back();
@@ -62,21 +71,44 @@ export default function CatalogItem() {
     );
   }
 
-  function createData(indication, method, value) {
-    return { indication, method, value };
+  function createData() {
+    if (data) {
+      return data.characteristics.map((item) => {
+        const { indicator, method, value } = item;
+
+        return { indicator, method, value };
+      });
+    }
+    return [];
   }
 
-  const rows = [
-    createData('Плотность при 15°C, кг/м3', 'ASTM D1298', 842),
-    createData('Вязкость кинематическая при 100°C, мм /с', 'ASTM D445', 10.3),
-    createData('Вязкость кинематическая при 40°C, мм /с', 'ASTM D445', 62),
-    createData('Индекс вязкости', 'ASTM D2270', 179),
-    createData('Температура застывания, °C', 'ASTM D97', -40),
-    createData('Температура вспышки в открытом тигле, °C', 'ASTM D92', 224),
-    createData('Щелочное число, мг КОН/г', 'ASTM D2896', 11.1),
-    createData('Сульфатная зольность, %', 'ASTM D874', 1.2),
-    createData('Испаряемость по методу NOACK, %', 'ASTM D5800', 0, 2)
-  ];
+  // const rows = [
+  //   createData('Плотность при 15°C, кг/м3', 'ASTM D1298', 842),
+  //   createData('Вязкость кинематическая при 100°C, мм /с', 'ASTM D445', 10.3),
+  //   createData('Вязкость кинематическая при 40°C, мм /с', 'ASTM D445', 62),
+  //   createData('Индекс вязкости', 'ASTM D2270', 179),
+  //   createData('Температура застывания, °C', 'ASTM D97', -40),
+  //   createData('Температура вспышки в открытом тигле, °C', 'ASTM D92', 224),
+  //   createData('Щелочное число, мг КОН/г', 'ASTM D2896', 11.1),
+  //   createData('Сульфатная зольность, %', 'ASTM D874', 1.2),
+  //   createData('Испаряемость по методу NOACK, %', 'ASTM D5800', 0, 2)
+  // ];
+
+  const renderTares = () => {
+    if (data) {
+      return data.tare.map((tare) => tare.name).join(' / ');
+    }
+
+    return '';
+  };
+
+  const imageUrl = () => {
+    if (data) {
+      return data?.images[0]?.url;
+    }
+
+    return null;
+  };
 
   return (
     <main>
@@ -96,7 +128,7 @@ export default function CatalogItem() {
           </Tooltip>
 
           <Box sx={{ display: 'flex', gap: '8px', justifyContent: 'space-between' }}>
-            <SectionTitle text={`${data?.name} ${data?.subtitle}`} />
+            <SectionTitle text={`${data?.name} ${data?.subtitle || ''}`} />
 
             <Box sx={{ display: 'flex', gap: '8px' }}>
               <Button
@@ -116,24 +148,39 @@ export default function CatalogItem() {
           </Box>
 
           <Box sx={{ display: 'flex', gap: '40px', alignItems: 'flex-start' }}>
-            <Box sx={{ backgroundColor: '#f5f5f5', borderRadius: '6px' }}>
-              <img
-                src={data?.img.src}
-                alt={data?.name}
-                width="500"
-                height="500"
-                style={{
-                  filter: 'drop-shadow(0px 10px 8px rgba(0,0,0,0.5))'
-                }}
-              />
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#f5f5f5',
+                borderRadius: '6px',
+                overflow: 'hidden',
+                minWidth: '500px',
+                height: '500px'
+              }}
+            >
+              {imageUrl() ? (
+                <img
+                  src={imageUrl()}
+                  alt={data?.name}
+                  width="500"
+                  height="500"
+                  style={{
+                    filter: 'drop-shadow(0px 10px 8px rgba(0,0,0,0.5))'
+                  }}
+                />
+              ) : (
+                <HideImageOutlinedIcon sx={{ color: '#ccc', fontSize: '96px' }} />
+              )}
             </Box>
 
             <Box>
               <h2>Описание</h2>
-              <Box sx={{ mb: 3, mt: 1 }}>{data?.description}</Box>
+              <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.description }} />
 
               <h2>Варианты фасовки</h2>
-              <Box sx={{ mb: 3, mt: 1 }}>1 Л, 4 Л, 5 Л, 205 Л</Box>
+              <Box sx={{ mb: 3, mt: 1 }}>{renderTares()}</Box>
 
               <Tabs
                 value={tabValue}
@@ -191,6 +238,7 @@ export default function CatalogItem() {
                   эксплуатации. Также подходит для применения в двигателях других автопроизводителей, требующих масел
                   уровня API SN, ACEA A3/B4.
                 </TabPanel>
+
                 <TabPanel value={tabValue} index={1}>
                   <ul>
                     <li>
@@ -207,9 +255,11 @@ export default function CatalogItem() {
                     </li>
                   </ul>
                 </TabPanel>
+
                 <TabPanel value={tabValue} index={2}>
-                  <Box sx={{ mb: 3, mt: 1 }}>API SP, ILSAC GF-6B</Box>
+                  <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.specifications }} />
                 </TabPanel>
+
                 <TabPanel value={tabValue} index={3}>
                   <TableContainer component={Paper}>
                     <Table sx={{ width: '100%' }} aria-label="simple table">
@@ -227,10 +277,10 @@ export default function CatalogItem() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {rows.map((row) => (
+                        {createData().map((row) => (
                           <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                             <TableCell align="center" component="th" scope="row">
-                              {row.indication}
+                              {row.indicator}
                             </TableCell>
                             <TableCell align="center">{row.method}</TableCell>
                             <TableCell align="center">{row.value}</TableCell>

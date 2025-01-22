@@ -6,11 +6,13 @@ export const Product = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  justifyContent: 'space-between',
   borderRadius: '6px',
   padding: '16px',
   width: '100%',
   backgroundColor: 'rgb(238, 243, 250)',
   cursor: 'pointer',
+  height: '100%',
 
   '&:hover': {
     '.preview-button': {
@@ -22,9 +24,12 @@ export const Product = styled(Box)(({ theme }) => ({
 }));
 
 export const ProductImg = styled('img')({
-  width: '50%',
-  // height: '170px',
   position: 'relative',
+  width: '100%',
+  height: '155px',
+  objectFit: 'contain',
+  backgroundColor: '#fff',
+  borderRadius: '6px',
   // top: '-60px',
   // marginBottom: '-32px',
   marginBottom: '32px'
@@ -42,9 +47,11 @@ export const PreviewButton = styled(IconButton)({
 });
 
 export const ProductTitle = styled(Typography)({
-  fontSize: '21px',
+  fontSize: '19px',
   fontWeight: 'bold',
-  marginBottom: '8px'
+  marginBottom: '8px',
+  textAlign: 'center',
+  letterSpacing: '0px'
 });
 
 export const ProductSubTitle = styled(Typography)({

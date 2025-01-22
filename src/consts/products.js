@@ -94,6 +94,7 @@ export const ITEMS = [
 
 export const CATEGORIES = [
   {
+    id: 4,
     title: 'Легковой транспорт',
     fullTitle: 'Для легкового транспорта',
     value: 'passenger',
@@ -102,6 +103,7 @@ export const CATEGORIES = [
     iconHeight: '40'
   },
   {
+    id: 3,
     title: 'Коммерческий транспорт',
     fullTitle: 'Для коммерческого транспорта',
     value: 'commercial',
@@ -110,6 +112,7 @@ export const CATEGORIES = [
     iconHeight: '35'
   },
   {
+    id: 2,
     title: 'Спец. техника',
     fullTitle: 'Для специальной техники',
     value: 'special',
@@ -118,6 +121,7 @@ export const CATEGORIES = [
     iconHeight: '40'
   },
   {
+    id: 5,
     title: 'Для индустрии',
     fullTitle: 'Для индустрии',
     value: 'industry',
@@ -126,6 +130,7 @@ export const CATEGORIES = [
     iconHeight: '35'
   },
   {
+    id: 1,
     title: 'Антифризы',
     fullTitle: 'Антифризы',
     value: 'antifreeze',

@@ -11,7 +11,7 @@ export const Header = styled('header', {
   justifyContent: 'space-between',
   transition: 'all .25s',
   // backdropFilter: isSticky ? 'blur(1.875rem)' : 'initial',
-  alignItems: 'center',
+  alignItems: 'strecth',
   flex: '0 0 auto',
   // background: isSticky ? theme.palette.background.paperAlpha : 'initial',
   background: isSticky ? '#fff' : 'initial',

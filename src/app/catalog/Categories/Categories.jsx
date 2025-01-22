@@ -14,7 +14,7 @@ export default function Categories(props) {
 
           return (
             <ToggleButton
-              value={item.value}
+              value={item.id}
               key={item.value}
               color="error"
               sx={{

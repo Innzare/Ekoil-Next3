@@ -6,7 +6,9 @@ import { Box, Button, IconButton, Card, Grid, Typography, Tooltip } from '@mui/m
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function ProductItem(props) {
   const { data, onProductPreviewClick } = props;
@@ -14,17 +16,34 @@ export default function ProductItem(props) {
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push(`/catalog/${data.id}`);
+    router.push(`/catalog/${data.product_number}`);
   };
 
   return (
     <Product>
-      <ProductImg
-        src={data.img.src}
-        srcSet={`${data.img.src}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-        loading="lazy"
-        alt="oil"
-      />
+      {data?.img ? (
+        <ProductImg
+          src={data.img}
+          srcSet={`${data.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+          loading="lazy"
+          alt="oil"
+        />
+      ) : (
+        <Box
+          sx={{
+            height: '155px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: '32px',
+            backgroundColor: '#fff',
+            borderRadius: '6px',
+            width: '100%'
+          }}
+        >
+          <HideImageOutlinedIcon sx={{ color: '#ccc', fontSize: '46px' }} />
+        </Box>
+      )}
 
       <Tooltip title="Предпросмотр">
         <PreviewButton className="preview-button" color="primary" onClick={() => onProductPreviewClick(data)}>

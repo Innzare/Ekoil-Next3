@@ -62,7 +62,6 @@ export default function Catalog() {
     const { data } = await axios.get(
       `api/products/all?limit=${LIMIT}&offset=${offsetCalculated}&filter_category=${categoryId}`
     );
-    await axios.get(`api/products/search/M19`);
     const response = await axios.get('api/products/filters');
 
     const { results, count, next, previous } = data;
@@ -114,7 +113,7 @@ export default function Catalog() {
   };
 
   const handleNavigate = () => {
-    router.push(`/catalog/${selectedProduct.id}`);
+    router.push(`/catalog/${selectedProduct.product_number}`);
   };
 
   const onCloseProductDialogClick = () => {

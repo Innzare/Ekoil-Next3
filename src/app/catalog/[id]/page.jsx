@@ -88,17 +88,16 @@ export default function CatalogItem() {
     return [];
   }
 
-  // const rows = [
-  //   createData('Плотность при 15°C, кг/м3', 'ASTM D1298', 842),
-  //   createData('Вязкость кинематическая при 100°C, мм /с', 'ASTM D445', 10.3),
-  //   createData('Вязкость кинематическая при 40°C, мм /с', 'ASTM D445', 62),
-  //   createData('Индекс вязкости', 'ASTM D2270', 179),
-  //   createData('Температура застывания, °C', 'ASTM D97', -40),
-  //   createData('Температура вспышки в открытом тигле, °C', 'ASTM D92', 224),
-  //   createData('Щелочное число, мг КОН/г', 'ASTM D2896', 11.1),
-  //   createData('Сульфатная зольность, %', 'ASTM D874', 1.2),
-  //   createData('Испаряемость по методу NOACK, %', 'ASTM D5800', 0, 2)
-  // ];
+  const onDownloadTDSClick = () => {
+    // Создаем ссылку для скачивания
+    const link = document.createElement('a');
+    link.href = data.documents[0].url; // Указываем URL файла
+    link.download = 'oil'; // Указываем имя файла
+    link.target = '_blank'; // Открываем в новом окне (если нужно)
+    document.body.appendChild(link); // Добавляем ссылку в DOM
+    link.click(); // Кликаем по ссылке для начала скачивания
+    document.body.removeChild(link);
+  };
 
   const renderTares = () => {
     if (data) {
@@ -156,7 +155,7 @@ export default function CatalogItem() {
                   <Box sx={{ display: 'flex', gap: '8px' }}>
                     <Button
                       sx={{ mb: 4 }}
-                      onClick={onGoBackClick}
+                      onClick={onDownloadTDSClick}
                       variant="contained"
                       disableElevation
                       size="small"

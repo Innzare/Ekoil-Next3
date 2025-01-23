@@ -15,7 +15,7 @@ export default function ProductItem(props) {
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push(`/catalog/${data.id}`);
+    router.push(`/catalog/${data.product_number}`);
   };
 
   return (
@@ -36,7 +36,7 @@ export default function ProductItem(props) {
           gap: '42px'
         }}
       >
-        <img width="100" height="100" src={data.img.src} srcSet={data.img.src} alt={data.name} loading="lazy" />
+        <img width="100" height="100" src={data.img} srcSet={data.img} alt={data.name} loading="lazy" />
 
         <Box
           sx={{

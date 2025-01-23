@@ -231,7 +231,9 @@ export default function Catalog() {
                     setPage(page - 1);
                     loadOils(page - 1, categoryId);
 
-                    document.querySelector('.scroll')?.scrollIntoView({ behavior: 'smooth' });
+                    document.body.scrollTo({ top: 400, behavior: 'smooth' });
+
+                    // document.querySelector('.scroll')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                   color="primary"
                   variant="outlined"

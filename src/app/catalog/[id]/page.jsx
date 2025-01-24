@@ -66,11 +66,7 @@ export default function CatalogItem() {
         aria-labelledby={`vertical-tab-${index}`}
         {...other}
       >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
       </div>
     );
   }
@@ -287,8 +283,8 @@ export default function CatalogItem() {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {createData().map((row) => (
-                                <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                              {createData().map((row, id) => (
+                                <TableRow key={id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                   <TableCell align="center" component="th" scope="row">
                                     {row.indicator}
                                   </TableCell>

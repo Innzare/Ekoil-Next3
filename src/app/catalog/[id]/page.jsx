@@ -22,8 +22,6 @@ import Skeleton from '@mui/material/Skeleton';
 
 import axios from 'axios';
 
-import { ITEMS } from '@/consts/products';
-
 export default function CatalogItem() {
   const router = useRouter();
   const params = useParams();

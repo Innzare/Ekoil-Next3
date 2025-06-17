@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -17,11 +17,8 @@
     "@mui/lab": "^6.0.0-beta.10",
     "@mui/material": "^6.1.1",
     "@pbe/react-yandex-maps": "^1.2.5",
-    "@react-jvectormap/core": "^1.0.4",
-    "@react-jvectormap/world": "^1.1.2",
     "axios": "^1.7.9",
-    "framer-motion": "^11.7.0",
-    "lottie-react": "^2.4.0",
+    "framer-motion": "^12.16.0",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-chrono": "^2.6.1",

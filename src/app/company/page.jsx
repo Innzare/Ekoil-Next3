@@ -11,6 +11,7 @@ import AboutTab from './Tabs/AboutTab';
 import NewsTab from './Tabs/NewsTab';
 import ProductionTab from './Tabs/ProductionTab';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
+import HeaderSection from '@/components/HeaderSection';
 
 // import BaseTabs from '@mui/material/Tabs';
 // import BaseTabsList from '@mui/lab/TabList';
@@ -96,15 +97,16 @@ export default function Production() {
   return (
     <main>
       <Box>
-        <Card elevation={3}>
-          <Box
+        <Box>
+          <HeaderSection title="О компании" />
+          {/* <Box
             sx={{
               backgroundImage: 'url(https://aimol.ru/bitrix/templates/aspro_max/images/09/company_top.jpg)',
               // height: '400px',
               p: 5
             }}
           >
-            {/* <SectionTitle text="О компании" isLight /> */}
+            <SectionTitle text="О компании" isLight />
 
             <Box sx={{ maxWidth: '80%', backdropFilter: 'blur(12px)', p: 2, borderRadius: '12px' }}>
               <Typography
@@ -131,7 +133,7 @@ export default function Production() {
                 Ассоциаций – API, ACEA, SAE, ILSAC, DIN и др.
               </Typography>
             </Box>
-          </Box>
+          </Box> */}
 
           <Box sx={{ p: 3 }}>
             {/* <Typography
@@ -252,7 +254,7 @@ export default function Production() {
           {/* {renderTabs()}
 
           <Box>{renderTabsContent()}</Box> */}
-        </Card>
+        </Box>
       </Box>
     </main>
   );

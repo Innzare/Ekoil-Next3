@@ -22,7 +22,7 @@ import { grey } from '@mui/material/colors';
 
 export const Swiper = styled(SwiperMUI)(({ theme }) => ({
   width: '100%',
-  height: '650px',
+  height: '750px',
 
   [theme.breakpoints.down('sm')]: {
     height: '300px'
@@ -34,7 +34,7 @@ export const SwiperSlide = styled(SwiperSlideMUI)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: '#ccc',
-  borderRadius: '8px',
+  // borderRadius: '8px',
   overflow: 'hidden'
 }));
 
@@ -43,7 +43,7 @@ export default function HomePageSlider() {
     <Box
       sx={{
         pb: 3,
-        borderRadius: '8px',
+        // borderRadius: '8px',
         overflow: 'hidden'
       }}
     >

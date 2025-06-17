@@ -15,7 +15,7 @@ export const sidenav = [
     icon: HomeIcon
   },
   {
-    title: 'Компания',
+    title: 'О Компании',
     path: '/company',
     icon: FactoryIcon
   },
@@ -24,25 +24,25 @@ export const sidenav = [
     path: '/products',
     icon: OilBarrelIcon
   },
-  // {
-  //   title: 'Подбор',
-  //   path: '/search',
-  //   icon: FilterAltIcon
-  // },
+  {
+    title: 'Каталог',
+    path: '/catalog',
+    icon: FilterAltIcon
+  },
   // {
   //   title: 'Сертификаты',
   //   path: '/sertificates',
   //   icon: VerifiedIcon
   // },
   {
-    title: 'Где купить',
-    path: '/location',
-    icon: LocationOnIcon
-  },
-  {
     title: 'Новости',
     path: '/news',
     icon: ArticleIcon
+  },
+  {
+    title: 'Где купить',
+    path: '/location',
+    icon: LocationOnIcon
   },
   {
     title: 'Контакты',

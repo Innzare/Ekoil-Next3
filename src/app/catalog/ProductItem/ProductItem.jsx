@@ -16,7 +16,7 @@ export default function ProductItem(props) {
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push(`/catalog/${data.product_number}`);
+    router.push(`/catalog/${data.product_number}`, `/catalog/${data.product_number}`);
   };
 
   return (

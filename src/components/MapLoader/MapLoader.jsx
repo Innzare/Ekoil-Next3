@@ -36,7 +36,7 @@ export default function MapLoader(props) {
       }}
       scrollZoom={false}
     >
-      <MapWrapper width="100%" height="500px" state={state}>
+      <MapWrapper width="100%" height="600px" state={state}>
         {marks.map((coords) => {
           return <Placemark geometry={coords}></Placemark>;
         })}

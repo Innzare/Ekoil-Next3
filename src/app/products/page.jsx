@@ -22,6 +22,7 @@ import ProductItem from '@/app/catalog/ProductItem/ProductItem';
 import WeProduceBlock from '@/components/MainPageBlocks/WeProduce/WeProduceBlock/WeProduceBlock';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
+import HeaderSection from '@/components/HeaderSection';
 
 import Car from '@/components/SvgIcons/Car';
 import CommercialCar from '@/components/SvgIcons/CommercialCar';
@@ -131,8 +132,8 @@ export default function Products() {
   return (
     <main>
       <Box>
-        <Card elevation={3}>
-          <Box
+        <Box>
+          {/* <Box
             sx={{
               backgroundImage: `url(${motorOil.src})`,
               backgroundSize: 'cover',
@@ -143,7 +144,9 @@ export default function Products() {
             }}
           >
             <SectionTitle text="Продукция" isLight />
-          </Box>
+          </Box> */}
+
+          <HeaderSection title="Продукция" />
 
           <Box sx={{ p: 3 }}>
             <h2>Мы производим:</h2>
@@ -208,10 +211,9 @@ export default function Products() {
                 );
               })}
             </Grid> */}
-
-            <FeedbackBlock />
           </Box>
-        </Card>
+          <FeedbackBlock />
+        </Box>
       </Box>
     </main>
   );

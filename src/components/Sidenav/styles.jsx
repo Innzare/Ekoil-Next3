@@ -21,19 +21,19 @@ export const SidenavWrapper = styled(Box, {
   zIndex: 999,
   top: '50%',
   transform: 'translateY(-50%)',
-  left: '16px',
+  // left: '16px',
   transition: '.25s ease',
-  width: isOpen ? '250px' : '70px',
+  // width: isOpen ? '250px' : '70px',
   height: 'calc(100vh - 2rem)',
   padding: '16px',
   borderRadius: '6px',
   background: theme.palette.background.paper,
   boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem',
 
-  [theme.breakpoints.down('md')]: {
-    left: isOpen ? '16px' : '-100%',
-    width: '250px'
-  }
+  right: isOpen ? '16px' : '-100%',
+  width: '250px'
+  // [theme.breakpoints.down('md')]: {
+  // }
 }));
 
 export const SidenavTop = styled(Box, {

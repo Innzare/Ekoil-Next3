@@ -42,9 +42,9 @@ export default function Sidenav(props) {
             }}
           />
 
-          <IconButton size="small" variant="outlined" onClick={onToggle}>
+          {/* <IconButton size="small" variant="outlined" onClick={onToggle}>
             {isOpen ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon />}
-          </IconButton>
+          </IconButton> */}
 
           <SidenavList isOpen={isOpen} />
         </SidenavTop>

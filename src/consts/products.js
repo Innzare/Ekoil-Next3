@@ -94,46 +94,53 @@ export const ITEMS = [
 
 export const CATEGORIES = [
   {
-    id: 4,
-    title: 'Легковой транспорт',
+    id: 'motor-oils',
+    // title: 'Легковой транспорт',
+    title: 'Моторные масла',
     fullTitle: 'Для легкового транспорта',
-    value: 'passenger',
+    // value: 'passenger',
+    value: 'motor_oils',
     icon: Car,
     iconWidth: '45',
     iconHeight: '40'
   },
   {
-    id: 3,
-    title: 'Коммерческий транспорт',
+    id: 'transmission-oils',
+    // title: 'Коммерческий транспорт',
+    title: 'Трансмиссионные масла',
     fullTitle: 'Для коммерческого транспорта',
-    value: 'commercial',
+    // value: 'commercial',
+    value: 'transmission_oils',
     icon: CommercialCar,
     iconWidth: '35',
     iconHeight: '35'
   },
   {
-    id: 2,
-    title: 'Спец. техника',
+    id: 'industrial-oils',
+    // title: 'Спец. техника',
+    title: 'Индустриальные масла',
     fullTitle: 'Для специальной техники',
-    value: 'special',
+    // value: 'special',
+    value: 'industrial_oils',
     icon: SpecialCar,
     iconWidth: '40',
     iconHeight: '40'
   },
+  // {
+  //   id: 5,
+  //   title: 'Для индустрии',
+  //   fullTitle: 'Для индустрии',
+  //   value: 'industry',
+  //   icon: IndustryIcon,
+  //   iconWidth: '30',
+  //   iconHeight: '35'
+  // },
   {
-    id: 5,
-    title: 'Для индустрии',
-    fullTitle: 'Для индустрии',
-    value: 'industry',
-    icon: IndustryIcon,
-    iconWidth: '30',
-    iconHeight: '35'
-  },
-  {
-    id: 1,
+    id: 'antifreezes',
     title: 'Антифризы',
     fullTitle: 'Антифризы',
-    value: 'antifreeze',
+    // value: 'antifreeze',
+    value: 'antifreezes',
     icon: AntiFreezeIcon,
     iconWidth: '30',
     iconHeight: '35'

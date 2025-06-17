@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Box,
   Card,
@@ -11,21 +11,23 @@ import {
   DialogContentText,
   DialogActions,
   Button,
-  IconButton
+  IconButton,
+  Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';
 import ProductItem from './ProductItem/ProductItem';
 import ProductItemLine from './ProductItem/ProductItemLine';
-import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import Categories from './Categories/Categories';
 import Filters from './Filters/Filters';
 import ViewModeButtons from './ViewModeButtons/ViewModeButtons';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
+import HeaderSection from '@/components/HeaderSection';
 import CircularProgress from '@mui/material/CircularProgress';
 import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
 import Pagination from '@mui/material/Pagination';
+
 import axios from 'axios';
 
 import Skeleton from '@mui/material/Skeleton';
@@ -38,31 +40,47 @@ const LIMIT = 10;
 
 export default function Catalog() {
   const router = useRouter();
+  const mainSectionRef = useRef(null);
 
   const [items, setItems] = useState([]);
+  // const [filters, setFilters] = useState(null);
   const [itemsCount, setItemsCount] = useState(0);
   const [page, setPage] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [categoryId, setCategoryId] = useState(4);
+  const [categoryId, setCategoryId] = useState('motor-oils');
   const [viewMode, setViewMode] = useState('grid');
   const [gridViewMode, setGridViewMode] = useState('grid-three-line');
 
   useEffect(() => {
     loadOils(page, categoryId);
+    // loadFilters();
   }, []);
 
-  const loadOils = async (page, categoryId) => {
+  // const loadFilters = async () => {
+  //   const { data } = await axios.get('api/products/filters');
+
+  //   setFilters(data);
+  // };
+
+  const loadOils = async (page, categoryId, queryString = '') => {
     setIsLoading(true);
 
     const offsetCalculated = page * LIMIT;
 
+    // const { data } = await axios.get(
+    //   `api/products/all?limit=${LIMIT}&offset=${offsetCalculated}&filter_category=${categoryId}`
+    // );
+
     const { data } = await axios.get(
-      `api/products/all?limit=${LIMIT}&offset=${offsetCalculated}&filter_category=${categoryId}`
+      `api/products/${categoryId}?limit=${LIMIT}&offset=${offsetCalculated}&${queryString}`
     );
-    const response = await axios.get('api/products/filters');
+
+    // const { data } = await axios.get(
+    //   `api/products/all?vehicle_types=${1}&viscosity=${3}&limit=${LIMIT}&offset=${offsetCalculated}`
+    // );
 
     const { results, count, next, previous } = data;
 
@@ -134,32 +152,44 @@ export default function Catalog() {
     return '';
   };
 
+  const onFiltersChange = (data) => {
+    const queryString = Object.entries(data).reduce((result, [key, value], index) => {
+      if (value) {
+        return index === 0 ? result + `${key}=${value}` : result + `&${key}=${value}`;
+      }
+
+      return result;
+    }, '');
+
+    loadOils(0, categoryId, queryString);
+
+    mainSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    console.log('mainSectionRef', mainSectionRef);
+  };
+
   return (
     <div>
-      <Card elevation={3}>
-        <Box
-          sx={{
-            backgroundImage: 'url(https://aimol.ru/bitrix/templates/aspro_max/images/09/company_top.jpg)',
-            height: '300px',
-            p: 5
-          }}
-        >
-          <SectionTitle text="Каталог" isLight className="scroll" />
-        </Box>
+      <Box>
+        <HeaderSection title="Каталог" />
 
-        <Box sx={{ p: 3 }}>
-          <Categories list={CATEGORIES} value={categoryId} change={onCategoryChange} />
+        <Box>
+          <Box sx={{ p: 3 }}>
+            <Categories list={CATEGORIES} value={categoryId} change={onCategoryChange} />
+          </Box>
+
           <Box
             sx={{
               display: 'flex',
               alignItems: 'flex-start',
               // flexWrap: 'wrap',
               gap: '24px',
-              marginTop: '40px'
+              p: 3
             }}
           >
-            <Filters />
-            <Box sx={{ flex: 1 }}>
+            <Filters category={categoryId} onFiltersChangeEmit={onFiltersChange} isLoading={isLoading} />
+
+            <Box sx={{ flex: 1, scrollMargin: '120px' }} ref={mainSectionRef}>
               <Box
                 sx={{
                   display: 'flex',
@@ -168,7 +198,16 @@ export default function Catalog() {
                   gap: '24px'
                 }}
               >
-                <h1>{CATEGORIES.find((item) => item.id === categoryId)?.fullTitle || ''}</h1>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontSize: '24px',
+                    lineHeight: '31px',
+                    fontWeight: 800
+                  }}
+                >
+                  {CATEGORIES.find((item) => item.id === categoryId)?.title || ''}
+                </Typography>
 
                 <ViewModeButtons
                   viewMode={viewMode}
@@ -183,7 +222,7 @@ export default function Catalog() {
                   <Grid container spacing={4} sx={{ marginTop: '24px', width: '100%' }}>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
                       return (
-                        <Grid size={4}>
+                        <Grid size={4} key={item}>
                           <Stack spacing={1}>
                             <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
                             <Skeleton variant="rounded" width="100%" height={285} />
@@ -226,13 +265,13 @@ export default function Catalog() {
                   sx={{ mt: 4 }}
                   page={page + 1}
                   count={itemsCount}
-                  onChange={(event, page) => {
-                    setPage(page - 1);
-                    loadOils(page - 1, categoryId);
+                  onChange={(event, newPage) => {
+                    if (page !== newPage - 1) {
+                      setPage(newPage - 1);
+                      loadOils(newPage - 1, categoryId);
 
-                    document.body.scrollTo({ top: 400, behavior: 'smooth' });
-
-                    // document.querySelector('.scroll')?.scrollIntoView({ behavior: 'smooth' });
+                      document.body.scrollTo({ top: 400, behavior: 'smooth' });
+                    }
                   }}
                   color="primary"
                   variant="outlined"
@@ -241,13 +280,13 @@ export default function Catalog() {
                 />
               </Box>
             </Box>
-            ,
           </Box>
+
           <Box sx={{ mt: 8 }}>
             <FeedbackBlock />
           </Box>
         </Box>
-      </Card>
+      </Box>
 
       <Dialog
         open={isDialogOpen}

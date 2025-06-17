@@ -3,21 +3,26 @@ import { Box } from '@mui/material';
 
 export const Header = styled('header', {
   shouldForwardProp: (prop) => prop !== 'isSticky'
-})(({ theme, isSticky }) => ({
-  position: 'sticky',
+})(({ theme }) => ({
+  position: 'fixed',
   top: '16px',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  width: '98%',
   zIndex: 100,
   display: 'flex',
   justifyContent: 'space-between',
   transition: 'all .25s',
   // backdropFilter: isSticky ? 'blur(1.875rem)' : 'initial',
-  alignItems: 'strecth',
+  alignItems: 'center',
   flex: '0 0 auto',
   // background: isSticky ? theme.palette.background.paperAlpha : 'initial',
-  background: isSticky ? '#fff' : 'initial',
-  boxShadow: isSticky ? theme.shadows[2] : 'initial',
-  padding: '24px',
-  borderRadius: '6px',
+  // background: isSticky ? '#fff' : 'initial',
+  background: '#fff',
+  boxShadow: theme.shadows[3],
+  padding: '18px',
+  paddingLeft: '14px',
+  borderRadius: '10px',
 
   // [theme.breakpoints.down('sm')]: {
   //   padding: '16px 0px'

@@ -7,11 +7,11 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import WeProduceBlock from './WeProduceBlock/WeProduceBlock';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 // import Car from '@/app/assets/car.json';
-import Car from '@/components/SvgIcons/Car';
-import CommercialCar from '@/components/SvgIcons/CommercialCar';
-import SpecialCar from '@/components/SvgIcons/SpecialCar';
-import IndustryIcon from '@/components/SvgIcons/IndustryIcon';
-import AntiFreezeIcon from '@/components/SvgIcons/AntiFreezeIcon';
+// import Car from '@/components/SvgIcons/Car';
+// import CommercialCar from '@/components/SvgIcons/CommercialCar';
+// import SpecialCar from '@/components/SvgIcons/SpecialCar';
+// import IndustryIcon from '@/components/SvgIcons/IndustryIcon';
+// import AntiFreezeIcon from '@/components/SvgIcons/AntiFreezeIcon';
 import Auto from '@/app/assets/auto2.jpg';
 import Snowbike from '@/app/assets/snowbike.jpg';
 import Truck from '@/app/assets/truck2.jpg';
@@ -26,17 +26,11 @@ import {
   WeProduceBlockSubTitle,
   WeProduceBlockText
 } from './WeProduceBlock/styles';
-import Tractor from '@/app/assets/tractor.json';
-import Factory from '@/app/assets/factory.json';
+// import Tractor from '@/app/assets/tractor.json';
+// import Factory from '@/app/assets/factory.json';
 import Tara4 from '@/app/assets/ekoil-tara4.png';
 
 export default function About() {
-  const lottieRef = useRef(null);
-
-  useEffect(() => {
-    lottieRef?.current?.setSpeed(0.75);
-  }, []);
-
   const weProduceItems = [
     {
       title: 'Для легкового транспорта',

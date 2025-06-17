@@ -12,11 +12,10 @@ import Loader from '@/components/Loader/Loader';
 import ContactModal from '@/components/ContactModal/ContactModal';
 import { MaterialUIControllerProvider } from '@/context';
 import '@/app/styles/global.css';
-import { motion } from 'framer-motion';
 
 const MainContent = styled(Box)(({ theme }) => ({
-  marginLeft: '88px',
-  padding: '16px',
+  // marginLeft: '88px',
+  // padding: '16px',
   minHeight: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -64,7 +63,7 @@ export default function RootLayout({ children }) {
               <MainContent>
                 <Header onToggleSidenav={onToggleSidenav} />
 
-                <Box sx={{ flex: '1 0 auto', mb: 4, mt: 1 }}>{children}</Box>
+                <Box sx={{ flex: '1 0 auto', mb: 4 }}>{children}</Box>
 
                 <ContactModal />
 

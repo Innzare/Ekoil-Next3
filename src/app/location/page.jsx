@@ -10,6 +10,7 @@ import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 import Distributors from './Tabs/Distributors';
 import Marketplace from './Tabs/Marketplace';
 import SellPoints from './Tabs/SellPoints';
+import HeaderSection from '@/components/HeaderSection';
 
 const ITEMS = [
   {
@@ -55,73 +56,71 @@ export default function Location() {
 
   return (
     <main>
+      <HeaderSection title="Где нас найти" />
+
       <Box>
-        <Card sx={{ p: 3 }} elevation={3}>
-          <SectionTitle text="Где нас найти" />
-
-          <Box
-            sx={{
-              display: 'flex',
-              // justifyContent: 'center',
-              gap: 8,
-              mb: 4
-            }}
+        <Box
+          sx={{
+            display: 'flex',
+            // justifyContent: 'center',
+            gap: 8,
+            mb: 4
+          }}
+        >
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            sx={{ display: 'flex', width: '100%', borderBottom: '1px solid #ccc' }}
           >
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              sx={{ display: 'flex', width: '100%', borderBottom: '1px solid #ccc' }}
-            >
-              {ITEMS.map((item, index) => {
-                const Icon = item.icon;
+            {ITEMS.map((item, index) => {
+              const Icon = item.icon;
 
-                return (
-                  <Tab
-                    id={index}
-                    label={item.title}
-                    icon={<Icon />}
-                    iconPosition="start"
-                    sx={{
-                      // flex: 1,
-                      // minHeight: '50px',
-                      maxWidth: 'none',
-                      whiteSpace: 'nowrap',
-                      px: 6,
-                      borderTopLeftRadius: '8px',
-                      borderTopRightRadius: '8px',
-                      fontSize: '16px',
+              return (
+                <Tab
+                  id={index}
+                  label={item.title}
+                  icon={<Icon />}
+                  iconPosition="start"
+                  sx={{
+                    // flex: 1,
+                    // minHeight: '50px',
+                    maxWidth: 'none',
+                    whiteSpace: 'nowrap',
+                    px: 6,
+                    borderTopLeftRadius: '8px',
+                    borderTopRightRadius: '8px',
+                    fontSize: '16px',
 
-                      [`&.${tabClasses.selected}`]: {
-                        backgroundColor: '#0072e526'
-                      }
-                    }}
-                  />
-                );
-              })}
-            </Tabs>
-          </Box>
+                    [`&.${tabClasses.selected}`]: {
+                      backgroundColor: '#0072e526'
+                    }
+                  }}
+                />
+              );
+            })}
+          </Tabs>
+        </Box>
 
-          <Box
-            sx={{
-              mb: 4
-            }}
-          >
-            <TabPanel id={0}>
-              <SellPoints />
-            </TabPanel>
+        <Box
+          sx={{
+            mb: 4,
+            p: 3
+          }}
+        >
+          <TabPanel id={0}>
+            <SellPoints />
+          </TabPanel>
 
-            <TabPanel id={1}>
-              <Distributors />
-            </TabPanel>
+          <TabPanel id={1}>
+            <Distributors />
+          </TabPanel>
 
-            <TabPanel id={2}>
-              <Marketplace />
-            </TabPanel>
-          </Box>
-
-          <FeedbackBlock />
-        </Card>
+          <TabPanel id={2}>
+            <Marketplace />
+          </TabPanel>
+        </Box>
       </Box>
+      <FeedbackBlock />
     </main>
   );
 }

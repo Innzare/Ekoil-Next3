@@ -11,14 +11,13 @@ import SertificateIcon from '@/components/SvgIcons/SertificateIcon';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ActionButton from './ActionButton/ActionButton';
 // import AboutTabs from './AboutTabs/AboutTabs';
-import Lottie from 'lottie-react';
 import Engine from '@/app/assets/engine.json';
 import GroupIcon from '@mui/icons-material/Group';
 import DescriptionIcon from '@mui/icons-material/Description';
 import CommuteIcon from '@mui/icons-material/Commute';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-import Background from './Background';
+// import Background from './Background';
 
 import { styled } from '@mui/system';
 

@@ -99,32 +99,34 @@ export default function HomePageSlider() {
               pl: 14
             }}
           >
-            <Typography variant="h3" color="#fff" fontWeight={700} lineHeight="48px" sx={{ mb: 3 }}>
-              Моторные масла <br />
-              для легковой техники
-            </Typography>
+            <Box sx={{ backdropFilter: 'blur(16px)' }}>
+              <Typography variant="h3" color="#fff" fontWeight={700} lineHeight="48px" sx={{ mb: 3 }}>
+                Моторные масла <br />
+                для легковой техники
+              </Typography>
 
-            <Typography color="#fff" sx={{ maxWidth: '500px', fontSize: '18px' }}>
-              Ваш двигатель, наша забота <br />
-              Ekoil Lubricants разработал полный ассортимент смазочных материалов, которые соответствуют и превосходят
-              уровни производительности по API и ACEA
-            </Typography>
+              <Typography color="#fff" sx={{ maxWidth: '500px', fontSize: '18px' }}>
+                Ваш двигатель, наша забота <br />
+                Ekoil Lubricants разработал полный ассортимент смазочных материалов, которые соответствуют и превосходят
+                уровни производительности по API и ACEA
+              </Typography>
 
-            <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
-              <Button
-                startIcon={<SubjectOutlinedIcon />}
-                sx={{ backgroundColor: '#fff', color: '#000' }}
-                variant="contained"
-              >
-                Подробнее
-              </Button>
-              <Button
-                startIcon={<DescriptionOutlinedIcon />}
-                sx={{ backgroundColor: '#fff', color: '#000' }}
-                variant="contained"
-              >
-                Скачать каталог
-              </Button>
+              <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
+                <Button
+                  startIcon={<SubjectOutlinedIcon />}
+                  sx={{ backgroundColor: '#fff', color: '#000' }}
+                  variant="contained"
+                >
+                  Подробнее
+                </Button>
+                <Button
+                  startIcon={<DescriptionOutlinedIcon />}
+                  sx={{ backgroundColor: '#fff', color: '#000' }}
+                  variant="contained"
+                >
+                  Скачать каталог
+                </Button>
+              </Box>
             </Box>
           </Box>
         </SwiperSlide>

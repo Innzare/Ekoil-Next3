@@ -1,120 +1,120 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Card, Tab, Tabs, Tooltip, Typography } from '@mui/material';
-import { useRouter, useParams, useSearchParams } from 'next/navigation';
-import SectionTitle from '@/components/SectionTitle/SectionTitle';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
+// import { Box, Button, Card, Tab, Tabs, Tooltip, Typography } from '@mui/material';
+// import { useRouter, useParams, useSearchParams } from 'next/navigation';
+// import SectionTitle from '@/components/SectionTitle/SectionTitle';
+// import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+// import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
+// import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TableRow from '@mui/material/TableRow';
+// import Paper from '@mui/material/Paper';
 
-import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
-import CircularProgress from '@mui/material/CircularProgress';
-import Skeleton from '@mui/material/Skeleton';
-import HeaderSection from '@/components/HeaderSection';
+// import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
+// import CircularProgress from '@mui/material/CircularProgress';
+// import Skeleton from '@mui/material/Skeleton';
+// import HeaderSection from '@/components/HeaderSection';
 
-import axios from 'axios';
+// import axios from 'axios';
 
 export default function CatalogItem() {
-  const router = useRouter();
-  const params = useParams();
-  const searchParams = useSearchParams();
+  // const router = useRouter();
+  // const params = useParams();
+  // const searchParams = useSearchParams();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState(null);
-  const [tabValue, setTabValue] = useState(0);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [data, setData] = useState(null);
+  // const [tabValue, setTabValue] = useState(0);
 
-  useEffect(() => {
-    loadOil();
+  // useEffect(() => {
+  //   loadOil();
 
-    // const product = ITEMS.find((item) => item.id === Number(params.id));
-    // setData(product);
-  }, []);
+  //   // const product = ITEMS.find((item) => item.id === Number(params.id));
+  //   // setData(product);
+  // }, []);
 
-  const loadOil = async () => {
-    setIsLoading(true);
+  // const loadOil = async () => {
+  //   setIsLoading(true);
 
-    const { data } = await axios.get(`/api/products/search/${params.id}`);
+  //   const { data } = await axios.get(`/api/products/search/${params.id}`);
 
-    setData(data);
-    setIsLoading(false);
-  };
+  //   setData(data);
+  //   setIsLoading(false);
+  // };
 
-  const onGoBackClick = () => {
-    router.back();
-  };
+  // const onGoBackClick = () => {
+  //   router.back();
+  // };
 
-  const handleChange = (event, newValue) => {
-    setTabValue(newValue);
-  };
+  // const handleChange = (event, newValue) => {
+  //   setTabValue(newValue);
+  // };
 
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+  // function TabPanel(props) {
+  //   const { children, value, index, ...other } = props;
 
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-      </div>
-    );
-  }
+  //   return (
+  //     <div
+  //       role="tabpanel"
+  //       hidden={value !== index}
+  //       id={`vertical-tabpanel-${index}`}
+  //       aria-labelledby={`vertical-tab-${index}`}
+  //       {...other}
+  //     >
+  //       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+  //     </div>
+  //   );
+  // }
 
-  function createData() {
-    if (data) {
-      return data.characteristics.map((item) => {
-        const { indicator, method, value } = item;
+  // function createData() {
+  //   if (data) {
+  //     return data.characteristics.map((item) => {
+  //       const { indicator, method, value } = item;
 
-        return { indicator, method, value };
-      });
-    }
-    return [];
-  }
+  //       return { indicator, method, value };
+  //     });
+  //   }
+  //   return [];
+  // }
 
-  const onDownloadTDSClick = () => {
-    // Создаем ссылку для скачивания
-    const link = document.createElement('a');
-    link.href = data.documents[0].url; // Указываем URL файла
-    link.download = 'oil'; // Указываем имя файла
-    link.target = '_blank'; // Открываем в новом окне (если нужно)
-    document.body.appendChild(link); // Добавляем ссылку в DOM
-    link.click(); // Кликаем по ссылке для начала скачивания
-    document.body.removeChild(link);
-  };
+  // const onDownloadTDSClick = () => {
+  //   // Создаем ссылку для скачивания
+  //   const link = document.createElement('a');
+  //   link.href = data.documents[0].url; // Указываем URL файла
+  //   link.download = 'oil'; // Указываем имя файла
+  //   link.target = '_blank'; // Открываем в новом окне (если нужно)
+  //   document.body.appendChild(link); // Добавляем ссылку в DOM
+  //   link.click(); // Кликаем по ссылке для начала скачивания
+  //   document.body.removeChild(link);
+  // };
 
-  const renderTares = () => {
-    if (data) {
-      return data.tare.map((tare) => tare.name).join(' / ');
-    }
+  // const renderTares = () => {
+  //   if (data) {
+  //     return data.tare.map((tare) => tare.name).join(' / ');
+  //   }
 
-    return '';
-  };
+  //   return '';
+  // };
 
-  const imageUrl = () => {
-    if (data) {
-      return data?.images[0]?.url;
-    }
+  // const imageUrl = () => {
+  //   if (data) {
+  //     return data?.images[0]?.url;
+  //   }
 
-    return null;
-  };
+  //   return null;
+  // };
 
   return (
     <main>
       <HeaderSection title="Каталог EKOIL" />
 
-      <Box sx={{ p: 3 }}>
+      {/* <Box sx={{ p: 3 }}>
         <Tooltip title="Назад">
           <Button
             sx={{ mb: 4 }}
@@ -304,7 +304,7 @@ export default function CatalogItem() {
             </>
           )}
         </Box>
-      </Box>
+      </Box> */}
 
       <Box sx={{ mt: 4 }}>
         <FeedbackBlock />

@@ -12,7 +12,7 @@ import News from '@/components/MainPageBlocks/News/News';
 import Contacts from '@/components/MainPageBlocks/Contacts/Contacts';
 import OurBuyers from '@/components/MainPageBlocks/OurBuyers/OurBuyers';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
-import ScrollableSlider from '@/components/ScrollableSlider/ScrollableSlider';
+// import ScrollableSlider from '@/components/ScrollableSlider/ScrollableSlider';
 import Logo from '@/components/SvgIcons/Logo';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 import TextLogo from '@/components/SvgIcons/TextLogo';
@@ -65,7 +65,7 @@ export default function Home() {
             </Box>
           </Box>
 
-          <ScrollableSlider />
+          {/* <ScrollableSlider /> */}
         </Box>
 
         <Box sx={{ mb: 8, position: 'relative' }}>

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 // import { useRouter, useParams, useSearchParams } from 'next/navigation';
 // import SectionTitle from '@/components/SectionTitle/SectionTitle';
 // import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-// import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
+import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 // import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 // import Table from '@mui/material/Table';
@@ -19,7 +19,7 @@ import React, { useEffect, useState } from 'react';
 // import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
 // import CircularProgress from '@mui/material/CircularProgress';
 // import Skeleton from '@mui/material/Skeleton';
-// import HeaderSection from '@/components/HeaderSection';
+import HeaderSection from '@/components/HeaderSection';
 
 // import axios from 'axios';
 

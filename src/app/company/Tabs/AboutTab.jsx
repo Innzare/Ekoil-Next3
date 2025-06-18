@@ -6,9 +6,9 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle';
 // import type { Chrono as ChronoType } from "react-chrono";
 import dynamic from 'next/dynamic';
 
-export const Chrono = dynamic(() => import('react-chrono').then((lib) => lib.Chrono), {
-  ssr: false
-});
+// export const Chrono = dynamic(() => import('react-chrono').then((lib) => lib.Chrono), {
+//   ssr: false
+// });
 
 // 1) 1995
 // Год основания Компании
@@ -135,7 +135,7 @@ export default function AboutTab() {
 
       <SectionTitle text="История развития компании" />
 
-      <Chrono
+      {/* <Chrono
         items={items}
         mode="HORIZONTAL"
         // disableToolbar
@@ -145,7 +145,7 @@ export default function AboutTab() {
         cardLess
         cardPositionHorizontal="BOTTOM"
         cardWidth="300"
-      />
+      /> */}
     </Box>
   );
 }

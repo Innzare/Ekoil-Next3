@@ -21,7 +21,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Skeleton from '@mui/material/Skeleton';
 import HeaderSection from '@/components/HeaderSection';
 
-// import axios from 'axios';
+import axios from 'axios';
 
 export default function CatalogItem() {
   const router = useRouter();

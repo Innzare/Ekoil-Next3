@@ -8,7 +8,7 @@ export const Header = styled('header', {
   top: '16px',
   left: '50%',
   transform: 'translateX(-50%)',
-  width: '98%',
+  width: '96%',
   zIndex: 100,
   display: 'flex',
   justifyContent: 'space-between',
@@ -29,7 +29,7 @@ export const Header = styled('header', {
   // },
 
   [theme.breakpoints.down('sm')]: {
-    padding: '16px 0px',
+    padding: '16px',
     top: '8px'
   }
 }));

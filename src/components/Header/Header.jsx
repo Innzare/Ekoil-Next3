@@ -151,9 +151,9 @@ export default function (props) {
                       sx={{
                         color: isCurrentPath && 'red',
                         '& span': {
+                          fontWeight: isCurrentPath ? 900 : 600,
                           fontSize: isMinWidth1400 ? '14px' : '12px',
-                          textTransform: 'uppercase',
-                          fontWeight: 600
+                          textTransform: 'uppercase'
                         }
                       }}
                     />

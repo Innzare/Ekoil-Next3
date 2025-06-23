@@ -1,19 +1,17 @@
 import React from 'react';
 
-export default function mitsubishi() {
+export default function Mitsubishi() {
   return (
-    <svg width="70" height="70" viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_277_89)">
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <mask id="mask0_426_72649" maskUnits="userSpaceOnUse" x="0" y="4" width="64" height="56">
+        <path d="M64 4.41406H0V59.5865H64V4.41406Z" fill="white" />
+      </mask>
+      <g mask="url(#mask0_426_72649)">
         <path
-          d="M14.4112 0L19.3351 8.3937L14.4112 16.7874L9.4874 8.4541L14.4112 0ZM14.4112 16.7874H24.0187L28.8225 25H19.215L14.4112 16.7874ZM14.4112 16.7874H4.8037L0 25H9.6075L14.4112 16.7874Z"
-          fill="#E60012"
+          d="M31.804 4.41406L42.6706 22.9381L31.804 41.4621L20.9377 23.0714L31.804 4.41406ZM31.804 41.4621H53.0068L63.6083 59.5865H42.4055L31.804 41.4621ZM31.804 41.4621H10.6013L0 59.5865H21.2028L31.804 41.4621Z"
+          fill="#919EAB"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_277_89">
-          <rect width="29" height="25" fill="white" />
-        </clipPath>
-      </defs>
     </svg>
   );
 }

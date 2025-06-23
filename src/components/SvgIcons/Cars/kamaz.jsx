@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function kamaz() {
+export default function Kamaz() {
   return (
     <svg height="200" viewBox="0 16 596.1 881.4" width="100" xmlns="http://www.w3.org/2000/svg">
       <path

@@ -2,11 +2,15 @@
   --color-text: navy;
   --color-bg: papayawhip;
   --color-bg-accent: #ecdcc0;
-  --size: clamp(10rem, 1rem + 20vmin, 30rem);
+  --size: 130px;
   --gap: calc(var(--size) / 18);
-  --duration: 60s;
+  --duration: 50s;
   --scroll-start: 0;
   --scroll-end: calc(-100% - var(--gap));
+
+  @media (max-width: 600px) {
+    --size: 110px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,13 +31,13 @@ article {
   overflow: hidden;
   user-select: none;
   gap: var(--gap);
-  mask-image: linear-gradient(
+  /* mask-image: linear-gradient(
     var(--mask-direction, to right),
     hsl(0 0% 0% / 0),
     hsl(0 0% 0% / 1) 20%,
     hsl(0 0% 0% / 1) 80%,
     hsl(0 0% 0% / 0)
-  );
+  ); */
 }
 
 .marquee__group {
@@ -81,8 +85,8 @@ article {
   place-items: center;
   width: var(--size);
   /* fill: var(--color-text); */
-  background: var(--color-bg-accent);
-  background: #1a1a1a;
+  /* background: var(--color-bg-accent);
+  background: #1a1a1a; */
   aspect-ratio: 16/9;
   padding: calc(var(--size) / 10);
   border-radius: 0.5rem;

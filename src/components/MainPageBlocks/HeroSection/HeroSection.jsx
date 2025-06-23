@@ -31,7 +31,7 @@ import 'swiper/css/effect-fade';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 // import Group from '@/app/assets/Group.png';
-import gaz from '@/app/assets/gaz.png';
+// import gaz from '@/app/assets/gaz.png';
 import ekoilBarrel from '@/app/assets/ekoil-barrel.png';
 import ekoil from '@/app/assets/ekoil-bckg.jpg';
 import {

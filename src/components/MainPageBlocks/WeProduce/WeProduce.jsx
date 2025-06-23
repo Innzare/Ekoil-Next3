@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Box, Grid2 as Grid, Button } from '@mui/material';
+import { Box, Grid2 as Grid, Button, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import WeProduceBlock from './WeProduceBlock/WeProduceBlock';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
@@ -80,11 +80,49 @@ export default function About() {
 
   return (
     <>
-      <SectionTitle text="Продукция" />
+      <Box
+        sx={(theme) => ({
+          px: 10,
+
+          [theme.breakpoints.down('md')]: {
+            px: 4
+          },
+
+          [theme.breakpoints.down('sm')]: {
+            px: 2
+          }
+        })}
+      >
+        <Typography
+          variant="h6"
+          fontWeight="900"
+          sx={{
+            mb: 4,
+            textTransform: 'uppercase',
+            position: 'relative',
+            display: 'inline-block',
+
+            '&:after': {
+              content: '""',
+              position: 'absolute',
+              right: '-80%',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '80px',
+              height: '1px',
+              backgroundColor: '#000'
+            }
+          }}
+        >
+          Продукция
+        </Typography>
+      </Box>
+
+      {/* <SectionTitle text="Продукция" />
 
       <Grid container spacing={2}>
         {renderWeProduceBlocks()}
-      </Grid>
+      </Grid> */}
 
       {/* <Box>
         <Grid

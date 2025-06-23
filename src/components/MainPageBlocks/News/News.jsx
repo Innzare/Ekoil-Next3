@@ -8,30 +8,42 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const news = [
   {
     image: '',
-    title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    title: 'Lorem 2 ipsum dolor sit amet consectetur adipisicing elit.',
     data: '09.03.2024'
   },
   {
     image: '',
-    title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    title: 'Lorem 3 ipsum dolor sit amet consectetur adipisicing elit.',
     data: '09.03.2024'
   },
   {
     image: '',
-    title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    title: 'Lorem 1 ipsum dolor sit amet consectetur adipisicing elit.',
     data: '09.03.2024'
   }
 ];
 
 export default function News() {
   return (
-    <Box>
+    <Box
+      sx={(theme) => ({
+        px: 10,
+
+        [theme.breakpoints.down('md')]: {
+          px: 4
+        },
+
+        [theme.breakpoints.down('sm')]: {
+          px: 2
+        }
+      })}
+    >
       <SectionTitle text="Новости компании" />
 
       <Grid container spacing={4}>
         {news.map((item) => {
           return (
-            <Grid item cols="12" xs="4">
+            <Grid item cols="12" xs={4} key={item.title}>
               <NewsItem data={item} />
             </Grid>
           );

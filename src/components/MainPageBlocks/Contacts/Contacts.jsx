@@ -11,13 +11,25 @@ import Link from 'next/link';
 
 export default function Contacts() {
   return (
-    <Box>
+    <Box
+      sx={(theme) => ({
+        px: 10,
+
+        [theme.breakpoints.down('md')]: {
+          px: 4
+        },
+
+        [theme.breakpoints.down('sm')]: {
+          px: 2
+        }
+      })}
+    >
       <SectionTitle text="Контакты" />
 
       <Grid container>
-        <Grid item xs="6">
+        <Grid item xs={6}>
           <Grid container spacing={4}>
-            <Grid item xs="6" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <LocationOnOutlinedIcon color="primary" />
                 Адрес
@@ -27,7 +39,7 @@ export default function Contacts() {
               </Typography>
             </Grid>
 
-            <Grid item xs="6" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <AccessTimeOutlinedIcon color="primary" />
                 Время работы
@@ -38,7 +50,7 @@ export default function Contacts() {
               </Typography>
             </Grid>
 
-            <Grid item xs="6" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <LocalPhoneOutlinedIcon color="primary" />
                 Номер телефона
@@ -49,7 +61,7 @@ export default function Contacts() {
               </Typography>
             </Grid>
 
-            <Grid item xs="6" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <MailOutlineIcon color="primary" />
                 Почта
@@ -68,7 +80,7 @@ export default function Contacts() {
           </Link>
         </Grid>
 
-        <Grid item xs="6">
+        <Grid item xs={6}>
           <Box
             sx={{
               height: '400px'

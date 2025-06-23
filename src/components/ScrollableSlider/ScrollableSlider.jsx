@@ -19,16 +19,19 @@ import Ford from '@/components/SvgIcons/Cars/ford';
 import Volvo from '@/components/SvgIcons/Cars/volvo';
 import Renault from '@/components/SvgIcons/Cars/renault';
 import Man from '@/components/SvgIcons/Cars/man';
-import Infinity from '@/components/SvgIcons/Cars/infinity';
+import Infiniti from '@/components/SvgIcons/Cars/infiniti';
 import Chery from '@/components/SvgIcons/Cars/chery';
 
 export default function ScrollableSlider() {
   return (
-    <article class="wrapper">
-      <div class="marquee">
-        <div class="marquee__group">
+    <article className="wrapper">
+      <div className="marquee">
+        <div className="marquee__group">
           <div className="item">
             <Mers />
+          </div>
+          <div className="item">
+            <Lexus />
           </div>
           <div className="item">
             <Bmw />
@@ -37,7 +40,68 @@ export default function ScrollableSlider() {
             <Wolkswagen />
           </div>
           <div className="item">
-            <Fiat />
+            <Audi />
+          </div>
+          <div className="item">
+            <Toyota />
+          </div>
+          <div className="item">
+            <Mitsubishi />
+          </div>
+          <div className="item">
+            <LandRover />
+          </div>
+          <div className="item">
+            <Mazda />
+          </div>
+          {/* <div className="item">
+            <Lexus />
+          </div> */}
+
+          <div className="item">
+            <LandRover />
+          </div>
+          <div className="item">
+            <Hyndai />
+          </div>
+          <div className="item">
+            <Lada />
+          </div>
+          <div className="item">
+            <Infiniti />
+          </div>
+          <div className="item">
+            <Kia />
+          </div>
+          <div className="item">
+            <Ford />
+          </div>
+          <div className="item">
+            <Renault />
+          </div>
+          <div className="item">
+            <Man />
+          </div>
+          <div className="item">
+            <Chery />
+          </div>
+          <div className="item">
+            <Lexus />
+          </div>
+        </div>
+
+        <div aria-hidden="true" className="marquee__group">
+          <div className="item">
+            <Mers />
+          </div>
+          {/* <div className="item">
+            <Lexus />
+          </div> */}
+          <div className="item">
+            <Bmw />
+          </div>
+          <div className="item">
+            <Wolkswagen />
           </div>
           <div className="item">
             <Audi />
@@ -57,35 +121,33 @@ export default function ScrollableSlider() {
           <div className="item">
             <Lexus />
           </div>
-        </div>
 
-        <div aria-hidden="true" class="marquee__group">
-          <div className="item">
-            <Mers />
-          </div>
-          <div className="item">
-            <Bmw />
-          </div>
-          <div className="item">
-            <Wolkswagen />
-          </div>
-          <div className="item">
-            <Fiat />
-          </div>
-          <div className="item">
-            <Audi />
-          </div>
-          <div className="item">
-            <Toyota />
-          </div>
-          <div className="item">
-            <Mitsubishi />
-          </div>
           <div className="item">
             <LandRover />
           </div>
           <div className="item">
-            <Mazda />
+            <Hyndai />
+          </div>
+          <div className="item">
+            <Lada />
+          </div>
+          <div className="item">
+            <Infiniti />
+          </div>
+          <div className="item">
+            <Kia />
+          </div>
+          <div className="item">
+            <Ford />
+          </div>
+          <div className="item">
+            <Renault />
+          </div>
+          <div className="item">
+            <Man />
+          </div>
+          <div className="item">
+            <Chery />
           </div>
           <div className="item">
             <Lexus />
@@ -93,8 +155,11 @@ export default function ScrollableSlider() {
         </div>
       </div>
 
-      <div class="marquee marquee--reverse">
-        <div class="marquee__group">
+      {/* <div className="marquee marquee--reverse">
+        <div className="marquee__group">
+          <div className="item">
+            <LandRover />
+          </div>
           <div className="item">
             <Hyndai />
           </div>
@@ -108,16 +173,13 @@ export default function ScrollableSlider() {
             <Ford />
           </div>
           <div className="item">
-            <Volvo />
-          </div>
-          <div className="item">
             <Renault />
           </div>
           <div className="item">
             <Man />
           </div>
           <div className="item">
-            <Infinity />
+            <Infiniti />
           </div>
           <div className="item">
             <Chery />
@@ -127,7 +189,10 @@ export default function ScrollableSlider() {
           </div>
         </div>
 
-        <div aria-hidden="true" class="marquee__group">
+        <div aria-hidden="true" className="marquee__group">
+          <div className="item">
+            <LandRover />
+          </div>
           <div className="item">
             <Hyndai />
           </div>
@@ -141,16 +206,13 @@ export default function ScrollableSlider() {
             <Ford />
           </div>
           <div className="item">
-            <Volvo />
-          </div>
-          <div className="item">
             <Renault />
           </div>
           <div className="item">
             <Man />
           </div>
           <div className="item">
-            <Infinity />
+            <Infiniti />
           </div>
           <div className="item">
             <Chery />
@@ -159,7 +221,7 @@ export default function ScrollableSlider() {
             <Lexus />
           </div>
         </div>
-      </div>
+      </div> */}
     </article>
   );
 }

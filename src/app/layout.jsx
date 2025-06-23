@@ -23,11 +23,11 @@ const MainContent = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.down('md')]: {
     marginLeft: '0px'
-  },
-
-  [theme.breakpoints.down('sm')]: {
-    padding: '8px'
   }
+
+  // [theme.breakpoints.down('sm')]: {
+  //   padding: '8px'
+  // }
 }));
 
 const inter = Inter({ subsets: ['latin'] });

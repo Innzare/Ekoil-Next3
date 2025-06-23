@@ -38,7 +38,7 @@ export default function MapLoader(props) {
     >
       <MapWrapper width="100%" height="600px" state={state}>
         {marks.map((coords) => {
-          return <Placemark geometry={coords}></Placemark>;
+          return <Placemark geometry={coords} key={coords}></Placemark>;
         })}
         {/* <Box
           onClick={() => {

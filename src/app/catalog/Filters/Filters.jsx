@@ -81,7 +81,7 @@ const FilterFields = (props) => {
       height: 20,
       backgroundImage:
         "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath" +
-        " fill-rule='evenodd' clip-rule='evenodd' d='M12 5c-.28 0-.53.11-.71.29L7 9.59l-2.29-2.3a1.003 " +
+        " fillRule='evenodd' clipRule='evenodd' d='M12 5c-.28 0-.53.11-.71.29L7 9.59l-2.29-2.3a1.003 " +
         "1.003 0 00-1.42 1.42l3 3c.18.18.43.29.71.29s.53-.11.71-.29l5-5A1.003 1.003 0 0012 5z' fill='%23fff'/%3E%3C/svg%3E\")",
       content: '""'
     },
@@ -149,13 +149,14 @@ export default function Filters(props) {
   const [secondStepFilters, setSecondStepFilters] = useState([]);
 
   useEffect(() => {
+    setSelectedFilters(null);
     loadFilters();
   }, [category]);
 
   const loadFilters = async () => {
     const { data } = await axios.get('api/products/filters');
 
-    setSelectedFilters(null);
+    // setSelectedFilters(null);
     setFilters(data);
 
     const categoryStringFormatted = category.split('-').join('_');
@@ -211,57 +212,57 @@ export default function Filters(props) {
         // border: '1px solid #d6d6d6'
       }}
     >
-      {!selectedFilters && (
-        <Box sx={{ textAlign: 'center' }}>
+      {!selectedFilters ? (
+        <Box sx={{ textAlign: 'center', py: 4 }}>
           <CircularProgress />
         </Box>
-      )}
+      ) : (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Box>
+            <Typography variant="body1" fontWeight="800" sx={{ mb: 1, color: '#454F5B', textTransform: 'uppercase' }}>
+              {selectedFilters?.field_name}
+            </Typography>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-        <Box>
-          <Typography variant="body1" fontWeight="800" sx={{ mb: 1, color: '#454F5B', textTransform: 'uppercase' }}>
-            {selectedFilters?.field_name}
-          </Typography>
+            {filtersState !== null && selectedFilters !== null && (
+              <FilterFields
+                isFirstStep
+                options={selectedFilters.options || []}
+                filtersState={filtersState}
+                fieldValue={selectedFilters?.field_value}
+                onFilterChangeEmit={(field, data) => onFilterChange(field, data, true)}
+              />
+            )}
+          </Box>
 
-          {filtersState !== null && selectedFilters !== null && (
-            <FilterFields
-              isFirstStep
-              options={selectedFilters.options || []}
-              filtersState={filtersState}
-              fieldValue={selectedFilters?.field_value}
-              onFilterChangeEmit={(field, data) => onFilterChange(field, data, true)}
-            />
-          )}
-        </Box>
+          {secondStepFilters.length > 0 && <Divider></Divider>}
 
-        {secondStepFilters.length > 0 && <Divider></Divider>}
+          {secondStepFilters.length > 0 &&
+            secondStepFilters.map((filter, index, arr) => {
+              return (
+                <Box key={filter?.field_name}>
+                  <Box sx={{ mb: index + 1 < arr.length ? 3 : 0 }}>
+                    <Typography
+                      variant="body1"
+                      fontWeight="800"
+                      sx={{ mb: 1, color: '#454F5B', textTransform: 'uppercase' }}
+                    >
+                      {filter?.field_name}
+                    </Typography>
 
-        {secondStepFilters.length > 0 &&
-          secondStepFilters.map((filter, index, arr) => {
-            return (
-              <Box key={filter?.field_name}>
-                <Box sx={{ mb: index + 1 < arr.length ? 3 : 0 }}>
-                  <Typography
-                    variant="body1"
-                    fontWeight="800"
-                    sx={{ mb: 1, color: '#454F5B', textTransform: 'uppercase' }}
-                  >
-                    {filter?.field_name}
-                  </Typography>
+                    <FilterFields
+                      options={filter.options || []}
+                      filtersState={filtersState}
+                      fieldValue={filter?.field_value}
+                      onFilterChangeEmit={onFilterChange}
+                    />
+                  </Box>
 
-                  <FilterFields
-                    options={filter.options || []}
-                    filtersState={filtersState}
-                    fieldValue={filter?.field_value}
-                    onFilterChangeEmit={onFilterChange}
-                  />
+                  {index + 1 < arr.length && <Divider></Divider>}
                 </Box>
-
-                {index + 1 < arr.length && <Divider></Divider>}
-              </Box>
-            );
-          })}
-      </Box>
+              );
+            })}
+        </Box>
+      )}
     </Box>
   );
 }

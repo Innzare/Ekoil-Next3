@@ -58,7 +58,20 @@ export default function OurBuyers() {
   const [_, setInit] = useState();
 
   return (
-    <Box>
+    <Box
+      sx={(theme) => ({
+        backgroundColor: '#f5f5f5',
+        p: 10,
+
+        [theme.breakpoints.down('md')]: {
+          px: 4
+        },
+
+        [theme.breakpoints.down('sm')]: {
+          px: 2
+        }
+      })}
+    >
       <SectionTitle text="Наши покупатели" />
 
       <Box
@@ -67,8 +80,6 @@ export default function OurBuyers() {
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '16px',
-          backgroundColor: '#f5f5f5',
-          borderRadius: '50px',
           p: '40px 8px'
         }}
       >
@@ -77,7 +88,7 @@ export default function OurBuyers() {
         </IconButton>
 
         <Swiper
-          slidesPerView={3}
+          slidesPerView={4}
           spaceBetween={30}
           navigation={{
             prevEl: prevRef.current,
@@ -90,7 +101,7 @@ export default function OurBuyers() {
         >
           {SLIDES.map((slide) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={slide}>
                 <img src={slide} alt="Buyer logo" />
               </SwiperSlide>
             );

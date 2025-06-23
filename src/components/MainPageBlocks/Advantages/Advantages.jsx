@@ -71,7 +71,7 @@ export default function Advantages() {
           const Icon = feature.icon;
 
           return (
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={4} key={feature.title}>
               <Box
                 sx={{
                   display: 'flex',

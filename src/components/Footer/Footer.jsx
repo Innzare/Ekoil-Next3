@@ -23,7 +23,7 @@ export default function Footer() {
   return (
     <footer>
       <Box
-        sx={{
+        sx={(theme) => ({
           position: 'relative',
           zIndex: 1,
           flex: '0 0 auto',
@@ -31,15 +31,27 @@ export default function Footer() {
           py: 2,
           borderRadius: '6px',
           backgroundColor: '#fff',
-          boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem'
-        }}
+          boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem',
+
+          [theme.breakpoints.down('sm')]: {
+            px: 2
+          }
+        })}
       >
         <Box
-          sx={{
+          sx={(theme) => ({
             display: 'flex',
             gap: 4,
-            justifyContent: 'space-between'
-          }}
+            justifyContent: 'space-between',
+
+            [theme.breakpoints.down('md')]: {
+              flexWrap: 'wrap'
+            },
+
+            '@media(max-width: 500px)': {
+              flexDirection: 'column'
+            }
+          })}
         >
           <Box
             sx={{
@@ -50,7 +62,7 @@ export default function Footer() {
           >
             <FullLogoIcon />
 
-            <Button
+            {/* <Button
               sx={{ textTransform: 'initial' }}
               variant="text"
               color="primary"
@@ -58,14 +70,28 @@ export default function Footer() {
               onClick={openContactModal}
             >
               Обратная связь
-            </Button>
+            </Button> */}
           </Box>
 
           <Box
-            sx={{
+            sx={(theme) => ({
               display: 'flex',
-              gap: 6
-            }}
+              gap: 4,
+
+              [theme.breakpoints.down('md')]: {
+                flex: 1,
+                order: '1'
+              },
+
+              '@media(max-width: 500px)': {
+                flexDirection: 'column'
+              },
+
+              [theme.breakpoints.down('sm')]: {
+                // flexDirection: 'column',
+                gap: 2
+              }
+            })}
           >
             <List
               component="nav"
@@ -176,7 +202,16 @@ export default function Footer() {
           </Box>
         </Box>
 
-        <Typography color="#999" sx={{ fontSize: '14px', mt: 2 }}>
+        <Typography
+          color="#999"
+          sx={{
+            fontSize: '14px',
+            mt: 2,
+            '@media(max-width: 500px)': {
+              textAlign: 'center'
+            }
+          }}
+        >
           © 2015 - 2024, Все права защищены.{' '}
           <Typography variant="span" fontWeight="900">
             EKOIL

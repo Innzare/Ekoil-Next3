@@ -34,7 +34,7 @@ const ListItemText = styled(Typography, {
   color: theme.palette.text.primary
 }));
 
-export default function SidenavListItem({ item, isOpen }) {
+export default function SidenavListItem({ item, isOpen, onClick }) {
   const { title, icon: Icon, path } = item;
 
   const pathname = usePathname();
@@ -42,7 +42,7 @@ export default function SidenavListItem({ item, isOpen }) {
   const isCurrentPath = pathname === path;
 
   return (
-    <Link href={path}>
+    <Link href={path} onClick={onClick}>
       <ListItem isCurrentPath={isCurrentPath}>
         <Icon color="inherit" sx={{ mr: 2 }} />
 

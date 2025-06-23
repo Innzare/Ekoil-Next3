@@ -10,11 +10,11 @@ export const List = styled('ul')({
   width: '100%'
 });
 
-export default function SidenavList({ isOpen }) {
+export default function SidenavList({ isOpen, onClick }) {
   return (
     <List>
       {sidenav.map((item) => {
-        return <SidenavListItem key={item.title} item={item} isOpen={isOpen} />;
+        return <SidenavListItem key={item.title} item={item} isOpen={isOpen} onClick={onClick} />;
       })}
     </List>
   );

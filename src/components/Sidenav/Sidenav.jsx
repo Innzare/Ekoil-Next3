@@ -46,7 +46,7 @@ export default function Sidenav(props) {
             {isOpen ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon />}
           </IconButton> */}
 
-          <SidenavList isOpen={isOpen} />
+          <SidenavList isOpen={isOpen} onClick={onToggle} />
         </SidenavTop>
 
         {/* <ThemeModeSwitch /> */}

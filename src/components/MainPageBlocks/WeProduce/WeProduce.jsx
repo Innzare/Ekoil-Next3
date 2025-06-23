@@ -101,6 +101,7 @@ export default function About() {
             textTransform: 'uppercase',
             position: 'relative',
             display: 'inline-block',
+            color: '#CC2828',
 
             '&:after': {
               content: '""',

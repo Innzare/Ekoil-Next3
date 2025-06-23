@@ -24,7 +24,7 @@ export const SidenavWrapper = styled(Box, {
   // left: '16px',
   transition: '.25s ease',
   // width: isOpen ? '250px' : '70px',
-  height: 'calc(100vh - 2rem)',
+  height: 'calc(100dvh - 2rem)',
   padding: '16px',
   borderRadius: '6px',
   background: theme.palette.background.paper,

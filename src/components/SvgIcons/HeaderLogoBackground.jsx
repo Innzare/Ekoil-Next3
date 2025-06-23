@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function HeaderLogoBackground() {
+export default function HeaderLogoBackground({ width = '100%', height = '100%' }) {
   return (
-    <svg width="439" height="500" viewBox="0 0 439 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 439 500" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M203.348 156.032C303.463 91.6491 652.669 186.716 840.25 234.934C643.945 151.648 231.601 -8.24564 116.104 107.813C15.7708 208.634 242.61 370.822 438.915 462.876C299.321 383.973 94.2917 226.168 203.348 156.032Z"
         fill="#343C58"

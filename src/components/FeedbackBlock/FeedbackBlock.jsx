@@ -15,10 +15,11 @@ export default function FeedbackBlock() {
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
-        gap: 6,
+        flexWrap: 'wrap',
+        gap: 2,
         px: 10,
         py: 13,
         // justifyContent: 'space-between',
@@ -30,8 +31,20 @@ export default function FeedbackBlock() {
         // background: 'linear-gradient(to right, #004e92, #000428)',
         // background: '#000428',
         // background: '-webkit-linear-gradient(to right, #004e92, #000428)',
-        overflow: 'hidden'
-      }}
+        overflow: 'hidden',
+
+        [theme.breakpoints.down('md')]: {
+          flexDirection: 'column',
+          px: 5,
+          py: 7
+        },
+
+        [theme.breakpoints.down('sm')]: {
+          flexDirection: 'column',
+          px: 2,
+          py: 4
+        }
+      })}
     >
       <Box
         sx={{
@@ -42,15 +55,47 @@ export default function FeedbackBlock() {
           // alignItems: 'center'
         }}
       >
-        <Typography variant="h4" fontWeight="700" color="#fff" sx={{ mb: 1 }}>
+        <Typography
+          variant="h4"
+          fontWeight="700"
+          color="#fff"
+          sx={(theme) => ({
+            mb: 1,
+            [theme.breakpoints.down('sm')]: {
+              fontSize: '21px'
+            }
+          })}
+        >
           У вас есть что спросить?
         </Typography>
 
-        <Typography variant="body1" fontWeight="600" color="#fff" sx={{ maxWidth: '660px', fontSize: '18px' }}>
+        <Typography
+          variant="body1"
+          fontWeight="600"
+          color="#fff"
+          sx={(theme) => ({
+            maxWidth: '660px',
+            fontSize: '18px',
+
+            [theme.breakpoints.down('sm')]: {
+              fontSize: '21px',
+              fontSize: '14px'
+            }
+          })}
+        >
           Оставьте свой номер телефона или напишите сообщение и наши специалисты ответят Вам в ближайшее время!
         </Typography>
 
-        <Box sx={{ display: 'flex', gap: 2, mt: 4 }}>
+        <Box
+          sx={(theme) => ({
+            display: 'flex',
+            gap: 2,
+            mt: 4,
+            [theme.breakpoints.down('sm')]: {
+              flexDirection: 'column'
+            }
+          })}
+        >
           <Button
             variant="contained"
             size="large"
@@ -89,13 +134,26 @@ export default function FeedbackBlock() {
         }}
       >
         <Box
-          sx={{
+          sx={(theme) => ({
             display: 'flex',
             flexDirection: 'column',
-            gap: 2
-          }}
+            gap: 2,
+
+            [theme.breakpoints.down('sm')]: {
+              gap: 1,
+              mt: 2
+            }
+          })}
         >
-          <HeaderLogo light width={340} height={100} />
+          <Box
+            sx={(theme) => ({
+              [theme.breakpoints.down('sm')]: {
+                display: 'none'
+              }
+            })}
+          >
+            <HeaderLogo light width={340} height={100} />
+          </Box>
 
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
             <MailOutlineIcon sx={{ color: 'red' }} />

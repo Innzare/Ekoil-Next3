@@ -7,7 +7,7 @@ import HeaderSectionBackground from '@/app/assets/header-section-background.png'
 export default function HeaderSection({ title }) {
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         position: 'relative',
         display: 'flex',
         alignItems: 'flex-end',
@@ -16,19 +16,43 @@ export default function HeaderSection({ title }) {
         backgroundSize: 'cover',
         backgroundPosition: 'left',
         height: '500px',
-        p: 5
-      }}
+        p: 5,
+
+        [theme.breakpoints.down('md')]: {
+          height: '300px',
+          p: 3
+        }
+      })}
     >
-      <Typography variant="h1" sx={{ fontSize: '64px', color: '#fff', fontWeight: 800 }}>
+      <Typography
+        variant="h1"
+        sx={(theme) => ({
+          fontSize: '64px',
+          color: '#fff',
+          fontWeight: 800,
+
+          [theme.breakpoints.down('md')]: {
+            fontSize: '32px'
+          }
+        })}
+      >
         {title}
       </Typography>
 
       <Box
-        sx={{
+        sx={(theme) => ({
           position: 'absolute',
           right: 0,
-          bottom: 0
-        }}
+          bottom: 0,
+          width: '439px',
+          height: '500px',
+
+          [theme.breakpoints.down('md')]: {
+            width: '180px',
+            height: '200px',
+            fontSize: '32px'
+          }
+        })}
       >
         <HeaderLogoBackground></HeaderLogoBackground>
       </Box>

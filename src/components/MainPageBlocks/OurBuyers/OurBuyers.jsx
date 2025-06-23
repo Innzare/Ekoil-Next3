@@ -88,8 +88,8 @@ export default function OurBuyers() {
         </IconButton>
 
         <Swiper
-          slidesPerView={4}
-          spaceBetween={30}
+          slidesPerView={1}
+          spaceBetween={10}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current

@@ -84,7 +84,8 @@ export default function HomePageSlider() {
     <Box
       sx={{
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        userSelect: 'none'
       }}
     >
       <Swiper
@@ -277,7 +278,7 @@ export default function HomePageSlider() {
             <Button
               endIcon={<ArrowOutwardIcon />}
               sx={(theme) => ({
-                backgroundColor: 'red',
+                backgroundColor: '#CC2828',
                 color: '#fff',
                 borderRadius: '16px',
                 padding: '16px 24px',

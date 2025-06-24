@@ -4,7 +4,7 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Link from 'next/link';
-import { Divider } from '@mui/material';
+import { Divider, Box } from '@mui/material';
 import Logo from '@/components/SvgIcons/Logo';
 import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -26,14 +26,15 @@ export default function Sidenav(props) {
 
       <SidenavWrapper isOpen={isOpen}>
         <SidenavTop>
-          <Link href="/">
-            <Logo color={theme.palette.common.mode} />
-          </Link>
+          <Link href="/" onClick={onToggle}>
+            <Box sx={{ textAlign: 'center' }}>
+              <Logo color={theme.palette.common.mode} />
+            </Box>
 
-          <OnlyTextLogoWrapper isOpen={isOpen}>
-            {/* <OnlyTextLogo color={theme.palette.common.mode} /> */}
-            <TextLogo width="140" height="40" />
-          </OnlyTextLogoWrapper>
+            <OnlyTextLogoWrapper isOpen={isOpen}>
+              <TextLogo width="140" height="40" />
+            </OnlyTextLogoWrapper>
+          </Link>
 
           <Divider
             sx={{

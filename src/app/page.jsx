@@ -77,9 +77,9 @@ export default function Home() {
           <WeProduce />
         </Box>
 
-        {/* <Box sx={{ mb: 8 }}>
+        <Box sx={{ mb: 8 }}>
           <OurBuyers />
-        </Box> */}
+        </Box>
 
         {/* <Box sx={{ mb: 8 }}>
           <News />

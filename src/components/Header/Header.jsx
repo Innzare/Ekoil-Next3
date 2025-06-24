@@ -198,21 +198,18 @@ export default function (props) {
           {isMinWidth1060 ? (
             <>
               <Button
-                sx={{ textTransform: 'initial' }}
-                variant="outlined"
-                color="success"
-                size={isMinWidth1400 ? 'medium' : 'small'}
-                startIcon={<CallIcon sx={{ mr: 1 }} />}
-                onClick={onContactUsClick}
-              >
-                Свяжитесь с нами!
-              </Button>
-
-              <Button
                 onClick={handleClick}
                 size={isMinWidth1400 ? 'medium' : 'small'}
                 id="basic-button"
-                sx={{ textTransform: 'initial' }}
+                sx={{
+                  textTransform: 'initial',
+                  backgroundColor: '#CC2828',
+                  color: '#fff',
+                  borderRadius: '8px',
+                  border: '1px solid #CC2828',
+                  px: 2,
+                  py: 1
+                }}
                 variant="outlined"
                 startIcon={<OilBarrelIcon />}
               >
@@ -280,6 +277,24 @@ export default function (props) {
                   Отправить каталог на почту
                 </MenuItem>
               </Menu>
+
+              <Button
+                sx={{
+                  textTransform: 'initial',
+                  backgroundColor: '#1E284B',
+                  color: '#fff',
+                  borderRadius: '8px',
+                  border: '1px solid #1E284B',
+                  px: 2,
+                  py: 1
+                }}
+                variant="outlined"
+                size={isMinWidth1400 ? 'medium' : 'small'}
+                startIcon={<CallIcon sx={{ mr: 1 }} />}
+                onClick={onContactUsClick}
+              >
+                Свяжитесь с нами!
+              </Button>
             </>
           ) : (
             <IconButton aria-label="delete" onClick={onToggleSidenav}>

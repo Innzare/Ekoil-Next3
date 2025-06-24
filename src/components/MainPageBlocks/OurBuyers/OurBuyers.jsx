@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { Box, styled } from '@mui/system';
-import { IconButton } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -27,12 +29,12 @@ const SLIDES = [
 ];
 
 export const Swiper = styled(SwiperMUI)(({ theme }) => ({
-  width: '500px',
+  width: '100%',
   height: '150px',
   flex: '1',
 
   [theme.breakpoints.down('sm')]: {
-    height: '300px'
+    height: '200px'
   }
 }));
 
@@ -52,6 +54,9 @@ export const SwiperSlide = styled(SwiperSlideMUI)(({ theme }) => ({
 }));
 
 export default function OurBuyers() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -68,27 +73,36 @@ export default function OurBuyers() {
         },
 
         [theme.breakpoints.down('sm')]: {
-          px: 2
+          px: 2,
+          py: 4
         }
       })}
     >
-      <SectionTitle text="Наши покупатели" />
+      <Box
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, flexWrap: 'wrap', mb: 3 }}
+      >
+        <SectionTitle text="Наши покупатели" />
+
+        <Typography variant="body1" sx={{ maxWidth: '670px' }}>
+          Мы поставляем масла и смазочные материалы ведущим компаниям, выбирающим качество и надежность нашей продукции
+        </Typography>
+      </Box>
 
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '16px',
-          p: '40px 8px'
+          gap: '16px'
         }}
       >
-        <IconButton ref={prevRef}>
+        {/* <IconButton ref={prevRef}>
           <ArrowBackIcon />
-        </IconButton>
+        </IconButton> */}
 
         <Swiper
-          slidesPerView={1}
+          freeMode
+          slidesPerView={isMobile ? 1 : 4}
           spaceBetween={10}
           navigation={{
             prevEl: prevRef.current,
@@ -108,9 +122,9 @@ export default function OurBuyers() {
           })}
         </Swiper>
 
-        <IconButton ref={nextRef}>
+        {/* <IconButton ref={nextRef}>
           <ArrowForwardIcon />
-        </IconButton>
+        </IconButton> */}
       </Box>
     </Box>
   );

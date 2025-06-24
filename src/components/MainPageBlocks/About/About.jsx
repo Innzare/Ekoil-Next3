@@ -38,6 +38,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import PeopleIcon from '@mui/icons-material/People';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import Logo from '@/components/SvgIcons/Logo';
+import EkoilTextOutlinedIcon from '@/components/SvgIcons/EkoilTextOutlinedIcon';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import factory from '@/app/assets/factory.jpg';
 import factory2 from '@/app/assets/factory2.jpg';
@@ -114,7 +115,7 @@ export default function About() {
         <Typography
           variant="h6"
           fontWeight="900"
-          sx={{
+          sx={(theme) => ({
             mb: 4,
             textTransform: 'uppercase',
             position: 'relative',
@@ -129,8 +130,12 @@ export default function About() {
               width: '80px',
               height: '1px',
               backgroundColor: '#000'
+            },
+
+            [theme.breakpoints.down('sm')]: {
+              fontSize: '21px'
             }
-          }}
+          })}
         >
           О компании
         </Typography>
@@ -345,22 +350,36 @@ export default function About() {
         sx={(theme) => ({
           position: 'relative',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-end',
           pl: '5%',
+          pb: '5%',
           mt: 10,
           width: '100%',
-          height: '1200px',
+          height: '1100px',
           backgroundImage: `url(${ekoilAbout.src})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'top',
           backgroundRepeat: 'no-repeat',
 
           [theme.breakpoints.down('sm')]: {
             pr: '5%',
-            height: '600px'
+            pb: '50px',
+            pt: '130px',
+            height: 'auto'
           }
         })}
       >
+        <Box
+          sx={{
+            position: 'absolute',
+            left: '5%',
+            right: '5%',
+            top: '50px'
+          }}
+        >
+          <EkoilTextOutlinedIcon />
+        </Box>
+
         <Box>
           {accordions.map((item, index) => (
             <Accordion

@@ -34,10 +34,18 @@ export default function NewsItem(props) {
         variant="h6"
         fontWeight="700"
         color="initial"
-        sx={{ mb: 2, textTransform: 'uppercase', lineHeight: '1.5' }}
+        sx={(theme) => ({
+          mb: 2,
+          textTransform: 'uppercase',
+          lineHeight: '1.5',
+          [theme.breakpoints.down('sm')]: {
+            fontSize: '16px'
+          }
+        })}
       >
         {data.title}
       </Typography>
+
       <Typography variant="body" sx={{ color: '#666' }}>
         {data.data}
       </Typography>

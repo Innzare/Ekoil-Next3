@@ -43,7 +43,7 @@ export default function News() {
       <Grid container spacing={4}>
         {news.map((item) => {
           return (
-            <Grid item cols="12" xs={4} key={item.title}>
+            <Grid item cols="12" xs={12} sm={4} key={item.title}>
               <NewsItem data={item} />
             </Grid>
           );

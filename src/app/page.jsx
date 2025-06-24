@@ -81,11 +81,11 @@ export default function Home() {
           <OurBuyers />
         </Box>
 
-        {/* <Box sx={{ mb: 8 }}>
+        <Box sx={{ mb: 8 }}>
           <News />
         </Box>
 
-        <Box sx={{ mb: 8 }}>
+        {/* <Box sx={{ mb: 8 }}>
           <Contacts />
         </Box> */}
 

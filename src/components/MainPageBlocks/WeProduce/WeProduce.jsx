@@ -23,6 +23,10 @@ import Tara from '@/app/assets/ekoil-tara.png';
 import Tara2 from '@/app/assets/ekoil-tara2.png';
 import Tara3 from '@/app/assets/ekoil-tara3.png';
 import Tara4 from '@/app/assets/ekoil-tara4.png';
+import Product1 from '@/app/assets/product1.jpg';
+import Product2 from '@/app/assets/product2.jpg';
+import Product3 from '@/app/assets/product3.jpg';
+import Product4 from '@/app/assets/product4.jpg';
 import Antifreeze from '@/app/assets/antifreeze.webp';
 import OilsIcon from '@/components/SvgIcons/OilsIcon';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
@@ -78,7 +82,7 @@ const products = [
       'Для разных типов трансмиссий: механические, автоматические и вариаторные КПП',
       'Для сервисного обслуживания'
     ],
-    img: ''
+    img: Product1.src
   },
   {
     badge: 'Commercial Vehicle',
@@ -88,7 +92,7 @@ const products = [
       'Для использования в механических и автоматических трансмиссиях грузовых автомобилей и другой мобильной техники',
       'Для использования в гидравлических системах'
     ],
-    img: ''
+    img: Product2.src
   },
   {
     badge: 'Small-sized Vehicle Lubricants',
@@ -96,7 +100,7 @@ const products = [
     list: [
       'Для применения в различном промышленном оборудовании — гидравлических системах, станках, редукторах, прессах, прокатных станах и т.д.'
     ],
-    img: ''
+    img: Product3.src
   },
   {
     badge: 'Industrial Lubricants',
@@ -107,7 +111,7 @@ const products = [
       'Для разных типов трансмиссий: механические, автоматические и вариаторные КПП',
       'Для сервисного обслуживания'
     ],
-    img: ''
+    img: Product4.src
   }
 ];
 
@@ -307,36 +311,53 @@ export default function About() {
         </Box>
       </Box>
 
-      {/* <Box
+      <Box
         sx={(theme) => ({
           display: 'flex',
           flexDirection: 'column',
-          gap: 10,
+          gap: 6,
           px: 10,
           mt: 12,
+          mb: 10,
 
           [theme.breakpoints.down('md')]: {
-            px: 4
+            px: 4,
+            mt: 6
           },
 
           [theme.breakpoints.down('sm')]: {
-            px: 2
-          },
-
-          mb: 10
+            px: 2,
+            gap: 3
+          }
         })}
       >
         {products.map((product, index) => (
           <Box
-            sx={{
+            sx={() => ({
               display: 'flex',
-              gap: 1,
+              alignItems: 'center',
+              gap: 6,
               backgroundColor: '#F4F6F8',
               borderRadius: '32px',
-              p: 6
-            }}
+              p: 6,
+
+              [theme.breakpoints.down('md')]: {
+                flexDirection: 'column',
+                p: 3,
+                gap: 3
+              }
+            })}
           >
-            <Box sx={{ flex: '1 1 50%', order: index % 2 === 0 ? 0 : 1 }}>
+            <Box
+              sx={(theme) => ({
+                flex: '1 1 50%',
+                order: index % 2 === 0 ? 0 : 1,
+
+                [theme.breakpoints.down('md')]: {
+                  order: 0
+                }
+              })}
+            >
               <Chip
                 label={product.badge}
                 variant="filled"
@@ -344,15 +365,43 @@ export default function About() {
                   backgroundColor: '#1E284B',
                   color: '#fff',
                   fontSize: '16px',
-                  mb: 3
+                  mb: 3,
+
+                  [theme.breakpoints.down('sm')]: {
+                    fontSize: '14px',
+                    mb: 2
+                  }
                 })}
               />
 
-              <Typography variant="h5" color="initial" sx={{ mb: 3, fontWeight: '700' }}>
+              <Typography
+                variant="h5"
+                color="initial"
+                sx={(theme) => ({
+                  mb: 3,
+                  fontWeight: '700',
+
+                  [theme.breakpoints.down('sm')]: {
+                    fontSize: '21px'
+                  }
+                })}
+              >
                 {product.title}
               </Typography>
 
-              <Box component="ul" sx={{ pl: '18px', display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Box
+                component="ul"
+                sx={(theme) => ({
+                  pl: '18px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 1,
+
+                  [theme.breakpoints.down('sm')]: {
+                    fontSize: '14px'
+                  }
+                })}
+              >
                 {product.list.map((item) => (
                   <li>{item}</li>
                 ))}
@@ -360,13 +409,76 @@ export default function About() {
             </Box>
 
             <Box
-              sx={{
-                flex: '1 1 50%'
-              }}
-            ></Box>
+              sx={(theme) => ({
+                position: 'relative',
+                flex: '1 1 50%',
+                backgroundImage: `url(${product.img})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                borderRadius: '24px',
+                minHeight: '500px',
+                width: '100%',
+
+                [theme.breakpoints.down('md')]: {
+                  minHeight: '300px'
+                },
+
+                [theme.breakpoints.down('sm')]: {
+                  minHeight: '200px'
+                }
+              })}
+            >
+              <Link href="/catalog">
+                <Button
+                  rounded
+                  endIcon={<ArrowOutwardIcon />}
+                  sx={(theme) => ({
+                    display: 'flex',
+                    minWidth: '100px',
+                    maxWidth: '100px',
+                    minHeight: '100px',
+                    maxHeight: '100px',
+                    flexDirection: 'column-reverse',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'absolute',
+                    bottom: '24px',
+                    right: '24px',
+                    backgroundColor: '#CC2828',
+                    color: '#fff',
+                    borderRadius: '100%',
+                    padding: '0',
+                    fontWeight: '800',
+
+                    '& .mui-1gulhci-MuiButton-endIcon': {
+                      ml: 0
+                    },
+
+                    [theme.breakpoints.down('md')]: {
+                      minWidth: '45px',
+                      maxWidth: '45px',
+                      minHeight: '45px',
+                      maxHeight: '45px'
+                    }
+                  })}
+                >
+                  <Typography
+                    variant="span"
+                    sx={(theme) => ({
+                      [theme.breakpoints.down('sm')]: {
+                        display: 'none'
+                      }
+                    })}
+                  >
+                    Каталог
+                  </Typography>
+                </Button>
+              </Link>
+            </Box>
           </Box>
         ))}
-      </Box> */}
+      </Box>
     </>
   );
 }

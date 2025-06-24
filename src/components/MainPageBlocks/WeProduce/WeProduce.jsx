@@ -134,16 +134,16 @@ export default function About() {
       <Box
         sx={(theme) => ({
           px: 10,
+          mb: 10,
 
           [theme.breakpoints.down('md')]: {
             px: 4
           },
 
           [theme.breakpoints.down('sm')]: {
-            px: 2
-          },
-
-          mb: 10
+            px: 2,
+            mb: 5
+          }
         })}
       >
         <Typography

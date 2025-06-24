@@ -452,7 +452,7 @@ export default function About() {
                     fontWeight: '800',
 
                     '& .mui-1gulhci-MuiButton-endIcon': {
-                      ml: 0
+                      m: 0
                     },
 
                     [theme.breakpoints.down('md')]: {

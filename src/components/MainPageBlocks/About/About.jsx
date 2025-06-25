@@ -293,6 +293,10 @@ export default function About() {
               flexDirection: 'column',
               mt: 5,
               gap: 4
+            },
+
+            [theme.breakpoints.down('sm')]: {
+              mt: 3
             }
           })}
         >
@@ -365,7 +369,8 @@ export default function About() {
             pr: '5%',
             pb: '50px',
             pt: '130px',
-            height: 'auto'
+            height: 'auto',
+            mt: 5
           }
         })}
       >

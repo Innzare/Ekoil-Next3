@@ -33,7 +33,8 @@ export default function Home() {
             paddingBlock: '60px',
 
             [theme.breakpoints.down('sm')]: {
-              paddingBlock: '16px'
+              paddingBlock: '16px',
+              mb: 4
             }
           })}
         >
@@ -69,25 +70,65 @@ export default function Home() {
           <ScrollableSlider />
         </Box>
 
-        <Box sx={{ mb: 8 }}>
+        <Box
+          sx={(theme) => ({
+            mb: 8,
+
+            [theme.breakpoints.down('sm')]: {
+              mb: 4
+            }
+          })}
+        >
           <About />
         </Box>
 
-        <Box sx={{ mb: 8 }}>
+        <Box
+          sx={(theme) => ({
+            mb: 8,
+
+            [theme.breakpoints.down('sm')]: {
+              mb: 4
+            }
+          })}
+        >
           <WeProduce />
         </Box>
 
-        <Box sx={{ mb: 8 }}>
+        <Box
+          sx={(theme) => ({
+            mb: 8,
+
+            [theme.breakpoints.down('sm')]: {
+              mb: 4
+            }
+          })}
+        >
           <OurBuyers />
         </Box>
 
-        <Box sx={{ mb: 8 }}>
+        <Box
+          sx={(theme) => ({
+            mb: 8,
+
+            [theme.breakpoints.down('sm')]: {
+              mb: 4
+            }
+          })}
+        >
           <News />
         </Box>
 
-        {/* <Box sx={{ mb: 8 }}>
+        <Box
+          sx={(theme) => ({
+            mb: 8,
+
+            [theme.breakpoints.down('sm')]: {
+              mb: 4
+            }
+          })}
+        >
           <Contacts />
-        </Box> */}
+        </Box>
 
         <FeedbackBlock />
       </SectionWrapper>

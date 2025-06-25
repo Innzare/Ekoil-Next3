@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, Grid } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import NewsItem from './NewsItem';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
@@ -38,7 +39,17 @@ export default function News() {
         }
       })}
     >
-      <SectionTitle text="Новости компании" />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 2,
+          mb: 4
+        }}
+      >
+        <SectionTitle text="Новости компании" />
+      </Box>
 
       <Grid container spacing={4}>
         {news.map((item) => {
@@ -52,11 +63,19 @@ export default function News() {
 
       <Link href="/news">
         <Button
-          variant="outlined"
-          disableElevation
-          size="large"
-          endIcon={<ArrowForwardIcon />}
-          sx={{ mt: 4, py: 2, px: 4 }}
+          fontSize="large"
+          endIcon={<ArrowOutwardIcon />}
+          sx={{
+            textTransform: 'initial',
+            backgroundColor: '#1E284B',
+            color: '#fff',
+            fontWeight: '700',
+            borderRadius: '8px',
+            px: 3,
+            py: 2,
+            mt: 4,
+            fontSize: '16px'
+          }}
         >
           Все новости
         </Button>

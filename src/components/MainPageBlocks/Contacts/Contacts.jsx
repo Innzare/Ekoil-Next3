@@ -4,10 +4,34 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import MapLoader from '@/components/MapLoader/MapLoader';
 import Link from 'next/link';
+
+const contacts = [
+  {
+    title: 'Адрес',
+    text: 'г. Уфа, 450071, ул. Менделеева, д. 197/2',
+    icon: LocationOnOutlinedIcon
+  },
+  {
+    title: 'Телефон',
+    text: '(347) 248-50-53',
+    icon: LocalPhoneOutlinedIcon
+  },
+  {
+    title: 'Почта',
+    text: 'oil@td-ekoil.ru',
+    icon: MailOutlineIcon
+  },
+  {
+    title: 'Время работы',
+    text: '9:00 - 18:00',
+    icon: AccessTimeOutlinedIcon
+  }
+];
 
 export default function Contacts() {
   return (
@@ -24,67 +48,112 @@ export default function Contacts() {
         }
       })}
     >
-      <SectionTitle text="Контакты" />
+      <Box
+        sx={{
+          mb: 4
+        }}
+      >
+        <SectionTitle text="Контакты" />
+      </Box>
 
-      <Grid container>
-        <Grid item xs={6}>
-          <Grid container spacing={4}>
-            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <LocationOnOutlinedIcon color="primary" />
-                Адрес
-              </Typography>
-              <Typography variant="body" sx={{ color: '#666' }}>
-                г. Уфа, 450071, ул. Менделеева, д. 197/2
-              </Typography>
-            </Grid>
+      <Grid container spacing={{ xs: 3, sm: 6 }}>
+        <Grid item xs={12} md={6}>
+          <Grid container spacing={{ xs: 2, sm: 6 }}>
+            {contacts.map((contact) => {
+              const Icon = contact.icon;
 
-            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <AccessTimeOutlinedIcon color="primary" />
-                Время работы
-              </Typography>
+              return (
+                <Grid
+                  key={contact.title}
+                  item
+                  xs={6}
+                  sm={6}
+                  sx={(theme) => ({
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
 
-              <Typography variant="body" sx={{ color: '#666' }}>
-                9:00 - 18:00
-              </Typography>
-            </Grid>
+                    [theme.breakpoints.down('sm')]: {
+                      gap: 1
+                    }
+                  })}
+                >
+                  <Typography
+                    variant="h6"
+                    fontWeight="700"
+                    sx={(theme) => ({
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 1,
+                      backgroundColor: '#E8EEF4',
+                      p: 2,
+                      borderRadius: '50px',
+                      textAlign: 'center',
 
-            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <LocalPhoneOutlinedIcon color="primary" />
-                Номер телефона
-              </Typography>
+                      [theme.breakpoints.down('sm')]: {
+                        fontSize: '16px'
+                      }
+                    })}
+                  >
+                    <Icon color="primary" />
 
-              <Typography variant="body" sx={{ color: '#666' }}>
-                (347) 248-50-53
-              </Typography>
-            </Grid>
+                    {contact.title}
+                  </Typography>
 
-            <Grid item xs={6} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <MailOutlineIcon color="primary" />
-                Почта
-              </Typography>
+                  <Typography
+                    variant="body"
+                    sx={(theme) => ({
+                      color: '#666',
+                      textAlign: 'center',
+                      px: 6,
+                      fontSize: '16px',
+                      fontWeight: '700',
 
-              <Typography variant="body" sx={{ color: '#666' }}>
-                oil@td-ekoil.ru
-              </Typography>
-            </Grid>
+                      [theme.breakpoints.down('sm')]: {
+                        px: 0,
+                        fontSize: '14px'
+                      }
+                    })}
+                  >
+                    {contact.text}
+                  </Typography>
+                </Grid>
+              );
+            })}
           </Grid>
 
-          <Link href="/contacts">
-            <Button variant="outlined" fontSize="large" endIcon={<ArrowForwardIcon />} sx={{ mt: 6, py: 2, px: 4 }}>
-              Перейти в контакты
+          <Link href="/location">
+            <Button
+              fontSize="large"
+              endIcon={<ArrowOutwardIcon />}
+              sx={{
+                textTransform: 'initial',
+                backgroundColor: '#1E284B',
+                color: '#fff',
+                fontWeight: '700',
+                borderRadius: '8px',
+                mt: 6,
+                px: 3,
+                py: 2,
+                fontSize: '16px'
+              }}
+            >
+              Где купить
             </Button>
           </Link>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Box
-            sx={{
-              height: '400px'
-            }}
+            sx={(theme) => ({
+              width: '100%',
+              height: '400px',
+
+              [theme.breakpoints.down('sm')]: {
+                height: '250px'
+              }
+            })}
           >
             <MapLoader />
           </Box>

@@ -22,16 +22,9 @@ export default function FeedbackBlock() {
         gap: 2,
         px: 10,
         py: 13,
-        // justifyContent: 'space-between',
-        // alignItems: 'center',
-        // borderRadius: '50px',
-        // background: `url(${FeedbackBackground.src})`,
         background: `linear-gradient(45deg, #1e284b75, rgba(0, 0, 0, 0.45)), url(${FeedbackBackground.src})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        // background: 'linear-gradient(to right, #004e92, #000428)',
-        // background: '#000428',
-        // background: '-webkit-linear-gradient(to right, #004e92, #000428)',
         overflow: 'hidden',
 
         [theme.breakpoints.down('md')]: {
@@ -52,8 +45,6 @@ export default function FeedbackBlock() {
           position: 'relative',
           display: 'flex',
           flexDirection: 'column'
-          // justifyContent: 'space-between',
-          // alignItems: 'center'
         }}
       >
         <Typography
@@ -101,7 +92,13 @@ export default function FeedbackBlock() {
             variant="contained"
             size="large"
             startIcon={<CallIcon />}
-            sx={{ backgroundColor: '#CC2828', fontSize: '16px', fontWeight: '700', textTransform: 'initial' }}
+            sx={{
+              backgroundColor: '#CC2828',
+              fontSize: '16px',
+              fontWeight: '700',
+              textTransform: 'initial',
+              borderRadius: '12px'
+            }}
             onClick={openContactModal}
           >
             Заказать обратный звонок
@@ -111,7 +108,13 @@ export default function FeedbackBlock() {
             variant="contained"
             size="large"
             startIcon={<EmailIcon sx={{ color: '#000' }} />}
-            sx={{ backgroundColor: '#fff', fontSize: '16px', fontWeight: '700', textTransform: 'initial' }}
+            sx={{
+              backgroundColor: '#fff',
+              fontSize: '16px',
+              fontWeight: '700',
+              textTransform: 'initial',
+              borderRadius: '12px'
+            }}
             onClick={openContactModal}
           >
             <Typography variant="span" fontWeight="700" color="#000">
@@ -119,10 +122,6 @@ export default function FeedbackBlock() {
             </Typography>
           </Button>
         </Box>
-
-        {/* <Box>
-          <LogoBackground />
-        </Box> */}
       </Box>
 
       <Box
@@ -131,7 +130,6 @@ export default function FeedbackBlock() {
           flexDirection: 'column',
           gap: 4,
           justifyContent: 'space-between'
-          // alignItems: 'center'
         }}
       >
         <Box
@@ -158,6 +156,7 @@ export default function FeedbackBlock() {
 
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
             <MailOutlineIcon sx={{ color: 'red' }} />
+
             <Typography variant="span" fontWeight="700" sx={{ fontSize: '21px', color: '#fff' }}>
               oil@td-ekoil.ru
             </Typography>
@@ -165,21 +164,13 @@ export default function FeedbackBlock() {
 
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
             <LocalPhoneOutlinedIcon sx={{ color: 'red' }} />
+
             <Typography variant="span" fontWeight="700" sx={{ fontSize: '21px', color: '#fff' }}>
               (347) 248-50-53
             </Typography>
           </Box>
         </Box>
       </Box>
-
-      {/* <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center'
-        }}
-      >
-        <SmsOutlinedIcon sx={{ fontSize: '120px', color: '#fff' }} />
-      </Box> */}
     </Box>
   );
 }

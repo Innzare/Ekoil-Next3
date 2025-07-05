@@ -4,7 +4,6 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import NewsItem from './NewsItem';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import Link from 'next/link';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const news = [
   {

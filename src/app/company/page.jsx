@@ -5,9 +5,7 @@ import React, { useRef, useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { Box, Typography, IconButton, Grid2 } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Box, Typography, IconButton, Grid2, Button } from '@mui/material';
 
 import { Swiper as SwiperMUI, SwiperSlide as SwiperSlideMUI } from 'swiper/react';
 import 'swiper/css';
@@ -29,6 +27,10 @@ import timeline8 from '@/app/assets/Timeline/timeline8.jpg';
 import timeline9 from '@/app/assets/Timeline/timeline9.jpg';
 import timeline10 from '@/app/assets/Timeline/timeline10.jpg';
 import timeline11 from '@/app/assets/Timeline/timeline11.jpg';
+import production1 from '@/app/assets/Production/production1.jpg';
+import production2 from '@/app/assets/Production/production2.jpg';
+import FeedbackBackground from '@/app/assets/FeedbackBackground.jpg';
+import map from '@/app/assets/map.png';
 
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 import HeaderSection from '@/components/HeaderSection';
@@ -42,8 +44,12 @@ import LabIcon from '@/components/SvgIcons/LabIcon';
 import FactoryIcon from '@mui/icons-material/Factory';
 import OilBarrelIcon from '@mui/icons-material/OilBarrel';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 export const Swiper = styled(SwiperMUI)(({ theme }) => ({
   width: '100%',
@@ -193,6 +199,24 @@ const TIMELINE = [
     text: 'Компания обновила тару для легкомоторных и трансмиссионных масел',
     year: '2023',
     image: timeline11.src
+  }
+];
+
+const PRODUCTION = [
+  {
+    title: 'Производственная мощность',
+    text: 'Компания имеет собственную производственную площадку с развитой складской и транспортной инфраструктурой, расположенную в г. Уфе (Республика Башкортостан). Производственная мощность завода – более 30 тысяч тонн в год.',
+    img: production1.src
+  },
+  {
+    title: 'Широкий ассортимент',
+    text: 'Ekoil Lubricants предлагает широкий ассортимент моторных и трансмиссионных масел для легковых автомобилей и коммерческой техники, масел для малой техники, гидравлических масел, компрессорных масел, а также антифризов. В собственной лаборатории наши инженеры постоянно работают над развитием и расширением ассортимента выпускаемой продукции.',
+    img: timeline11.src
+  },
+  {
+    title: 'Качественное сырье',
+    text: 'При производстве смазочных материалов мы используем исключительно качественное сырье: как базовые масла (VHVI, PAO), так и пакеты присадок ведущих мировых производителей.',
+    img: production2.src
   }
 ];
 
@@ -526,7 +550,11 @@ export default function Production() {
               left: '20px',
               top: '50%',
               transform: 'translateY(-50%)',
-              zIndex: '10'
+              zIndex: '10',
+
+              '&:hover': {
+                backgroundColor: '#fff'
+              }
             }}
           >
             <ArrowBackIcon />
@@ -560,7 +588,11 @@ export default function Production() {
               right: '20px',
               top: '50%',
               transform: 'translateY(-50%)',
-              zIndex: '10'
+              zIndex: '10',
+
+              '&:hover': {
+                backgroundColor: '#fff'
+              }
             }}
           >
             <ArrowForwardIcon />
@@ -804,11 +836,11 @@ export default function Production() {
             <Box sx={{ position: 'relative' }}>
               <IconButton
                 ref={timelinePrevRef}
+                color="primary"
                 sx={{
-                  backgroundColor: '#fff',
                   position: 'absolute',
                   left: '20px',
-                  top: '50%',
+                  top: '90%',
                   transform: 'translateY(-50%)',
                   zIndex: '10'
                 }}
@@ -834,14 +866,14 @@ export default function Production() {
                       <Box
                         sx={{ backgroundColor: '#1E284B', color: '#fff', height: '100%', p: 3, borderRadius: '12px' }}
                       >
-                        <Typography variant="h5" fontWeight={800} sx={{ mb: 2 }}>
+                        <Typography variant="h5" fontWeight={800} sx={{ mb: 2, fontSize: '32px' }}>
                           {slide.year}
                         </Typography>
-                        <Typography variant="body1">{slide.title}</Typography>
+                        <Typography variant="body1" sx={{ mb: 1, fontSize: '21px', fontWeight: 800 }}>
+                          {slide.title}
+                        </Typography>
                         <Typography variant="body2">{slide.text}</Typography>
                       </Box>
-
-                      {/* <img src={slide.} alt={`ekoil-${index}`} /> */}
                     </SwiperSlide>
                   );
                 })}
@@ -849,11 +881,11 @@ export default function Production() {
 
               <IconButton
                 ref={timelineNextRef}
+                color="primary"
                 sx={{
-                  backgroundColor: '#fff',
                   position: 'absolute',
                   right: '20px',
-                  top: '50%',
+                  top: '90%',
                   transform: 'translateY(-50%)',
                   zIndex: '10'
                 }}
@@ -967,6 +999,213 @@ export default function Production() {
               </Box>
             </Box>
           )}
+        </Box>
+
+        <Box
+          sx={{
+            px: 10,
+            py: 10,
+
+            backgroundImage: `url(${FeedbackBackground.src})`,
+
+            [theme.breakpoints.down('md')]: {
+              px: 4,
+              py: 5
+            },
+
+            [theme.breakpoints.down('sm')]: {
+              px: 2
+            }
+          }}
+        >
+          <Typography
+            variant="h1"
+            color="#fff"
+            fontWeight={700}
+            sx={(theme) => ({
+              mb: 10,
+              fontSize: '40px',
+
+              [theme.breakpoints.down('md')]: {
+                fontSize: '28px',
+                mb: 5
+              }
+            })}
+          >
+            Наше производство
+          </Typography>
+
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {PRODUCTION.map((item, index) => {
+              const isOdd = index % 2 === 0;
+
+              return (
+                <Box key={item.title}>
+                  <Box
+                    sx={(theme) => ({
+                      display: 'flex',
+                      flexDirection: !isOdd ? 'row' : 'row-reverse',
+                      alignItems: 'center',
+                      gap: 8,
+
+                      [theme.breakpoints.down('md')]: {
+                        flexDirection: 'column-reverse',
+                        gap: 4
+                      }
+                    })}
+                  >
+                    <Box sx={{ flex: '1 1 50%', color: '#fff' }}>
+                      <Typography
+                        variant="h4"
+                        fontWeight={800}
+                        sx={() => ({
+                          mb: 3,
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 2,
+                          fontSize: '28px',
+
+                          [theme.breakpoints.down('md')]: {
+                            fontSize: '21px'
+                          }
+                        })}
+                      >
+                        {isOdd && (
+                          <ArrowBackIcon
+                            sx={(theme) => ({
+                              mt: 1,
+                              fontSize: '32px',
+
+                              [theme.breakpoints.down('md')]: {
+                                transform: 'rotate(90deg)'
+                              }
+                            })}
+                          />
+                        )}
+                        {item.title}
+                        {!isOdd && (
+                          <ArrowForwardIcon
+                            sx={() => ({
+                              mt: 1,
+                              fontSize: '32px',
+
+                              [theme.breakpoints.down('md')]: {
+                                transform: 'rotate(-90deg)'
+                              }
+                            })}
+                          />
+                        )}
+                      </Typography>
+
+                      <Typography
+                        variant="body1"
+                        sx={() => ({
+                          fontSize: '16px',
+
+                          [theme.breakpoints.down('md')]: {
+                            fontSize: '14px'
+                          }
+                        })}
+                      >
+                        {item.text}
+                      </Typography>
+                    </Box>
+
+                    <Box
+                      sx={(theme) => ({
+                        flex: '1 1 50%',
+                        backgroundImage: `url(${item.img})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        minHeight: '400px',
+                        borderRadius: '12px',
+                        width: '100%',
+
+                        [theme.breakpoints.down('sm')]: {
+                          minHeight: '300px'
+                        }
+                      })}
+                    ></Box>
+                  </Box>
+                </Box>
+              );
+            })}
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            px: 10,
+            py: 10,
+
+            [theme.breakpoints.down('md')]: {
+              px: 4,
+              py: 5
+            },
+
+            [theme.breakpoints.down('sm')]: {
+              px: 2
+            }
+          }}
+        >
+          <Box
+            sx={(theme) => ({
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: 2,
+              mb: 2,
+
+              [theme.breakpoints.down('sm')]: {
+                flexDirection: 'column',
+                alignItems: 'stretch'
+              }
+            })}
+          >
+            <Typography
+              variant="h4"
+              fontWeight={800}
+              sx={(theme) => ({
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '24px'
+                }
+              })}
+            >
+              Страны поставок нашей продукции
+            </Typography>
+
+            <Link href="/location">
+              <Button
+                fontSize="large"
+                endIcon={<ArrowOutwardIcon />}
+                sx={(theme) => ({
+                  textTransform: 'initial',
+                  backgroundColor: '#1E284B',
+                  color: '#fff',
+                  fontWeight: '700',
+                  borderRadius: '8px',
+                  px: 3,
+                  py: 1,
+                  fontSize: '16px',
+
+                  [theme.breakpoints.down('sm')]: {
+                    width: '100%'
+                  }
+                })}
+              >
+                Где купить
+              </Button>
+            </Link>
+          </Box>
+
+          <Typography variant="body1" sx={{ mb: 5 }}>
+            Компания реализует свою продукцию не только на рынке России, но и успешно осваивает новые рынки сбыта
+            Ближнего и Дальнего зарубежья.
+          </Typography>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', userSelect: 'none', '& img': { width: '100%' } }}>
+            <img src={map.src} alt="" />
+          </Box>
         </Box>
       </Box>
 

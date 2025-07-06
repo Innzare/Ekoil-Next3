@@ -355,21 +355,32 @@ export default function About() {
                 }
               })}
             >
-              <Chip
-                label={product.badge}
-                variant="filled"
-                sx={(theme) => ({
-                  backgroundColor: '#1E284B',
-                  color: '#fff',
-                  fontSize: '16px',
-                  mb: 3,
+              <Link href="/catalog">
+                <Chip
+                  label={product.badge}
+                  variant="filled"
+                  sx={(theme) => ({
+                    backgroundColor: '#1E284B',
+                    color: '#fff',
+                    fontSize: '18px',
+                    p: 2,
+                    mb: 3,
+                    transition: 'background-color 0.3s ease',
+                    cursor: 'pointer',
+                    fontWeight: 700,
+                    height: '40px',
 
-                  [theme.breakpoints.down('sm')]: {
-                    fontSize: '14px',
-                    mb: 2
-                  }
-                })}
-              />
+                    '&:hover': {
+                      backgroundColor: '#CC2828'
+                    },
+
+                    [theme.breakpoints.down('sm')]: {
+                      fontSize: '14px',
+                      mb: 2
+                    }
+                  })}
+                />
+              </Link>
 
               <Typography
                 variant="h5"

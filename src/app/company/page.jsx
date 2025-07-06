@@ -88,7 +88,7 @@ const ACHIEVMENTS = [
     icon: CalendarIcon
   },
   {
-    title: '200+ продукции',
+    title: '200+',
     description: 'наименований в ассортименте',
     icon: ListIcon
   },

@@ -549,7 +549,8 @@ export default function Products() {
                                           background: 'transparent',
                                           fontSize: '16px',
                                           fontWeight: 700,
-                                          color: '#000'
+                                          color: '#000',
+                                          lineHeight: '24px'
                                         }}
                                       >
                                         {option.title}

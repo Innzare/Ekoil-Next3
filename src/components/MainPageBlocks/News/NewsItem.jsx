@@ -61,7 +61,7 @@ export default function NewsItem(props) {
           },
 
           [theme.breakpoints.down('sm')]: {
-            height: '150px',
+            height: '200px',
             mb: 1
           }
         })}

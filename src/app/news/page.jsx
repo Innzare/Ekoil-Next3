@@ -84,12 +84,12 @@ export default function page() {
           },
 
           [theme.breakpoints.down('sm')]: {
-            p: 2
+            p: 3
           }
         })}
       >
         <Box sx={{ mb: 8 }}>
-          <Grid container spacing={6}>
+          <Grid container spacing={{ xs: 3, sm: 6 }}>
             {news.map((item) => {
               return (
                 <Grid key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>

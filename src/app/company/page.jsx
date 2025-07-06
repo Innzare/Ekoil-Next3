@@ -420,7 +420,8 @@ export default function Production() {
               },
 
               [theme.breakpoints.down('sm')]: {
-                mt: 3
+                mt: 3,
+                p: 2
               }
             })}
           >

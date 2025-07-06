@@ -296,7 +296,8 @@ export default function About() {
             },
 
             [theme.breakpoints.down('sm')]: {
-              mt: 3
+              mt: 3,
+              p: 2
             }
           })}
         >

@@ -2,8 +2,8 @@
 
 import React, { useRef, useEffect } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Link from 'next/link';
 import { useTheme } from '@mui/material/styles';
+import Link from 'next/link';
 import { Box, Grid2 as Grid, Button, Typography, Chip } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import WeProduceBlock from './WeProduceBlock/WeProduceBlock';
@@ -448,7 +448,7 @@ export default function About() {
                     padding: '0',
                     fontWeight: '800',
 
-                    '& .mui-1gulhci-MuiButton-endIcon': {
+                    '& .MuiButton-endIcon': {
                       m: 0
                     },
 

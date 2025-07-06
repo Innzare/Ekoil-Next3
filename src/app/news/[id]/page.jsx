@@ -1,17 +1,19 @@
 'use client';
 
 import React from 'react';
+import { Box, Grid2 as Grid, Button, Card, Tooltip, Typography } from '@mui/material';
 
-import { Box, Card, Grid2 as Grid } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
-
-import NewsItem from '@/components/MainPageBlocks/News/NewsItem';
-import HeaderSection from '@/components/HeaderSection';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import oilTara from '@/app/assets/AboutPage/oil-tara.jpg';
 import slider1 from '@/app/assets/AboutPage/slider1.png';
 import slider2 from '@/app/assets/AboutPage/slider2.jpg';
 import slider3 from '@/app/assets/AboutPage/slider3.jpg';
+
+import NewsItem from '@/components/MainPageBlocks/News/NewsItem';
+import HeaderSection from '@/components/HeaderSection';
 
 const news = [
   {
@@ -71,6 +73,15 @@ const news = [
 ];
 
 export default function page() {
+  const params = useParams();
+  const router = useRouter();
+
+  const currentNews = news.find((item) => item.id === parseInt(params.id));
+
+  const onGoBackClick = () => {
+    router.push('/news');
+  };
+
   return (
     <main>
       <HeaderSection title="Новости" />
@@ -88,17 +99,22 @@ export default function page() {
           }
         })}
       >
-        <Box sx={{ mb: 8 }}>
-          <Grid container spacing={6}>
-            {news.map((item) => {
-              return (
-                <Grid key={item.id} size={{ xs: 12, sm: 6, md: 4 }}>
-                  <NewsItem data={item} />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
+        <Tooltip title="Назад">
+          <Button
+            sx={{ mb: 4 }}
+            onClick={onGoBackClick}
+            variant="contained"
+            disableElevation
+            size="small"
+            color="primary"
+          >
+            <ArrowBackIcon />
+          </Button>
+        </Tooltip>
+
+        <Typography variant="h4" fontWeight={800}>
+          {currentNews?.title}
+        </Typography>
       </Box>
 
       <FeedbackBlock />

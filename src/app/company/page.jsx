@@ -792,7 +792,7 @@ export default function Production() {
         </Box>
 
         <Box
-          sx={{
+          sx={(theme) => ({
             px: 10,
             py: 10,
 
@@ -805,7 +805,7 @@ export default function Production() {
               px: 2,
               gap: 3
             }
-          }}
+          })}
         >
           <Box
             sx={(theme) => ({
@@ -986,11 +986,25 @@ export default function Production() {
                           <Typography variant="body1" sx={{ fontWeight: 800, color: isActive ? '#fff' : '#000' }}>
                             {item.title}
                           </Typography>
-                          {item.text && isActive && (
+
+                          <Box
+                            sx={{
+                              display: 'grid',
+                              gridTemplateRows: item.text && isActive ? '1fr' : '0fr',
+                              overflow: 'hidden',
+                              transition: 'grid-template-rows 0.25s ease'
+                            }}
+                          >
+                            <Typography variant="body2" sx={{ color: isActive ? '#fff' : '#000', minHeight: 0 }}>
+                              {item.text}
+                            </Typography>
+                          </Box>
+
+                          {/* {item.text && isActive && (
                             <Typography variant="body2" sx={{ color: isActive ? '#fff' : '#000' }}>
                               {item.text}
                             </Typography>
-                          )}
+                          )} */}
                         </Box>
                       </Box>
                     </Box>
@@ -1131,6 +1145,25 @@ export default function Production() {
               );
             })}
           </Box>
+        </Box>
+
+        <Box
+          sx={{
+            overflow: 'hidden',
+            minWidth: '100%',
+            height: '600px'
+          }}
+        >
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/UtA7WnB4-tg?si=KFjkhNKJllbiaQkn&amp;modestbranding=1&amp;start=0"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
         </Box>
 
         <Box

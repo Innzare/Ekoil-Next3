@@ -49,7 +49,7 @@ export default function WeProduceBlock({ item }) {
             padding: '0',
             fontWeight: '800',
 
-            '& .mui-1gulhci-MuiButton-endIcon': {
+            '& .MuiButton-endIcon': {
               m: 0
             },
 

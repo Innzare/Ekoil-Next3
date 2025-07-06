@@ -56,7 +56,7 @@ export default function Home() {
                 }
               })}
             >
-              <Typography variant="h6" fontWeight={700} sx={{ background: '#fff', p: 1, borderRadius: '6px' }}>
+              <Typography variant="h6" fontWeight={800}>
                 Соответствует требованиям автопроизводителей
               </Typography>
 

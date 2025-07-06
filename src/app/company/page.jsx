@@ -983,7 +983,7 @@ export default function Production() {
                           {item.year}
                         </Typography>
 
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: isActive ? 1 : 0 }}>
                           <Typography variant="body1" sx={{ fontWeight: 800, color: isActive ? '#fff' : '#000' }}>
                             {item.title}
                           </Typography>

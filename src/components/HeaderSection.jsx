@@ -15,7 +15,7 @@ export default function HeaderSection({ title }) {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'left',
-        height: '500px',
+        height: '350px',
         p: 5,
 
         [theme.breakpoints.down('md')]: {
@@ -27,7 +27,7 @@ export default function HeaderSection({ title }) {
       <Typography
         variant="h1"
         sx={(theme) => ({
-          fontSize: '64px',
+          fontSize: '48px',
           color: '#fff',
           fontWeight: 800,
 

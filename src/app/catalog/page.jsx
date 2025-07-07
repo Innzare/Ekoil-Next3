@@ -14,6 +14,9 @@ import {
   IconButton,
   Typography
 } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+
 import CloseIcon from '@mui/icons-material/Close';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';
@@ -32,9 +35,11 @@ import axios from 'axios';
 
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 
 import { ITEMS, CATEGORIES } from '@/consts/products';
 import { useRouter } from 'next/navigation';
+import Slide from '@mui/material/Slide';
 
 const LIMIT = 10;
 
@@ -42,17 +47,23 @@ export default function Catalog() {
   const router = useRouter();
   const mainSectionRef = useRef(null);
 
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
   const [items, setItems] = useState([]);
   // const [filters, setFilters] = useState(null);
   const [itemsCount, setItemsCount] = useState(0);
   const [page, setPage] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [categoryId, setCategoryId] = useState('motor-oils');
   const [viewMode, setViewMode] = useState('grid');
   const [gridViewMode, setGridViewMode] = useState('grid-three-line');
+
+  const [filtersData, setFiltersData] = useState({});
 
   useEffect(() => {
     loadOils(page, categoryId);
@@ -64,6 +75,10 @@ export default function Catalog() {
 
   //   setFilters(data);
   // };
+
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
   const loadOils = async (page, categoryId, queryString = '') => {
     setIsLoading(true);
@@ -112,6 +127,8 @@ export default function Catalog() {
 
     setCategoryId(newCategoryId);
     loadOils(0, newCategoryId);
+
+    mainSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const onViewModeChange = (event, newMode) => {
@@ -152,7 +169,11 @@ export default function Catalog() {
     return '';
   };
 
-  const onFiltersChange = (data) => {
+  const onFiltersChange = (data, page = 0) => {
+    if (data) {
+      setFiltersData(data);
+    }
+
     const queryString = Object.entries(data).reduce((result, [key, value], index) => {
       if (value) {
         return index === 0 ? result + `${key}=${value}` : result + `&${key}=${value}`;
@@ -161,11 +182,10 @@ export default function Catalog() {
       return result;
     }, '');
 
-    loadOils(0, categoryId, queryString);
+    loadOils(page, categoryId, queryString);
+    setPage(page);
 
     mainSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    console.log('mainSectionRef', mainSectionRef);
   };
 
   return (
@@ -179,15 +199,19 @@ export default function Catalog() {
           </Box>
 
           <Box
-            sx={{
+            sx={(theme) => ({
               display: 'flex',
               alignItems: 'flex-start',
               // flexWrap: 'wrap',
               gap: '24px',
-              p: 3
-            }}
+              p: 3,
+
+              [theme.breakpoints.down('md')]: {
+                flexDirection: 'column'
+              }
+            })}
           >
-            <Filters category={categoryId} onFiltersChangeEmit={onFiltersChange} isLoading={isLoading} />
+            {!isTablet && <Filters category={categoryId} onFiltersChangeEmit={onFiltersChange} isLoading={isLoading} />}
 
             <Box sx={{ flex: 1, scrollMargin: '120px' }} ref={mainSectionRef}>
               <Box
@@ -195,7 +219,8 @@ export default function Catalog() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  gap: '24px'
+                  gap: '24px',
+                  flexWrap: 'wrap'
                 }}
               >
                 <Typography
@@ -209,41 +234,93 @@ export default function Catalog() {
                   {CATEGORIES.find((item) => item.id === categoryId)?.title || ''}
                 </Typography>
 
-                <ViewModeButtons
-                  viewMode={viewMode}
-                  gridViewMode={gridViewMode}
-                  onGridViewModeChange={onGridViewModeChange}
-                  onViewModeChange={onViewModeChange}
-                />
+                {isTablet ? (
+                  <Button
+                    variant="outlined"
+                    sx={{ textTransform: 'initial' }}
+                    onClick={() => setIsFiltersOpen((prev) => !prev)}
+                  >
+                    Фильтры
+                  </Button>
+                ) : (
+                  <ViewModeButtons
+                    viewMode={viewMode}
+                    gridViewMode={gridViewMode}
+                    onGridViewModeChange={onGridViewModeChange}
+                    onViewModeChange={onViewModeChange}
+                  />
+                )}
+
+                <Box sx={{ display: isTablet && isFiltersOpen ? 'block' : 'none', width: '100%' }}>
+                  <Filters category={categoryId} onFiltersChangeEmit={onFiltersChange} isLoading={isLoading} />
+                </Box>
               </Box>
 
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 {isLoading ? (
-                  <Grid container spacing={4} sx={{ marginTop: '24px', width: '100%' }}>
+                  <Grid container spacing={{ xs: 3, md: 5 }} sx={{ marginTop: '24px', width: '100%' }}>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
                       return (
-                        <Grid size={4} key={item}>
+                        <Grid
+                          size={{ xs: 12, sm: 6, md: 6, lg: gridViewMode === 'grid-three-line' ? 4 : 3 }}
+                          key={item}
+                        >
                           <Stack spacing={1}>
-                            <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
-                            <Skeleton variant="rounded" width="100%" height={285} />
-                            {/* <Skeleton variant="circular" width={40} height={40} />
-                          <Skeleton variant="rectangular" width={210} height={60} />
-                          <Skeleton variant="rounded" width={210} height={60} /> */}
+                            <Skeleton
+                              animation="wave"
+                              variant="rounded"
+                              width="100%"
+                              height={400}
+                              sx={{
+                                position: 'relative',
+                                backgroundColor: 'rgb(238, 243, 250)',
+                                p: 3,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-between'
+                              }}
+                            >
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  backgroundColor: '#fff',
+                                  borderRadius: '6px',
+                                  visibility: 'visible !important',
+                                  height: '200px'
+                                }}
+                              >
+                                <ImageOutlinedIcon
+                                  color="#ccc"
+                                  sx={{ visibility: 'visible !important', fontSize: 64, color: '#ccc' }}
+                                />
+                              </Box>
+
+                              <Box>
+                                <Skeleton variant="text" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                                <Skeleton variant="text" width="60%" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                              </Box>
+
+                              <Box sx={{ display: 'flex', gap: 2 }}>
+                                <Skeleton variant="rounded" height={40} sx={{ visibility: 'visible', width: '100%' }} />
+                                <Skeleton variant="rounded" height={40} sx={{ visibility: 'visible', width: '100%' }} />
+                              </Box>
+                            </Skeleton>
                           </Stack>
                         </Grid>
                       );
                     })}
                   </Grid>
                 ) : (
-                  // <CircularProgress />
-                  <Grid container spacing={4} sx={{ marginTop: '24px', width: '100%' }}>
+                  <Grid container spacing={{ xs: 3, md: 5 }} sx={{ marginTop: '24px', width: '100%' }}>
                     {items.map((item, index) => {
                       return viewMode === 'grid' ? (
                         <Grid
                           key={index}
                           size={{
                             xs: 12,
-                            sm: 12,
+                            sm: 6,
                             md: 6,
                             lg: gridViewMode === 'grid-three-line' ? 4 : 3
                           }}
@@ -267,16 +344,13 @@ export default function Catalog() {
                   count={itemsCount}
                   onChange={(event, newPage) => {
                     if (page !== newPage - 1) {
-                      setPage(newPage - 1);
-                      loadOils(newPage - 1, categoryId);
-
-                      document.body.scrollTo({ top: 400, behavior: 'smooth' });
+                      onFiltersChange(filtersData, newPage - 1);
                     }
                   }}
                   color="primary"
                   variant="outlined"
                   shape="rounded"
-                  size="large"
+                  size={isTablet ? 'small' : 'large'}
                 />
               </Box>
             </Box>
@@ -289,6 +363,7 @@ export default function Catalog() {
       </Box>
 
       <Dialog
+        fullScreen={isTablet}
         open={isDialogOpen}
         onClose={onCloseProductDialogClick}
         scroll="paper"
@@ -299,15 +374,19 @@ export default function Catalog() {
       >
         <DialogTitle
           id="scroll-dialog-title"
-          sx={{
+          sx={(theme) => ({
             display: 'flex',
             gap: '8px',
             justifyContent: 'space-between',
             alignItems: 'center',
             fontWeight: '900',
             textTransform: 'uppercase',
-            fontSize: '32px'
-          }}
+            fontSize: '32px',
+
+            [theme.breakpoints.down('md')]: {
+              fontSize: '24px'
+            }
+          })}
         >
           {`${selectedProduct?.name} ${selectedProduct?.subtitle}`}
 
@@ -318,21 +397,31 @@ export default function Catalog() {
 
         <DialogContent dividers>
           <Box
-            sx={{
+            sx={(theme) => ({
               display: 'flex',
               alignItems: 'flex-start',
               gap: '48px',
               position: 'relative',
-              pr: 4
-            }}
+              pr: 4,
+
+              [theme.breakpoints.down('md')]: {
+                flexDirection: 'column',
+                alignItems: 'center',
+                pr: 0
+              }
+            })}
           >
             <Box
-              sx={{
+              sx={(theme) => ({
                 position: 'sticky',
                 top: 0,
-                left: 0
+                left: 0,
+
+                [theme.breakpoints.down('md')]: {
+                  position: 'initial'
+                }
                 // transform: 'translateY(-50%)'
-              }}
+              })}
             >
               {selectedProduct?.img ? (
                 <img src={selectedProduct?.img} alt={selectedProduct?.name} width="300" height="300" />
@@ -394,21 +483,22 @@ export default function Catalog() {
               Скачать TDS
               <DescriptionOutlinedIcon sx={{ ml: 2 }} />
             </Button>
-            <Button
-              sx={{ textTransform: 'initial' }}
-              size="large"
-              variant="contained"
-              disableElevation
-              startIcon={<SubjectOutlinedIcon />}
-              onClick={handleNavigate}
-            >
-              Подробнее
-            </Button>
           </Box>
 
-          <Button sx={{ textTransform: 'initial' }} size="large" variant="outlined" onClick={onCloseProductDialogClick}>
-            Закрыть
+          <Button
+            sx={{ textTransform: 'initial' }}
+            size="large"
+            variant="contained"
+            disableElevation
+            startIcon={<SubjectOutlinedIcon />}
+            onClick={handleNavigate}
+          >
+            Подробнее
           </Button>
+
+          {/* <Button sx={{ textTransform: 'initial' }} size="large" variant="outlined" onClick={onCloseProductDialogClick}>
+            Закрыть
+          </Button> */}
         </DialogActions>
       </Dialog>
     </div>

@@ -7,7 +7,7 @@ import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Swiper as SwiperMUI, SwiperSlide as SwiperSlideMUI } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import Nefaz from '@/app/assets/Buyers/nefaz.png';
 import Kamaz from '@/app/assets/Buyers/kamaz.svg';
 import Bashkiravtodvor from '@/app/assets/Buyers/bashkiravtodvor.png';
@@ -66,7 +66,7 @@ export default function OurBuyers() {
     <Box
       sx={(theme) => ({
         backgroundColor: '#f5f5f5',
-        p: 10,
+        p: 7,
 
         [theme.breakpoints.down('md')]: {
           px: 4
@@ -78,38 +78,38 @@ export default function OurBuyers() {
         }
       })}
     >
-      <Box
-        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, flexWrap: 'wrap', mb: 3 }}
-      >
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}>
         <SectionTitle text="Наши покупатели" />
 
-        <Typography variant="body1" sx={{ maxWidth: '670px' }}>
+        {/* <Typography variant="body1" sx={{ maxWidth: '670px' }}>
           Мы поставляем масла и смазочные материалы ведущим компаниям, выбирающим качество и надежность нашей продукции
-        </Typography>
+        </Typography> */}
       </Box>
 
       <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '16px'
-        }}
+        sx={
+          {
+            // display: 'flex',
+            // alignItems: 'center',
+            // justifyContent: 'space-between',
+            // gap: '16px'
+          }
+        }
       >
-        {/* <IconButton ref={prevRef}>
-          <ArrowBackIcon />
-        </IconButton> */}
-
         <Swiper
           freeMode
           slidesPerView={isMobile ? 1 : 4}
           spaceBetween={10}
+          autoplay={{
+            delay: 1500,
+            disableOnInteraction: true
+          }}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current
           }}
           loop={true}
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           onInit={() => setInit(true)}
           className="mySwiper"
         >
@@ -122,9 +122,15 @@ export default function OurBuyers() {
           })}
         </Swiper>
 
-        {/* <IconButton ref={nextRef}>
-          <ArrowForwardIcon />
-        </IconButton> */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, justifyContent: 'center', mt: 5 }}>
+          <IconButton ref={prevRef}>
+            <ArrowBackIcon />
+          </IconButton>
+
+          <IconButton ref={nextRef}>
+            <ArrowForwardIcon />
+          </IconButton>
+        </Box>
       </Box>
     </Box>
   );

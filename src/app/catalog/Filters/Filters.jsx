@@ -202,15 +202,19 @@ export default function Filters(props) {
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         width: '320px',
         minWidth: '320px',
         borderRadius: '6px',
 
         padding: '16px 20px',
-        backgroundColor: '#eef3fa'
+        backgroundColor: '#eef3fa',
+
+        [theme.breakpoints.down('md')]: {
+          width: '100%'
+        }
         // border: '1px solid #d6d6d6'
-      }}
+      })}
     >
       {!selectedFilters ? (
         <Box sx={{ textAlign: 'center', py: 4 }}>

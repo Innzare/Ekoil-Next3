@@ -2,6 +2,7 @@ import Car from '@/components/SvgIcons/Car';
 import CommercialCar from '@/components/SvgIcons/CommercialCar';
 import SpecialCar from '@/components/SvgIcons/SpecialCar';
 import IndustryIcon from '@/components/SvgIcons/IndustryIcon';
+import TransmissionIcon from '@/components/SvgIcons/TransmissionIcon';
 import AntiFreezeIcon from '@/components/SvgIcons/AntiFreezeIcon';
 
 import ekoilTara from '@/app/assets/ekoil-tara.png';
@@ -111,9 +112,9 @@ export const CATEGORIES = [
     fullTitle: 'Для коммерческого транспорта',
     // value: 'commercial',
     value: 'transmission_oils',
-    icon: CommercialCar,
-    iconWidth: '35',
-    iconHeight: '35'
+    icon: TransmissionIcon,
+    iconWidth: '30',
+    iconHeight: '30'
   },
   {
     id: 'industrial-oils',
@@ -122,9 +123,9 @@ export const CATEGORIES = [
     fullTitle: 'Для специальной техники',
     // value: 'special',
     value: 'industrial_oils',
-    icon: SpecialCar,
-    iconWidth: '40',
-    iconHeight: '40'
+    icon: IndustryIcon,
+    iconWidth: '28',
+    iconHeight: '28'
   },
   // {
   //   id: 5,
@@ -142,7 +143,7 @@ export const CATEGORIES = [
     // value: 'antifreeze',
     value: 'antifreezes',
     icon: AntiFreezeIcon,
-    iconWidth: '30',
+    iconWidth: '35',
     iconHeight: '35'
   }
 ];

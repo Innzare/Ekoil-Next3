@@ -5,21 +5,28 @@ import NewsItem from './NewsItem';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import Link from 'next/link';
 
+import oilTara from '@/app/assets/AboutPage/oil-tara.jpg';
+import slider1 from '@/app/assets/AboutPage/slider1.png';
+import slider2 from '@/app/assets/AboutPage/slider2.jpg';
+
 const news = [
   {
-    image: '',
-    title: 'Lorem 2 ipsum dolor sit amet consectetur adipisicing elit.',
-    data: '09.03.2024'
+    image: oilTara.src,
+    title: 'ASURA 5W-30 GF-5 - энергосберегающее моторное масло',
+    data: '21.02.2025',
+    id: 1
   },
   {
-    image: '',
-    title: 'Lorem 3 ipsum dolor sit amet consectetur adipisicing elit.',
-    data: '09.03.2024'
+    image: slider1.src,
+    title: 'Ekoil 2T Aqua Premium Стандарт TC-W3 Продление лицензии NMMA',
+    data: '21.02.2025',
+    id: 2
   },
   {
-    image: '',
-    title: 'Lorem 1 ipsum dolor sit amet consectetur adipisicing elit.',
-    data: '09.03.2024'
+    image: slider2.src,
+    title: 'Лицензия NMMA TC-W3 2017',
+    data: '21.02.2025',
+    id: 3
   }
 ];
 
@@ -50,7 +57,7 @@ export default function News() {
         <SectionTitle text="Новости компании" />
       </Box>
 
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 4, sm: 6 }}>
         {news.map((item) => {
           return (
             <Grid item cols="12" xs={12} sm={4} key={item.title}>

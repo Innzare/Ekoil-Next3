@@ -260,21 +260,24 @@ export default function Production() {
               py: 12,
               position: 'relative',
               display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'flex-end',
+              gap: 15,
+              // flexDirection: 'column',
+              // justifyContent: 'flex-end',
               alignItems: 'flex-end',
-              mb: 10,
+              mb: 5,
 
               [theme.breakpoints.down('md')]: {
-                mb: 0,
-                py: 4
+                // mb: 0,
+                py: 4,
+                gap: 5,
+                flexDirection: 'column'
               }
             })}
           >
             <Box
               sx={(theme) => ({
                 position: 'absolute',
-                top: '50%',
+                top: '20%',
                 transform: 'translateY(-50%)',
                 width: '100%',
                 zIndex: 0,
@@ -287,64 +290,97 @@ export default function Production() {
               <EkoilTextOutlinedIcon />
             </Box>
 
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={(theme) => ({
-                fontSize: '28px',
-                fontWeight: '900',
-                zIndex: 1,
-                position: 'relative',
-                maxWidth: '70%',
-                mb: 4,
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography
+                variant="body1"
+                color="initial"
+                sx={(theme) => ({
+                  fontSize: '26px',
+                  fontWeight: '900',
+                  zIndex: 1,
+                  position: 'relative',
+                  // maxWidth: '80%',
+                  mb: 4,
+                  lineHeight: '38px',
 
-                [theme.breakpoints.down('md')]: {
-                  maxWidth: '100%',
-                  fontSize: '21px'
-                }
-              })}
-            >
-              <Typography variant="span" color="red" fontWeight="700">
-                EKOIL Lubricants
-              </Typography>
-              — один из крупных производителей смазочных материалов в Республике Башкортостан, обладающий собственной
-              технологической и производственной базой для выпуска широкого ассортимента продукции.
-            </Typography>
-
-            <Typography
-              variant="body2"
-              color="red"
-              sx={(theme) => ({
-                fontSize: '24px',
-                zIndex: 1,
-                position: 'relative',
-                lineHeight: '24px',
-                fontWeight: 700,
-
-                [theme.breakpoints.down('md')]: {
-                  fontSize: '18px'
-                },
-
-                '&:before': {
-                  content: '""',
-                  position: 'absolute',
-                  left: '-120px',
-                  top: '60%',
-                  transform: 'translateY(-50%)',
-                  width: '100px',
-                  height: '2px',
-                  backgroundColor: 'red'
-                },
-
-                [theme.breakpoints.down('sm')]: {
-                  '&:before': {
-                    display: 'none'
+                  [theme.breakpoints.down('md')]: {
+                    maxWidth: '100%',
+                    fontSize: '21px',
+                    lineHeight: '32px'
                   }
+                })}
+              >
+                <Typography variant="span" color="red" fontWeight={800} sx={{ mr: 1 }}>
+                  EKOIL Lubricants
+                </Typography>
+                — один из крупных производителей смазочных материалов в Республике Башкортостан, обладающий собственной
+                технологической и производственной базой для выпуска широкого ассортимента продукции.
+              </Typography>
+
+              <Typography
+                variant="body2"
+                color="red"
+                sx={(theme) => ({
+                  fontSize: '24px',
+                  zIndex: 1,
+                  position: 'relative',
+                  lineHeight: '24px',
+                  fontWeight: 700,
+
+                  [theme.breakpoints.down('md')]: {
+                    fontSize: '18px'
+                  },
+
+                  // '&:before': {
+                  //   content: '""',
+                  //   position: 'absolute',
+                  //   left: '-70px',
+                  //   top: '60%',
+                  //   transform: 'translateY(-50%)',
+                  //   width: '50px',
+                  //   height: '2px',
+                  //   backgroundColor: 'red'
+                  // },
+
+                  [theme.breakpoints.down('sm')]: {
+                    '&:before': {
+                      display: 'none'
+                    }
+                  }
+                })}
+              >
+                мы подберем Вам оптимальный продукт
+              </Typography>
+            </Box>
+
+            <Box
+              sx={() => ({
+                overflow: 'hidden',
+                // minWidth: '100%',
+                flex: '1 0 50%',
+                height: '420px',
+                borderRadius: '24px',
+                zIndex: 1,
+                position: 'relative',
+
+                [theme.breakpoints.down('md')]: {
+                  width: '100%',
+                  flex: 'none',
+                  order: 1
                 }
               })}
             >
-              мы подберем Вам оптимальный продукт
-            </Typography>
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/UtA7WnB4-tg?si=KFjkhNKJllbiaQkn&amp;modestbranding=1&amp;start=0"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </Box>
           </Box>
 
           <Box
@@ -373,7 +409,8 @@ export default function Production() {
                 flex: '1 1 50%',
 
                 [theme.breakpoints.down('md')]: {
-                  minHeight: '350px'
+                  minHeight: '350px',
+                  order: 1
                 }
               })}
             ></Box>
@@ -388,9 +425,9 @@ export default function Production() {
                 flexDirection: 'column'
               }}
             >
-              <HeaderLogo width={isMobile ? '200' : '400'} height={isMobile ? '50' : '100'} />
+              <HeaderLogo width={isMobile ? '200' : '400'} height={isMobile ? '50' : '100'} isColor />
 
-              <Typography variant="body1" sx={{ mb: 1 }}>
+              <Typography variant="body1" sx={{ mt: 3, mb: 2 }}>
                 Мы объединили современные российские и иностранные технологии в сфере производства смазочных материалов
                 для получения премиальных высокотехнологичных масел, закрывающих потребность во всех сферах.
               </Typography>
@@ -524,7 +561,7 @@ export default function Production() {
             <Typography
               variant="body1"
               sx={(theme) => ({
-                color: 'red',
+                color: '#CC2828',
                 fontSize: '64px',
                 fontWeight: 900,
 
@@ -814,7 +851,7 @@ export default function Production() {
               justifyContent: 'space-between',
               gap: 2,
               flexWrap: 'wrap',
-              alignItems: 'flex-end',
+              alignItems: 'center',
               mb: 10,
 
               [theme.breakpoints.down('sm')]: {
@@ -1140,25 +1177,6 @@ export default function Production() {
               );
             })}
           </Box>
-        </Box>
-
-        <Box
-          sx={{
-            overflow: 'hidden',
-            minWidth: '100%',
-            height: '600px'
-          }}
-        >
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/UtA7WnB4-tg?si=KFjkhNKJllbiaQkn&amp;modestbranding=1&amp;start=0"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
         </Box>
 
         <Box

@@ -28,7 +28,7 @@ const contacts = [
   },
   {
     title: 'Время работы',
-    text: '9:00 - 18:00',
+    text: '9:00 - 18:00 <br/> пн-пт',
     icon: AccessTimeOutlinedIcon
   }
 ];
@@ -103,6 +103,7 @@ export default function Contacts() {
 
                   <Typography
                     variant="body"
+                    dangerouslySetInnerHTML={{ __html: contact.text }}
                     sx={(theme) => ({
                       color: '#666',
                       textAlign: 'center',
@@ -115,9 +116,7 @@ export default function Contacts() {
                         fontSize: '14px'
                       }
                     })}
-                  >
-                    {contact.text}
-                  </Typography>
+                  ></Typography>
                 </Grid>
               );
             })}

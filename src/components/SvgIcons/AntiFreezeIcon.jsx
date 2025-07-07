@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function AntiFreezeIcon({ color = '#000', width = '58.46', height = '58.35' }) {
   return (
-    <svg width="40" height="40" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

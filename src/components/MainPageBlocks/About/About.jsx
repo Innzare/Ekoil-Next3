@@ -355,15 +355,15 @@ export default function About() {
         sx={(theme) => ({
           position: 'relative',
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           pl: '5%',
-          pb: '5%',
+          py: '15%',
           mt: 10,
           width: '100%',
-          height: '1100px',
+          // height: '1100px',
           backgroundImage: `url(${ekoilAbout.src})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'top',
+          backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
 
           [theme.breakpoints.down('sm')]: {

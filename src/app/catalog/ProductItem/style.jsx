@@ -8,11 +8,11 @@ export const Product = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   borderRadius: '6px',
-  padding: '16px',
+  padding: '24px',
   width: '100%',
   backgroundColor: 'rgb(238, 243, 250)',
   cursor: 'pointer',
-  height: '100%',
+  height: '400px',
 
   '&:hover': {
     '.preview-button': {
@@ -26,7 +26,7 @@ export const Product = styled(Box)(({ theme }) => ({
 export const ProductImg = styled('img')({
   position: 'relative',
   width: '100%',
-  height: '155px',
+  height: '200px',
   objectFit: 'contain',
   backgroundColor: '#fff',
   borderRadius: '6px',
@@ -36,23 +36,36 @@ export const ProductImg = styled('img')({
   // filter: 'drop-shadow(0px 10px 8px rgba(0,0,0,0.5))'
 });
 
-export const PreviewButton = styled(IconButton)({
+export const PreviewButton = styled(IconButton)(({ theme }) => ({
   opacity: '0',
   transition: '.25s',
   position: 'absolute',
-  top: '16px',
-  right: '16px',
+  top: '24px',
+  right: '24px',
   width: '40px',
-  height: '40px'
-});
+  height: '40px',
 
-export const ProductTitle = styled(Typography)({
+  [theme.breakpoints.down('md')]: {
+    opacity: 1
+  }
+}));
+
+export const ProductTitle = styled(Typography)(({ theme }) => ({
   fontSize: '19px',
   fontWeight: 'bold',
   marginBottom: '8px',
   textAlign: 'center',
-  letterSpacing: '0px'
-});
+  letterSpacing: '0px',
+
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  width: '100%',
+
+  [theme.breakpoints.down('sm')]: {
+    width: '200px'
+  }
+}));
 
 export const ProductSubTitle = styled(Typography)({
   fontSize: '14px',

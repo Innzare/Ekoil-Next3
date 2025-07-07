@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function IndustryIcon({ color = '#000', width = '54.4', height = '52.4' }) {
+export default function IndustryIcon({ color = '#000', width = '40', height = '40' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

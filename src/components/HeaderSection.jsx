@@ -47,7 +47,7 @@ export default function HeaderSection({ title, dynamicRouteTitle }) {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'left',
-        height: '350px',
+        height: '300px',
         p: 5,
         px: 10,
 

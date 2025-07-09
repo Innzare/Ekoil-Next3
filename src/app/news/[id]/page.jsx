@@ -31,7 +31,7 @@ export default function page() {
       const { data } = await axios.get(`/api/blog/news/${params.id}`);
       const allNewsResponse = await axios.get(`/api/blog/news`);
 
-      const allNewsFiltered = allNewsResponse.data.filter((item) => item.id !== params.id);
+      const allNewsFiltered = allNewsResponse.data.filter((item) => item.id !== Number(params.id));
 
       setNews(data);
       setAllNews(allNewsFiltered);

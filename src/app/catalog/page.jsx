@@ -27,7 +27,6 @@ import Filters from './Filters/Filters';
 import ViewModeButtons from './ViewModeButtons/ViewModeButtons';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 import HeaderSection from '@/components/HeaderSection';
-import CircularProgress from '@mui/material/CircularProgress';
 import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
 import Pagination from '@mui/material/Pagination';
 
@@ -37,9 +36,8 @@ import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 
-import { ITEMS, CATEGORIES } from '@/consts/products';
+import { CATEGORIES } from '@/consts/products';
 import { useRouter } from 'next/navigation';
-import Slide from '@mui/material/Slide';
 
 const LIMIT = 10;
 
@@ -75,10 +73,6 @@ export default function Catalog() {
 
   //   setFilters(data);
   // };
-
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
 
   const loadOils = async (page, categoryId, queryString = '') => {
     setIsLoading(true);
@@ -120,15 +114,22 @@ export default function Catalog() {
     setIsLoading(false);
   };
 
-  const onCategoryChange = (event, newCategoryId) => {
+  const onCategoryChange = async (event, newCategoryId) => {
     if (newCategoryId === null) {
       return;
     }
 
     setCategoryId(newCategoryId);
-    loadOils(0, newCategoryId);
+    await loadOils(0, newCategoryId);
 
-    mainSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const elementOffset = mainSectionRef.current.offsetTop - 150;
+
+    setTimeout(() => {
+      document.body.scrollTo({
+        top: elementOffset,
+        behavior: 'smooth'
+      });
+    }, 100);
   };
 
   const onViewModeChange = (event, newMode) => {
@@ -185,7 +186,16 @@ export default function Catalog() {
     loadOils(page, categoryId, queryString);
     setPage(page);
 
-    mainSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // mainSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const elementOffset = mainSectionRef.current.offsetTop - 150;
+
+    setTimeout(() => {
+      document.body.scrollTo({
+        top: elementOffset,
+        behavior: 'smooth'
+      });
+    }, 100);
   };
 
   return (
@@ -213,7 +223,7 @@ export default function Catalog() {
           >
             {!isTablet && <Filters category={categoryId} onFiltersChangeEmit={onFiltersChange} isLoading={isLoading} />}
 
-            <Box sx={{ flex: 1, scrollMargin: '120px' }} ref={mainSectionRef}>
+            <Box sx={{ flex: 1, scrollMargin: '120px' }}>
               <Box
                 sx={{
                   display: 'flex',
@@ -256,7 +266,7 @@ export default function Catalog() {
                 </Box>
               </Box>
 
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'center' }} ref={mainSectionRef}>
                 {isLoading ? (
                   <Grid container spacing={{ xs: 3, md: 5 }} sx={{ marginTop: '24px', width: '100%' }}>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {

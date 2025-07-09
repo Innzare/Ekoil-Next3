@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Card, Tab, Tabs, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Card, Stack, Tab, Tabs, Tooltip, Typography } from '@mui/material';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -20,6 +20,7 @@ import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
 import CircularProgress from '@mui/material/CircularProgress';
 import Skeleton from '@mui/material/Skeleton';
 import HeaderSection from '@/components/HeaderSection';
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 
 import axios from 'axios';
 
@@ -31,6 +32,7 @@ export default function CatalogItem() {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
   const [tabValue, setTabValue] = useState(0);
+  const [activeTara, setActiveTara] = useState(0);
 
   useEffect(() => {
     loadOil();
@@ -96,15 +98,45 @@ export default function CatalogItem() {
 
   const renderTares = () => {
     if (data) {
-      return data.tare.map((tare) => tare.name).join(' / ');
+      return data.tare.map((tare, index) => {
+        const isActive = index === activeTara;
+
+        return (
+          <Box
+            key={tare.id}
+            onClick={() => setActiveTara(index)}
+            sx={{
+              backgroundColor: isActive ? '#CC2828' : '#F4F6F8',
+              color: isActive ? '#fff' : '#000',
+              px: 2,
+              py: 1,
+              borderRadius: '8px',
+              transition: 'all .25s ease',
+              cursor: 'pointer',
+              fontWeight: 700,
+
+              '&:hover': {
+                backgroundColor: '#CC2828',
+                color: '#fff'
+              }
+            }}
+          >
+            {tare.name}
+          </Box>
+        );
+      });
     }
 
     return '';
   };
 
   const imageUrl = () => {
+    const tareId = data?.tare[activeTara].id;
+
+    console.log(tareId);
+
     if (data) {
-      return data?.images[0]?.url;
+      return data?.images.find((item) => Number(item.tare.id) === Number(tareId))?.url;
     }
 
     return null;
@@ -112,17 +144,28 @@ export default function CatalogItem() {
 
   return (
     <main>
-      <HeaderSection title="Каталог EKOIL" />
+      <HeaderSection title="Каталог EKOIL" dynamicRouteTitle={data?.name} />
 
-      <Box sx={{ p: 3 }}>
+      <Box
+        sx={(theme) => ({
+          p: 10,
+
+          [theme.breakpoints.down('md')]: {
+            p: 5
+          },
+
+          [theme.breakpoints.down('sm')]: {
+            p: 3
+          }
+        })}
+      >
         <Tooltip title="Назад">
           <Button
-            sx={{ mb: 4 }}
+            sx={{ mb: 4, backgroundColor: '#1E284B', borderRadius: '8px' }}
             onClick={onGoBackClick}
             variant="contained"
             disableElevation
             size="small"
-            color="primary"
           >
             <ArrowBackIcon />
           </Button>
@@ -131,33 +174,93 @@ export default function CatalogItem() {
         <Box>
           {isLoading ? (
             <Box>
-              <Skeleton variant="text" sx={{ fontSize: '1rem' }} height={50} />
+              <Stack spacing={1}>
+                <Skeleton
+                  animation="wave"
+                  variant="rounded"
+                  width="100%"
+                  height={600}
+                  sx={{
+                    position: 'relative',
+                    backgroundColor: 'rgb(238, 243, 250)',
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}
+                >
+                  <Box sx={{ mb: 2 }}>
+                    <Skeleton variant="text" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                    <Skeleton variant="text" width="60%" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                  </Box>
 
-              <Box sx={{ display: 'flex', gap: 5 }}>
-                <Skeleton variant="rounded" width="100%" height={500} />
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: '#fff',
+                      borderRadius: '6px',
+                      visibility: 'visible !important',
+                      height: '400px',
+                      mb: 2
+                    }}
+                  >
+                    <ImageOutlinedIcon
+                      color="#ccc"
+                      sx={{ visibility: 'visible !important', fontSize: 64, color: '#ccc' }}
+                    />
+                  </Box>
 
-                <Box>
-                  <Skeleton variant="rounded" width="100%" height={50} />
-                  <Skeleton variant="rounded" width="100%" height={50} />
-                  <Skeleton variant="rounded" width="100%" height={300} />
-                </Box>
-              </Box>
+                  <Box>
+                    <Skeleton variant="text" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                    <Skeleton variant="text" width="60%" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                  </Box>
+                </Skeleton>
+              </Stack>
             </Box>
           ) : (
             <>
-              <Box sx={{ display: 'flex', gap: '8px', justifyContent: 'space-between' }}>
-                <SectionTitle text={`${data?.name} ${data?.subtitle || ''}`} />
+              <Box
+                sx={(theme) => ({
+                  display: 'flex',
+                  gap: 1,
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  mb: 4,
+
+                  [theme.breakpoints.down('md')]: {
+                    mb: 2
+                  }
+                })}
+              >
+                <Typography
+                  variant="h4"
+                  fontWeight={800}
+                  sx={(theme) => ({
+                    [theme.breakpoints.down('md')]: {
+                      fontSize: '21px'
+                    }
+                  })}
+                >
+                  {`${data?.name} ${data?.subtitle || ''}`}
+                </Typography>
 
                 <Box sx={{ display: 'flex', gap: '8px' }}>
                   <Button
-                    sx={{ mb: 4 }}
                     onClick={onDownloadTDSClick}
                     variant="contained"
                     disableElevation
                     size="small"
-                    color="primary"
+                    sx={{ borderRadius: '8px', backgroundColor: '#1E284B' }}
                   >
-                    <Typography fontWeight={900} sx={{ mr: 2 }}>
+                    <Typography
+                      fontWeight={900}
+                      sx={(theme) => ({
+                        mr: 2,
+                        textTransform: 'initial'
+                      })}
+                    >
                       Скачать TDS
                     </Typography>
                     <FileDownloadIcon />
@@ -165,140 +268,90 @@ export default function CatalogItem() {
                 </Box>
               </Box>
 
-              <Box sx={{ display: 'flex', gap: '40px', alignItems: 'flex-start' }}>
+              <Box
+                sx={(theme) => ({
+                  display: 'flex',
+                  gap: '40px',
+                  alignItems: 'flex-start',
+
+                  [theme.breakpoints.down('md')]: {
+                    flexDirection: 'column',
+                    gap: '20px'
+                  }
+                })}
+              >
                 <Box
-                  sx={{
+                  sx={(theme) => ({
+                    position: 'sticky',
+                    top: '110px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: '#f5f5f5',
+                    // backgroundColor: '#F4F6F8',
                     borderRadius: '6px',
                     overflow: 'hidden',
                     minWidth: '500px',
-                    height: '500px'
-                  }}
+                    height: '500px',
+
+                    [theme.breakpoints.down('md')]: {
+                      position: 'initial',
+                      minWidth: '100%',
+                      height: '300px'
+                    },
+
+                    img: {
+                      objectFit: 'contain',
+                      width: '100%',
+                      height: '100%'
+                    }
+                  })}
                 >
                   {imageUrl() ? (
-                    <img
-                      src={imageUrl()}
-                      alt={data?.name}
-                      width="500"
-                      height="500"
-                      style={{
-                        filter: 'drop-shadow(0px 10px 8px rgba(0,0,0,0.5))'
-                      }}
-                    />
+                    <img src={imageUrl()} alt={data?.name} width="500" height="500" />
                   ) : (
                     <HideImageOutlinedIcon sx={{ color: '#ccc', fontSize: '96px' }} />
                   )}
                 </Box>
 
-                <Box>
-                  <h2>Описание</h2>
+                <Box sx={{ width: '100%' }}>
+                  <h4>Описание</h4>
                   <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.description }} />
 
-                  <h2>Варианты фасовки</h2>
-                  <Box sx={{ mb: 3, mt: 1 }}>{renderTares()}</Box>
+                  <h4>Варианты фасовки</h4>
+                  <Box sx={{ mb: 3, mt: 1, display: 'flex', gap: 1 }}>{renderTares()}</Box>
+                  <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.usage }} />
+                  <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.advantages }} />
+                  <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.specifications }} />
 
-                  <Tabs
-                    value={tabValue}
-                    onChange={handleChange}
-                    aria-label="basic tabs example"
-                    sx={{
-                      width: '100%',
-                      backgroundColor: '#f5f5f5',
-                      borderTopLeftRadius: '6px',
-                      borderTopRightRadius: '6px',
-
-                      '& .Mui-selected': {
-                        backgroundColor: '#0052cc1c'
-                      }
-                    }}
-                  >
-                    <Tab
-                      label="Применение"
-                      id={0}
-                      sx={{
-                        flex: 1,
-                        fontWeight: '900'
-                      }}
-                    />
-                    <Tab
-                      label="Преимущества"
-                      id={1}
-                      sx={{
-                        flex: 1,
-                        fontWeight: '900'
-                      }}
-                    />
-                    <Tab
-                      label="Спецификации"
-                      id={2}
-                      sx={{
-                        flex: 1,
-                        fontWeight: '900'
-                      }}
-                    />
-                    <Tab
-                      label="Характеристики"
-                      id={3}
-                      sx={{
-                        flex: 1,
-                        fontWeight: '900'
-                      }}
-                    />
-                  </Tabs>
-
-                  <Box
-                    sx={{
-                      border: '2px solid #f5f5f5',
-                      borderBottomLeftRadius: '6px',
-                      borderBottomRightRadius: '6px'
-                    }}
-                  >
-                    <TabPanel value={tabValue} index={0}>
-                      <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.usage }} />
-                    </TabPanel>
-
-                    <TabPanel value={tabValue} index={1}>
-                      <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.advantages }} />
-                    </TabPanel>
-
-                    <TabPanel value={tabValue} index={2}>
-                      <Box sx={{ mb: 3, mt: 1 }} dangerouslySetInnerHTML={{ __html: data?.specifications }} />
-                    </TabPanel>
-
-                    <TabPanel value={tabValue} index={3}>
-                      <TableContainer component={Paper}>
-                        <Table sx={{ width: '100%' }} aria-label="simple table">
-                          <TableHead>
-                            <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-                              <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
-                                Показатель
-                              </TableCell>
-                              <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
-                                Метод испытания
-                              </TableCell>
-                              <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
-                                Значение
-                              </TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {createData().map((row, id) => (
-                              <TableRow key={id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                <TableCell align="center" component="th" scope="row">
-                                  {row.indicator}
-                                </TableCell>
-                                <TableCell align="center">{row.method}</TableCell>
-                                <TableCell align="center">{row.value}</TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </TabPanel>
-                  </Box>
+                  <h4>Характеристики</h4>
+                  <TableContainer component={Paper} sx={{ mt: 1 }}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                      <TableHead>
+                        <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
+                          <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
+                            Показатель
+                          </TableCell>
+                          <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
+                            Метод испытания
+                          </TableCell>
+                          <TableCell sx={{ fontWeight: '900', fontSize: '18px' }} align="center">
+                            Значение
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {createData().map((row, id) => (
+                          <TableRow key={id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableCell align="center" component="th" scope="row">
+                              {row.indicator}
+                            </TableCell>
+                            <TableCell align="center">{row.method}</TableCell>
+                            <TableCell align="center">{row.value}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </Box>
               </Box>
             </>

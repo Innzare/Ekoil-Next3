@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/system';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 
 export const MapWrapper = styled(Map)(({ theme }) => ({
   position: 'relative',
-  borderRadius: '8px',
   overflow: 'hidden',
   width: '100%',
   height: '100%'

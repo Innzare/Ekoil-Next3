@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import MapLoader from '@/components/MapLoader/MapLoader';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography, Accordion, AccordionDetails, AccordionSummary, Divider } from '@mui/material';
 import RepresentativeItem from '../RepresentativeItem';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const ITEMS = [
   {
@@ -176,12 +177,20 @@ const ITEMS = [
 ];
 
 export default function Distributors() {
+  const [expanded, setExpanded] = React.useState(ITEMS.map((item) => item.id));
+
+  const mapContainerRef = React.useRef(null);
+
   const [items, setItems] = useState(ITEMS);
   const [mapState, setMapState] = useState({
     center: [42.33204, 69.572021],
     zoom: 3,
     behaviors: ['default', 'scrollZoom']
   });
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded((prev) => (isExpanded ? [...prev, panel] : prev.filter((id) => id !== panel)));
+  };
 
   const getMarks = () => {
     const places = items.map((item) => item.places).flat();
@@ -197,7 +206,7 @@ export default function Distributors() {
       };
     });
 
-    document.body.scrollTo({ top: 0, behavior: 'smooth' });
+    mapContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const onShowMoreClick = (id) => {
@@ -215,46 +224,122 @@ export default function Distributors() {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        gap: 4
+      }}
+    >
       <Box
         sx={{
-          position: 'relative',
-          height: '400px',
-          mb: 4
+          backgroundColor: '#F4F6F8',
+          p: 2,
+          borderRadius: '12px',
+          flex: '0 0 500px',
+          height: '700px',
+          overflowY: 'auto'
         }}
       >
-        <MapLoader state={mapState} marks={getMarks()} />
-      </Box>
-
-      <Box>
         {items.map((item) => {
           return (
-            <Box sx={{ mb: 6 }}>
-              <Box sx={{ mb: 2 }}>
-                <h2>{item.region}</h2>
-              </Box>
-
-              <Box
+            <Accordion
+              expanded={expanded.includes(item.id)}
+              onChange={handleChange(item.id)}
+              elevation={0}
+              sx={{
+                backgroundColor: 'transparent',
+                '&:before': {
+                  display: 'none'
+                }
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  mb: 2
+                  color: ' #919EAB',
+                  backgroundColor: '#00000008',
+                  borderRadius: '8px',
+                  mb: 2,
+                  border: '1px solid #ccc'
                 }}
               >
-                {(item.isOpen ? item.places : item.places.slice(0, 3)).map((place) => {
-                  return <RepresentativeItem data={place} showOnMapClick={onShowOnMapClick} />;
-                })}
-              </Box>
+                <h2>
+                  {item.region} {`(${item.places.length})`}
+                </h2>
+              </AccordionSummary>
 
-              {item.places.length > 3 && (
-                <Button variant="outlined" size="large" onClick={() => onShowMoreClick(item.id)}>
-                  {item.isOpen ? 'Скрыть' : 'Показать еще...'}
-                </Button>
-              )}
-            </Box>
+              <AccordionDetails>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
+                    mb: 2
+                  }}
+                >
+                  {(item.isOpen ? item.places : item.places.slice(0, 3)).map((place, index, array) => {
+                    return (
+                      <>
+                        <RepresentativeItem data={place} showOnMapClick={onShowOnMapClick} />
+                        {index < array.length - 1 && <Divider sx={{ my: 2 }}></Divider>}
+                      </>
+                    );
+                  })}
+                </Box>
+
+                {item.places.length > 3 && (
+                  <Button
+                    variant="text"
+                    size="large"
+                    onClick={() => onShowMoreClick(item.id)}
+                    sx={{ textTransform: 'initial', fontWeight: 800 }}
+                  >
+                    {item.isOpen ? 'Скрыть' : 'Показать еще...'}
+                  </Button>
+                )}
+              </AccordionDetails>
+            </Accordion>
+            // <Box sx={{ mb: 6 }}>
+            //   <Box sx={{ mb: 2 }}>
+            //     <h2>{item.region}</h2>
+            //   </Box>
+
+            //   <Box
+            //     sx={{
+            //       display: 'flex',
+            //       flexDirection: 'column',
+            //       gap: 2,
+            //       mb: 2
+            //     }}
+            //   >
+            //     {(item.isOpen ? item.places : item.places.slice(0, 3)).map((place) => {
+            //       return <RepresentativeItem data={place} showOnMapClick={onShowOnMapClick} />;
+            //     })}
+            //   </Box>
+
+            //   {item.places.length > 3 && (
+            //     <Button variant="outlined" size="large" onClick={() => onShowMoreClick(item.id)}>
+            //       {item.isOpen ? 'Скрыть' : 'Показать еще...'}
+            //     </Button>
+            //   )}
+            // </Box>
           );
         })}
+      </Box>
+
+      <Box
+        ref={mapContainerRef}
+        sx={{
+          position: 'relative',
+          minHeight: '400px',
+          width: '100%'
+        }}
+      >
+        <Paper elevation={3} sx={{ width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+          <MapLoader state={mapState} marks={getMarks()} />
+        </Paper>
       </Box>
     </Box>
   );

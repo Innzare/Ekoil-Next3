@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, Card, Grid, Typography } from '@mui/material';
+import { Box, Button, Card, Grid2 as Grid, Paper, Typography, Link as LinkMui } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import MapLoader from '@/components/MapLoader/MapLoader';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
@@ -9,85 +9,224 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import HeaderSection from '@/components/HeaderSection';
+import Link from 'next/link';
+
+const contacts = [
+  {
+    title: 'Адрес',
+    text: 'г. Уфа, 450071, ул. Менделеева, д. 197/2',
+    icon: LocationOnOutlinedIcon
+  },
+  {
+    title: 'Телефон',
+    text: '(347) 248-50-53',
+    icon: LocalPhoneOutlinedIcon
+  },
+  {
+    title: 'Почта',
+    text: 'oil@td-ekoil.ru',
+    icon: MailOutlineIcon
+  },
+  {
+    title: 'Время работы',
+    text: (
+      <>
+        <p>9:00 - 18:00</p>
+        <p>пн-пт</p>
+      </>
+    ),
+    icon: AccessTimeOutlinedIcon
+  }
+];
+
+const LinkWrapper = ({ contact, children }) => {
+  switch (contact.title) {
+    case 'Телефон':
+      return (
+        <LinkMui
+          variant="body1"
+          href={`tel:+${contact.text}`}
+          sx={(theme) => ({
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            cursor: 'pointer',
+            textDecoration: 'none',
+            color: '#000',
+
+            [theme.breakpoints.down('sm')]: {
+              gap: 1
+            }
+          })}
+        >
+          {children}
+        </LinkMui>
+      );
+
+    case 'Почта':
+      return (
+        <LinkMui
+          variant="body1"
+          href={`mailto:${contact.text}`}
+          sx={(theme) => ({
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            cursor: 'pointer',
+            textDecoration: 'none',
+            color: '#000',
+
+            [theme.breakpoints.down('sm')]: {
+              gap: 1
+            }
+          })}
+        >
+          {children}
+        </LinkMui>
+      );
+
+    default:
+      return (
+        <Box
+          sx={(theme) => ({
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            cursor: 'pointer',
+            textDecoration: 'none',
+            color: '#000',
+
+            [theme.breakpoints.down('sm')]: {
+              gap: 1
+            }
+          })}
+        >
+          {children}
+        </Box>
+      );
+  }
+};
 
 export default function Contacts() {
   return (
     <main>
       <HeaderSection title="Контакты" />
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', position: 'relative', zIndex: 1, px: 8, mt: 6, mb: 8 }}>
-        <Grid container spacing={4}>
-          <Grid item xs="6" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LocationOnOutlinedIcon color="primary" />
-              Адрес
-            </Typography>
-            <Typography variant="body" sx={{ color: '#666' }}>
-              г. Уфа, 450071, ул. Менделеева, д. 197/2
-            </Typography>
+      <Box
+        sx={(theme) => ({
+          p: 10,
+
+          [theme.breakpoints.down('md')]: {
+            p: 4
+          },
+
+          [theme.breakpoints.down('sm')]: {
+            p: 2
+          }
+        })}
+      >
+        <Grid container spacing={{ xs: 3, sm: 6 }}>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Grid container spacing={{ xs: 2, sm: 6 }}>
+              {contacts.map((contact) => {
+                const Icon = contact.icon;
+
+                return (
+                  <Grid
+                    key={contact.title}
+                    size={{
+                      xs: 6
+                    }}
+                  >
+                    <LinkWrapper contact={contact}>
+                      <Typography
+                        variant="h6"
+                        fontWeight="700"
+                        sx={(theme) => ({
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: 1,
+                          backgroundColor: '#E8EEF4',
+                          p: 2,
+                          borderRadius: '50px',
+                          textAlign: 'center',
+
+                          [theme.breakpoints.down('sm')]: {
+                            fontSize: '16px'
+                          }
+                        })}
+                      >
+                        <Icon sx={{ fill: '#CC2828' }} />
+
+                        {contact.title}
+                      </Typography>
+
+                      <Typography
+                        variant="body"
+                        sx={(theme) => ({
+                          color: '#666',
+                          textAlign: 'center',
+                          px: 6,
+                          fontSize: '16px',
+                          fontWeight: '700',
+
+                          [theme.breakpoints.down('sm')]: {
+                            px: 0,
+                            fontSize: '14px'
+                          }
+                        })}
+                      >
+                        {contact.text}
+                      </Typography>
+                    </LinkWrapper>
+                  </Grid>
+                );
+              })}
+            </Grid>
+
+            <Link href="/location">
+              <Button
+                fontSize="large"
+                endIcon={<ArrowOutwardIcon />}
+                sx={{
+                  textTransform: 'initial',
+                  backgroundColor: '#1E284B',
+                  color: '#fff',
+                  fontWeight: '700',
+                  borderRadius: '8px',
+                  mt: 6,
+                  px: 3,
+                  py: 2,
+                  fontSize: '16px'
+                }}
+              >
+                Где купить
+              </Button>
+            </Link>
           </Grid>
 
-          <Grid item xs="6" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <AccessTimeOutlinedIcon color="primary" />
-              Время работы
-            </Typography>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Box
+              sx={(theme) => ({
+                width: '100%',
+                height: '400px',
 
-            <Typography variant="body" sx={{ color: '#666' }}>
-              9:00 - 18:00
-            </Typography>
-          </Grid>
-
-          <Grid item xs="6" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LocalPhoneOutlinedIcon color="primary" />
-              Номер телефона
-            </Typography>
-
-            <Typography variant="body" sx={{ color: '#666' }}>
-              (347) 248-50-53
-            </Typography>
-          </Grid>
-
-          <Grid item xs="6" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <Typography variant="h6" fontWeight="700" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <MailOutlineIcon color="primary" />
-              Почта
-            </Typography>
-
-            <Typography variant="body" sx={{ color: '#666' }}>
-              oil@td-ekoil.ru
-            </Typography>
+                [theme.breakpoints.down('sm')]: {
+                  height: '250px'
+                }
+              })}
+            >
+              <Paper elevation={3} sx={{ width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+                <MapLoader />
+              </Paper>
+            </Box>
           </Grid>
         </Grid>
       </Box>
 
-      <Box>
-        <Box
-          sx={{
-            position: 'relative',
-            height: '600px',
-            mb: 4
-          }}
-        >
-          <MapLoader />
-
-          <Box
-            sx={{
-              position: 'absolute',
-              width: '100%',
-              height: '100px',
-              bottom: 0,
-              background:
-                'linear-gradient(to top,#fff 0,rgba(255,255,255,.8) 70%,rgba(255,255,255,.4) 85%,rgba(255,255,255,0) 100%)'
-            }}
-          >
-            {/* <Box sx={{ p: 4 }}>
-              </Box> */}
-          </Box>
-        </Box>
-      </Box>
       <FeedbackBlock />
     </main>
   );

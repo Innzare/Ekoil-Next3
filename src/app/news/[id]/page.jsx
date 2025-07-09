@@ -1,82 +1,38 @@
 'use client';
 
-import React from 'react';
-import { Box, Grid2 as Grid, Button, Card, Tooltip, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+import { Box, Grid2 as Grid, Button, Card, Tooltip, Typography, Divider, Stack, Skeleton } from '@mui/material';
 
-import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
-import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import oilTara from '@/app/assets/AboutPage/oil-tara.jpg';
-import slider1 from '@/app/assets/AboutPage/slider1.png';
-import slider2 from '@/app/assets/AboutPage/slider2.jpg';
-import slider3 from '@/app/assets/AboutPage/slider3.jpg';
-
-import NewsItem from '@/components/MainPageBlocks/News/NewsItem';
 import HeaderSection from '@/components/HeaderSection';
-
-const news = [
-  {
-    image: oilTara.src,
-    title: 'ASURA 5W-30 GF-5 - энергосберегающее моторное масло',
-    data: '21.02.2025',
-    id: 1
-  },
-  {
-    image: slider1.src,
-    title: 'Ekoil 2T Aqua Premium Стандарт TC-W3 Продление лицензии NMMA',
-    data: '21.02.2025',
-    id: 2
-  },
-  {
-    image: slider2.src,
-    title: 'Лицензия NMMA TC-W3 2017',
-    data: '21.02.2025',
-    id: 3
-  },
-  {
-    image: slider3.src,
-    title: 'ASURA 5W-30 GF-5 - энергосберегающее моторное масло',
-    data: '21.02.2025',
-    id: 4
-  },
-  {
-    image: oilTara.src,
-    title: 'Ekoil 2T Aqua Premium Стандарт TC-W3 Продление лицензии NMMA',
-    data: '21.02.2025',
-    id: 5
-  },
-  {
-    image: slider1.src,
-    title: 'Лицензия NMMA TC-W3 2017',
-    data: '21.02.2025',
-    id: 6
-  },
-  {
-    image: slider2.src,
-    title: 'ASURA 5W-30 GF-5 - энергосберегающее моторное масло',
-    data: '21.02.2025',
-    id: 7
-  },
-  {
-    image: slider3.src,
-    title: 'Ekoil 2T Aqua Premium Стандарт TC-W3 Продление лицензии NMMA',
-    data: '21.02.2025',
-    id: 8
-  },
-  {
-    image: oilTara.src,
-    title: 'Лицензия NMMA TC-W3 2017',
-    data: '21.02.2025',
-    id: 9
-  }
-];
+import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
+import axios from 'axios';
 
 export default function page() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [news, setNews] = useState(null);
   const params = useParams();
   const router = useRouter();
 
-  const currentNews = news.find((item) => item.id === parseInt(params.id));
+  useEffect(() => {
+    loadNews();
+  }, []);
+
+  const loadNews = async () => {
+    setIsLoading(true);
+
+    try {
+      const { data } = await axios.get(`/api/blog/news/${params.id}`);
+
+      setNews(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const onGoBackClick = () => {
     router.push('/news');
@@ -84,7 +40,7 @@ export default function page() {
 
   return (
     <main>
-      <HeaderSection title="Новости" />
+      <HeaderSection title="Новости" dynamicRouteTitle={news?.title} />
 
       <Box
         sx={(theme) => ({
@@ -99,22 +55,104 @@ export default function page() {
           }
         })}
       >
-        <Tooltip title="Назад">
-          <Button
-            sx={{ mb: 4 }}
-            onClick={onGoBackClick}
-            variant="contained"
-            disableElevation
-            size="small"
-            color="primary"
-          >
-            <ArrowBackIcon />
-          </Button>
-        </Tooltip>
+        {isLoading ? (
+          <Box sx={{ width: '100%', maxWidth: '1100px', margin: '0 auto' }}>
+            <Stack spacing={1}>
+              <Skeleton
+                animation="wave"
+                variant="rounded"
+                width="100%"
+                height={600}
+                sx={{
+                  position: 'relative',
+                  backgroundColor: 'rgb(238, 243, 250)',
+                  p: 3,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <Box sx={{ mb: 2 }}>
+                  <Skeleton variant="text" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                  <Skeleton variant="text" width="60%" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                </Box>
 
-        <Typography variant="h4" fontWeight={800}>
-          {currentNews?.title}
-        </Typography>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#fff',
+                    borderRadius: '6px',
+                    visibility: 'visible !important',
+                    height: '400px',
+                    mb: 2
+                  }}
+                >
+                  <ImageOutlinedIcon
+                    color="#ccc"
+                    sx={{ visibility: 'visible !important', fontSize: 64, color: '#ccc' }}
+                  />
+                </Box>
+
+                <Box>
+                  <Skeleton variant="text" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                  <Skeleton variant="text" width="60%" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                </Box>
+              </Skeleton>
+            </Stack>
+          </Box>
+        ) : (
+          <Box sx={{ width: '100%', maxWidth: '1100px', margin: '0 auto' }}>
+            <Tooltip title="Назад">
+              <Button
+                sx={{ mb: 4, backgroundColor: '#1E284B', borderRadius: '8px' }}
+                onClick={onGoBackClick}
+                variant="contained"
+                disableElevation
+                size="small"
+                color="primary"
+              >
+                <ArrowBackIcon />
+              </Button>
+            </Tooltip>
+
+            <Typography
+              variant="h4"
+              fontWeight={800}
+              sx={(theme) => ({
+                [theme.breakpoints.down('md')]: {
+                  fontSize: '21px'
+                }
+              })}
+            >
+              {news?.title}
+            </Typography>
+
+            <Divider sx={{ my: 4 }}></Divider>
+
+            {news?.image && (
+              <Box
+                sx={(theme) => ({
+                  display: 'flex',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: '400px',
+                  mb: 3,
+                  img: { height: '100%' },
+
+                  [theme.breakpoints.down('md')]: {
+                    height: '200px'
+                  }
+                })}
+              >
+                <img src={news?.image} alt="" />
+              </Box>
+            )}
+
+            <Box dangerouslySetInnerHTML={{ __html: news?.text }}></Box>
+          </Box>
+        )}
       </Box>
 
       <FeedbackBlock />

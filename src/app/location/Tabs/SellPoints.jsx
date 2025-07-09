@@ -1,65 +1,33 @@
 import React, { useState } from 'react';
 import MapLoader from '@/components/MapLoader/MapLoader';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography, Accordion, AccordionDetails, AccordionSummary, Divider } from '@mui/material';
 import RepresentativeItem from '../RepresentativeItem';
 
-const ITEMS = [
-  {
-    id: 1,
-    region: 'Республика Башкортостан',
-    isOpen: false,
-    places: [
-      {
-        name: 'Автоаура',
-        type: 'Автосервис',
-        address: 'г. Уфа, ул. Силикатная, д.3 к.1',
-        coords: [54.746581, 55.916111],
-        site: '',
-        email: ''
-      },
-      {
-        name: 'Авто-Газ.102',
-        type: 'Автосервис',
-        address: 'г. Уфа, ул. Адмирала Ушакова, д. 21/4',
-        coords: [54.804239, 56.146089],
-        site: '',
-        email: ''
-      },
-      {
-        name: 'ГрузовикЪ Уфа',
-        type: 'Автосервис',
-        address: 'г. Уфа, ул. Центральная, д. 59/3 к6',
-        coords: [54.673424, 55.815024],
-        site: '',
-        email: ''
-      },
-      {
-        name: 'ИП Боровиков А.В.',
-        type: 'Автосервис',
-        address: 'г. Уфа, ул. Кирова, д.65/1',
-        coords: [54.728815, 55.96966],
-        site: '',
-        email: ''
-      },
-      {
-        name: 'ИП Ганеев К.К.',
-        type: 'Автосервис',
-        address: 'г. Уфа, ул. Кирова, д. 128/1',
-        coords: [54.724204, 55.980844],
-        site: '',
-        email: ''
-      }
-    ]
-  }
-];
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function SellPoints() {
-  const [items, setItems] = useState(ITEMS);
-  const [mapState, setMapState] = useState({
-    center: [54.746581, 55.916111],
-    zoom: 10.4,
-    behaviors: ['default', 'scrollZoom']
-  });
+export default function SellPoints(props) {
+  const [expanded, setExpanded] = React.useState(props.items.map((item) => item.id));
+
+  const mapContainerRef = React.useRef(null);
+
+  const [items, setItems] = useState(props.items || []);
+  const [mapState, setMapState] = useState(
+    props.type === 'distributors'
+      ? {
+          center: [42.33204, 69.572021],
+          zoom: 3,
+          behaviors: ['default', 'scrollZoom']
+        }
+      : {
+          center: [54.746581, 55.916111],
+          zoom: 10.4,
+          behaviors: ['default', 'scrollZoom']
+        }
+  );
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded((prev) => (isExpanded ? [...prev, panel] : prev.filter((id) => id !== panel)));
+  };
 
   const getMarks = () => {
     const places = items.map((item) => item.places).flat();
@@ -75,7 +43,12 @@ export default function SellPoints() {
       };
     });
 
-    document.body.scrollTo({ top: 0, behavior: 'smooth' });
+    const elementOffset = mapContainerRef.current.offsetTop - 150;
+
+    document.body.scrollTo({
+      top: elementOffset,
+      behavior: 'smooth'
+    });
   };
 
   const onShowMoreClick = (id) => {
@@ -93,46 +66,115 @@ export default function SellPoints() {
   };
 
   return (
-    <Box>
+    <Box
+      sx={(theme) => ({
+        display: 'flex',
+        gap: 4,
+
+        [theme.breakpoints.down('md')]: {
+          flexDirection: 'column',
+          gap: 3
+        }
+      })}
+    >
       <Box
         sx={{
-          position: 'relative',
-          height: '400px',
-          mb: 4
+          backgroundColor: '#F4F6F8',
+          p: 2,
+          borderRadius: '12px',
+          flex: '0 0 500px',
+          height: '660px',
+          overflowY: 'auto'
         }}
       >
-        <MapLoader state={mapState} marks={getMarks()} />
-      </Box>
-
-      <Box>
         {items.map((item) => {
           return (
-            <Box sx={{ mb: 6 }}>
-              <Box sx={{ mb: 2 }}>
-                <h2>{item.region}</h2>
-              </Box>
+            <Accordion
+              key={item.id}
+              expanded={expanded.includes(item.id)}
+              onChange={handleChange(item.id)}
+              elevation={0}
+              sx={{
+                backgroundColor: 'transparent',
 
-              <Box
+                '&:before': {
+                  display: 'none'
+                }
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                  mb: 2
+                  color: ' #919EAB',
+                  backgroundColor: '#00000008',
+                  borderRadius: '8px',
+                  mb: 1,
+                  border: '1px solid #ccc'
                 }}
               >
-                {(item.isOpen ? item.places : item.places.slice(0, 3)).map((place) => {
-                  return <RepresentativeItem data={place} showOnMapClick={onShowOnMapClick} />;
-                })}
-              </Box>
+                <h2>
+                  {item.region} {`(${item.places.length})`}
+                </h2>
+              </AccordionSummary>
 
-              {item.places.length > 3 && (
-                <Button variant="outlined" size="large" onClick={() => onShowMoreClick(item.id)}>
-                  {item.isOpen ? 'Скрыть' : 'Показать еще...'}
-                </Button>
-              )}
-            </Box>
+              <AccordionDetails>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
+                    mb: 2
+                  }}
+                >
+                  {(item.isOpen ? item.places : item.places.slice(0, 3)).map((place, index, array) => {
+                    return (
+                      <>
+                        <RepresentativeItem
+                          data={place}
+                          showOnMapClick={onShowOnMapClick}
+                          key={`representative-${item.id}`}
+                        />
+                        {index < array.length - 1 && <Divider sx={{ my: 2 }} key={`divider-${item.id}`}></Divider>}
+                      </>
+                    );
+                  })}
+                </Box>
+
+                {item.places.length > 3 && (
+                  <Button
+                    variant="text"
+                    size="large"
+                    onClick={() => onShowMoreClick(item.id)}
+                    sx={{ textTransform: 'initial', fontWeight: 800 }}
+                  >
+                    {item.isOpen ? 'Скрыть' : 'Показать еще...'}
+                  </Button>
+                )}
+              </AccordionDetails>
+            </Accordion>
           );
         })}
+      </Box>
+
+      <Box
+        ref={mapContainerRef}
+        sx={(theme) => ({
+          position: 'relative',
+          minHeight: '600px',
+          height: '600px',
+          width: '100%',
+
+          [theme.breakpoints.down('md')]: {
+            minHeight: '400px',
+            height: '400px'
+          }
+        })}
+      >
+        <Paper elevation={3} sx={{ width: '100%', height: '100%', borderRadius: '12px', overflow: 'hidden' }}>
+          <MapLoader state={mapState} marks={getMarks()} />
+        </Paper>
       </Box>
     </Box>
   );

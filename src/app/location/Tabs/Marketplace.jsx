@@ -20,7 +20,7 @@ export default function Marketplace() {
       sx={{
         display: 'flex',
         gap: 2,
-        mt: 4
+        mt: 3
       }}
     >
       {ITEMS.map((item) => {

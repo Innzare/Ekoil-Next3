@@ -17,6 +17,8 @@ export default function NewsItem(props) {
       onClick={handleNavigate}
       sx={{
         cursor: 'pointer',
+        height: '320px',
+        maxHeight: '320px',
 
         '&:hover': {
           '.news-icon': {
@@ -46,7 +48,7 @@ export default function NewsItem(props) {
           borderRadius: '8px',
           // transition: '0.25s ease',
           mb: 2,
-          backgroundColor: '#e2e2e2',
+          backgroundColor: '#F9FAFB',
           // backgroundImage: `url(${data.image})`,
           // backgroundPosition: 'center',
           // backgroundSize: 'cover',
@@ -56,7 +58,7 @@ export default function NewsItem(props) {
           '.news-image': {
             width: '100%',
             height: '100%',
-            objectFit: 'cover',
+            objectFit: 'contain',
             transition: '0.35s'
           },
 
@@ -77,6 +79,7 @@ export default function NewsItem(props) {
         variant="h6"
         fontWeight="700"
         color="initial"
+        noWrap
         className="news-title"
         sx={(theme) => ({
           mb: 2,
@@ -102,7 +105,7 @@ export default function NewsItem(props) {
           }
         })}
       >
-        {data.data}
+        {data.published_at}
       </Typography>
     </Box>
   );

@@ -27,7 +27,11 @@ const contacts = [
   },
   {
     title: 'Время работы',
-    text: '9:00 - 18:00 <br/> пн-пт',
+    text: (
+      <span>
+        9:00 - 18:00 <br /> пн-пт
+      </span>
+    ),
     icon: AccessTimeOutlinedIcon
   }
 ];

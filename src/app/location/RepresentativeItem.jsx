@@ -7,7 +7,7 @@ import PublicIcon from '@mui/icons-material/Public';
 
 export default function RepresentativeItem(props) {
   const { showOnMapClick } = props;
-  const { name, type, address, coords, site, email } = props.data;
+  const { name, type, address_line, latitude, longitude, site, email } = props.data;
 
   return (
     <Box
@@ -30,13 +30,13 @@ export default function RepresentativeItem(props) {
             color="initial"
             sx={{ mb: 1, display: 'flex', alignItems: 'center', gap: 1 }}
           >
-            {type === 'Автосервис' ? <PlaceIcon sx={{ fill: '#CC2828' }} /> : <PublicIcon sx={{ fill: '#CC2828' }} />}
+            {type.id === 1 ? <PlaceIcon sx={{ fill: '#CC2828' }} /> : <PublicIcon sx={{ fill: '#CC2828' }} />}
 
             {name}
           </Typography>
 
           <Typography variant="body1" color="initial" sx={{ mb: 2 }}>
-            {address}
+            {address_line}
           </Typography>
 
           <Box
@@ -49,10 +49,10 @@ export default function RepresentativeItem(props) {
             }}
           >
             <Typography variant="body1" color="initial" sx={{ color: '#637381' }}>
-              {type}
+              {type.name}
             </Typography>
 
-            <Button size="small" color="primary" variant="text" onClick={() => showOnMapClick(coords)}>
+            <Button size="small" color="primary" variant="text" onClick={() => showOnMapClick([latitude, longitude])}>
               <MapIcon sx={{ fontSize: '18px' }} />
 
               <Typography variant="body2" color="primary" sx={{ textTransform: 'initial', ml: 1 }}>
@@ -61,17 +61,7 @@ export default function RepresentativeItem(props) {
             </Button>
           </Box>
         </Box>
-
-        {/* <Box></Box> */}
       </Box>
-
-      {/* <Button size="large" color="primary" variant="outlined" onClick={() => showOnMapClick(coords)}>
-        <MapIcon />
-
-        <Typography variant="body1" color="primary" sx={{ textTransform: 'initial', ml: 2 }}>
-          Показать на карте
-        </Typography>
-      </Button> */}
     </Box>
   );
 }

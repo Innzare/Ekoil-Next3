@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Card, Typography, Tab, Tabs, tabClasses } from '@mui/material';
 import SectionTitle from '@/components/SectionTitle/SectionTitle';
 import PublicIcon from '@mui/icons-material/Public';
@@ -11,6 +11,7 @@ import Distributors from './Tabs/Distributors';
 import Marketplace from './Tabs/Marketplace';
 import SellPoints from './Tabs/SellPoints';
 import HeaderSection from '@/components/HeaderSection';
+import axios from 'axios';
 
 const ITEMS = [
   {
@@ -251,6 +252,27 @@ const DISTRIBUTORS = [
 
 export default function Location() {
   const [value, setValue] = useState(0);
+  const [distributors, setDistributors] = useState([]);
+  const [points, setPoints] = useState([]);
+
+  useEffect(() => {
+    getStores();
+  }, []);
+
+  const getStores = async () => {
+    const { data } = await axios.get('/api/locations/stores/');
+
+    const distributors = data.filter((item) => {
+      return item.stores.some((store) => store.type.id === 1);
+    });
+
+    const points = data.filter((item) => {
+      return item.stores.some((store) => store.type.id !== 1);
+    });
+
+    setDistributors(distributors);
+    setPoints(points);
+  };
 
   function TabPanel(props) {
     const { children, id, ...other } = props;
@@ -349,11 +371,11 @@ export default function Location() {
           }}
         >
           <TabPanel id={0}>
-            <SellPoints items={SELL_POINTS} />
+            <SellPoints items={points} />
           </TabPanel>
 
           <TabPanel id={1}>
-            <SellPoints type="distributors" items={DISTRIBUTORS} />
+            <SellPoints type="distributors" items={distributors} />
           </TabPanel>
 
           <TabPanel id={2}>

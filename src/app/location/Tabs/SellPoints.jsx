@@ -30,8 +30,8 @@ export default function SellPoints(props) {
   };
 
   const getMarks = () => {
-    const places = items.map((item) => item.places).flat();
-    return places.map((place) => place.coords);
+    const stores = items.map((item) => item.stores).flat();
+    return stores.map((place) => [place.latitude, place.longitude]);
   };
 
   const onShowOnMapClick = (coords) => {
@@ -115,7 +115,7 @@ export default function SellPoints(props) {
                 }}
               >
                 <h2>
-                  {item.region} {`(${item.places.length})`}
+                  {item.name} {`(${item.stores?.length})`}
                 </h2>
               </AccordionSummary>
 
@@ -128,7 +128,7 @@ export default function SellPoints(props) {
                     mb: 2
                   }}
                 >
-                  {(item.isOpen ? item.places : item.places.slice(0, 3)).map((place, index, array) => {
+                  {(item.isOpen ? item.stores : item.stores?.slice(0, 3))?.map((place, index, array) => {
                     return (
                       <>
                         <RepresentativeItem
@@ -142,7 +142,7 @@ export default function SellPoints(props) {
                   })}
                 </Box>
 
-                {item.places.length > 3 && (
+                {item.stores?.length > 3 && (
                   <Button
                     variant="text"
                     size="large"

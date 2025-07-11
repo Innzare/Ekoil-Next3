@@ -133,8 +133,6 @@ export default function CatalogItem() {
   const imageUrl = () => {
     const tareId = data?.tare[activeTara].id;
 
-    console.log(tareId);
-
     if (data) {
       return data?.images.find((item) => Number(item.tare.id) === Number(tareId))?.url;
     }

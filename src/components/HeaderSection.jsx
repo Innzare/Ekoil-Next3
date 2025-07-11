@@ -24,16 +24,10 @@ export default function HeaderSection({ title, dynamicRouteTitle }) {
 
   const crumbs = segments.map((seg, index, array) => {
     const href = '/' + segments.slice(0, index + 1).join('/');
-    // const name = decodeURIComponent(seg)
-    //   .replace(/-/g, ' ')
-    //   .replace(/\b\w/g, (l) => l.toUpperCase());
-
     const name = index === array.length - 1 && dynamicRouteTitle ? dynamicRouteTitle : ROUTES_MAP[seg];
 
     return { name, href };
   });
-
-  console.log(segments);
 
   return (
     <Box

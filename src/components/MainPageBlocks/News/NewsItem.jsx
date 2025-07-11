@@ -23,16 +23,12 @@ export default function NewsItem(props) {
         '&:hover': {
           '.news-icon': {
             fontSize: '48px'
-          }
-        },
+          },
 
-        '&:hover': {
           '.news-image': {
-            transform: 'translateY(-5px)'
-          }
-        },
+            transform: 'scale(1.1)'
+          },
 
-        '&:hover': {
           '.news-title': {
             color: '#CC2828'
           }
@@ -55,7 +51,7 @@ export default function NewsItem(props) {
 
           overflow: 'hidden',
 
-          '.news-image': {
+          '& .news-image': {
             width: '100%',
             height: '100%',
             objectFit: 'contain',

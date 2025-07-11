@@ -10,6 +10,10 @@ import moto from '@/app/assets/moto.jpg';
 import transmission from '@/app/assets/transmission.jpg';
 import truck from '@/app/assets/truck.jpg';
 import auto from '@/app/assets/auto.jpg';
+import autoMobile1 from '@/app/assets/auto_mobile1.jpg';
+import autoMobile2 from '@/app/assets/auto_mobile2.jpg';
+import autoMobile3 from '@/app/assets/auto_mobile3.jpg';
+import autoMobile4 from '@/app/assets/auto_mobile4.jpg';
 
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -46,6 +50,7 @@ export const SwiperSlide = styled(SwiperSlideMUI)(({ theme }) => ({
 const slides = [
   {
     image: auto.src,
+    imageMobile: autoMobile1.src,
     title: 'Моторные масла',
     subtitle: 'Для легковой техники',
     description:
@@ -53,6 +58,7 @@ const slides = [
   },
   {
     image: moto.src,
+    imageMobile: autoMobile2.src,
     title: 'Моторные масла',
     subtitle: 'Для малоразмерной техники',
     description:
@@ -60,6 +66,7 @@ const slides = [
   },
   {
     image: truck.src,
+    imageMobile: autoMobile3.src,
     title: 'Моторные масла',
     subtitle: 'Для грузовых автомобилей и спецтехники',
     description:
@@ -67,6 +74,7 @@ const slides = [
   },
   {
     image: transmission.src,
+    imageMobile: autoMobile4.src,
     title: 'Трансмиссионные масла',
     subtitle: 'Для автоматических и механических коробок передач',
     description:
@@ -107,7 +115,7 @@ export default function HomePageSlider() {
           return (
             <SwiperSlide key={slide.description}>
               <Box
-                sx={{
+                sx={(theme) => ({
                   width: '100%',
                   height: '100%',
                   background: `linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url(${slide.image})`,
@@ -116,8 +124,15 @@ export default function HomePageSlider() {
                   backgroundPosition: 'center',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center'
-                }}
+                  justifyContent: 'center',
+
+                  [theme.breakpoints.down('sm')]: {
+                    background: `linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url(${slide.imageMobile})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center'
+                  }
+                })}
               ></Box>
             </SwiperSlide>
           );
@@ -143,8 +158,9 @@ export default function HomePageSlider() {
           minHeight: '400px',
 
           [theme.breakpoints.down('sm')]: {
-            p: '24px 16px',
-            bottom: '2.5%'
+            p: '16px',
+            bottom: '2.5%',
+            minHeight: '350px'
           }
         })}
       >
@@ -170,8 +186,8 @@ export default function HomePageSlider() {
                   lineHeight: '48px',
 
                   [theme.breakpoints.down('sm')]: {
-                    lineHeight: '32px',
-                    fontSize: '32px',
+                    lineHeight: '31px',
+                    fontSize: '31px',
                     fontWeight: '900'
                   }
                 })}
@@ -187,7 +203,8 @@ export default function HomePageSlider() {
                   sx={(theme) => ({
                     [theme.breakpoints.down('sm')]: {
                       lineHeight: '26px',
-                      fontSize: '16px'
+                      fontSize: '16px',
+                      lineHeight: '21px'
                     }
                   })}
                 >
@@ -203,7 +220,8 @@ export default function HomePageSlider() {
                   mt: 3,
 
                   [theme.breakpoints.down('sm')]: {
-                    fontSize: '14px'
+                    fontSize: '14px',
+                    mt: 2
                   }
                 })}
               >
@@ -285,7 +303,8 @@ export default function HomePageSlider() {
                 fontWeight: '800',
 
                 [theme.breakpoints.down('sm')]: {
-                  width: '100%'
+                  width: '100%',
+                  padding: '8px 24px'
                 }
               })}
             >

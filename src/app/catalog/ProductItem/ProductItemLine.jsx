@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Product, ProductImg, ProductTitle, ProductSubTitle, PreviewButton } from './style';
-import { Box, Button, IconButton, Card, Grid, Typography, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, Typography, Tooltip, Link } from '@mui/material';
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -58,10 +57,12 @@ export default function ProductItem(props) {
           </Typography>
           <Typography variant="body">{data.subtitle}</Typography>
 
-          <Button sx={{ textTransform: 'initial', width: 'fit-content' }} variant="outlined">
-            Скачать TDS
-            <DescriptionOutlinedIcon sx={{ ml: 2 }} />
-          </Button>
+          <Link href={data.documents[0]?.url} target="_blank">
+            <Button sx={{ textTransform: 'initial', width: 'fit-content' }} variant="outlined">
+              Скачать TDS
+              <DescriptionOutlinedIcon sx={{ ml: 2 }} />
+            </Button>
+          </Link>
         </Box>
       </Box>
 

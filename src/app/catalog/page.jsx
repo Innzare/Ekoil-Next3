@@ -67,7 +67,7 @@ export default function Catalog() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const filters = await loadOils(page, categoryId);
+      const filters = await loadOils(page, categoryId, null, true);
       setInitialFiltersState(filters);
     };
 

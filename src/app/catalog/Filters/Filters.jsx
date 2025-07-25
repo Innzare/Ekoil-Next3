@@ -180,7 +180,7 @@ export default function Filters(props) {
             height: '100px'
           }}
         >
-          <CircularProgress size={24} />
+          <CircularProgress size={34} />
         </Box>
       ) : (
         <>

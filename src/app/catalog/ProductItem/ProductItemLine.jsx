@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { Product, ProductImg, ProductTitle, ProductSubTitle, PreviewButton } from './style';
 import { Box, Button, IconButton, Card, Grid, Typography, Tooltip } from '@mui/material';
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';
@@ -36,7 +35,15 @@ export default function ProductItem(props) {
           gap: '42px'
         }}
       >
-        <img width="100" height="100" src={data.img} srcSet={data.img} alt={data.name} loading="lazy" />
+        <img
+          width="150"
+          height="150"
+          src={data.img}
+          srcSet={data.img}
+          alt={data.name}
+          loading="lazy"
+          style={{ borderRadius: '8px', backgroundColor: '#fff', objectFit: 'contain' }}
+        />
 
         <Box
           sx={{
@@ -46,12 +53,12 @@ export default function ProductItem(props) {
             gap: '16px'
           }}
         >
-          <Typography variant="h5" fontWeight={700}>
+          <Typography variant="h6" fontWeight={800}>
             {data.name}
           </Typography>
           <Typography variant="body">{data.subtitle}</Typography>
 
-          <Button sx={{ textTransform: 'initial' }} variant="outlined">
+          <Button sx={{ textTransform: 'initial', width: 'fit-content' }} variant="outlined">
             Скачать TDS
             <DescriptionOutlinedIcon sx={{ ml: 2 }} />
           </Button>

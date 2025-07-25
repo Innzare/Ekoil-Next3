@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Link as LinkMui } from '@mui/material';
 import { useStore } from '@/store';
 import SmsOutlinedIcon from '@mui/icons-material/SmsOutlined';
 import LogoBackground from '@/components/SvgIcons/LogoBackground';
@@ -97,7 +97,7 @@ export default function FeedbackBlock() {
               fontSize: '16px',
               fontWeight: '700',
               textTransform: 'initial',
-              borderRadius: '12px'
+              borderRadius: '8px'
             }}
             onClick={openContactModal}
           >
@@ -113,7 +113,7 @@ export default function FeedbackBlock() {
               fontSize: '16px',
               fontWeight: '700',
               textTransform: 'initial',
-              borderRadius: '12px'
+              borderRadius: '8px'
             }}
             onClick={openContactModal}
           >
@@ -154,21 +154,27 @@ export default function FeedbackBlock() {
             <HeaderLogo light width={340} height={100} />
           </Box>
 
-          <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <LinkMui
+            href="mailto:oil@td-ekoil.ru"
+            sx={{ display: 'flex', gap: 2, alignItems: 'center', textDecoration: 'none' }}
+          >
             <MailOutlineIcon sx={{ color: 'red' }} />
 
             <Typography variant="span" fontWeight="700" sx={{ fontSize: '21px', color: '#fff' }}>
               oil@td-ekoil.ru
             </Typography>
-          </Box>
+          </LinkMui>
 
-          <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <LinkMui
+            href="tel:+(347) 248-50-53"
+            sx={{ display: 'flex', gap: 2, alignItems: 'center', textDecoration: 'none' }}
+          >
             <LocalPhoneOutlinedIcon sx={{ color: 'red' }} />
 
             <Typography variant="span" fontWeight="700" sx={{ fontSize: '21px', color: '#fff' }}>
               (347) 248-50-53
             </Typography>
-          </Box>
+          </LinkMui>
         </Box>
       </Box>
     </Box>

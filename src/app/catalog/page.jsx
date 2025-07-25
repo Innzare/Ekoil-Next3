@@ -12,6 +12,7 @@ import {
   DialogActions,
   Button,
   IconButton,
+  Link,
   Typography
 } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -49,87 +50,81 @@ export default function Catalog() {
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   const [items, setItems] = useState([]);
-  // const [filters, setFilters] = useState(null);
   const [itemsCount, setItemsCount] = useState(0);
   const [page, setPage] = useState(0);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isOilsLoading, setIsOilsLoading] = useState(false);
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(false);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [categoryId, setCategoryId] = useState('motor-oils');
+  const [filters, setFilters] = useState([]);
+  const [categoryId, setCategoryId] = useState('M');
   const [viewMode, setViewMode] = useState('grid');
   const [gridViewMode, setGridViewMode] = useState('grid-three-line');
 
-  const [filtersData, setFiltersData] = useState({});
+  const [filtersState, setFiltersState] = useState({});
 
   useEffect(() => {
-    loadOils(page, categoryId);
-    // loadFilters();
+    const fetchData = async () => {
+      const filters = await loadOils(page, categoryId);
+      setInitialFiltersState(filters);
+    };
+
+    fetchData();
   }, []);
 
-  // const loadFilters = async () => {
-  //   const { data } = await axios.get('api/products/filters');
+  const setInitialFiltersState = (filters) => {
+    setFiltersState(() => {
+      const res = {};
 
-  //   setFilters(data);
-  // };
+      filters.forEach((item) => {
+        res[item?.field_value] = [];
+      });
 
-  const loadOils = async (page, categoryId, queryString = '') => {
-    setIsLoading(true);
+      return res;
+    });
+  };
+
+  const loadOils = async (page, categoryId, queryString = '', isLoadingByCategoriesChange = false) => {
+    isLoadingByCategoriesChange ? setIsCategoriesLoading(true) : setIsOilsLoading(true);
 
     const offsetCalculated = page * LIMIT;
 
-    // const { data } = await axios.get(
-    //   `api/products/all?limit=${LIMIT}&offset=${offsetCalculated}&filter_category=${categoryId}`
-    // );
+    try {
+      const { data } = await axios.get(
+        `api/products/all?limit=${LIMIT}&offset=${offsetCalculated}&usage=${categoryId}&${queryString}`
+      );
 
-    const { data } = await axios.get(
-      `api/products/${categoryId}?limit=${LIMIT}&offset=${offsetCalculated}&${queryString}`
-    );
+      const { products, count, filters, next, previous } = data;
 
-    // const { data } = await axios.get(
-    //   `api/products/all?vehicle_types=${1}&viscosity=${3}&limit=${LIMIT}&offset=${offsetCalculated}`
-    // );
+      const countFormatted = Math.ceil(count / LIMIT);
 
-    const { results, count, next, previous } = data;
+      setItemsCount(countFormatted);
 
-    const countFormatted = Math.ceil(count / LIMIT);
-
-    setItemsCount(countFormatted);
-
-    const dataFormatted = results.map((item) => {
-      return {
-        id: item.id,
-        name: item.name,
-        subtitle: item.viscosity?.name,
-        img: item.images.first,
-        specifications: item.specifications,
-        tare: item.tare,
-        product_number: item.product_number,
-        description: item.description
-      };
-    });
-
-    setItems(dataFormatted);
-    setIsLoading(false);
-  };
-
-  const onCategoryChange = async (event, newCategoryId) => {
-    if (newCategoryId === null) {
-      return;
-    }
-
-    setCategoryId(newCategoryId);
-    await loadOils(0, newCategoryId);
-
-    const elementOffset = mainSectionRef.current.offsetTop - 150;
-
-    setTimeout(() => {
-      document.body.scrollTo({
-        top: elementOffset,
-        behavior: 'smooth'
+      const dataFormatted = products.map((item) => {
+        return {
+          id: item.id,
+          name: item.name,
+          subtitle: item.viscosity?.name,
+          img: item.images.first,
+          documents: item?.documents || [],
+          specifications: item.specifications,
+          tare: item.tare,
+          product_number: item.product_number,
+          description: item.description
+        };
       });
-    }, 100);
+
+      setFilters(filters);
+      setItems(dataFormatted);
+
+      return filters;
+    } catch (error) {
+      console.error('Error loading oils:', error);
+    } finally {
+      isLoadingByCategoriesChange ? setIsCategoriesLoading(false) : setIsOilsLoading(false);
+    }
   };
 
   const onViewModeChange = (event, newMode) => {
@@ -170,14 +165,39 @@ export default function Catalog() {
     return '';
   };
 
-  const onFiltersChange = (data, page = 0) => {
-    if (data) {
-      setFiltersData(data);
+  const onCategoryChange = async (event, newCategoryId) => {
+    if (newCategoryId === null) {
+      return;
     }
 
-    const queryString = Object.entries(data).reduce((result, [key, value], index) => {
+    setCategoryId(newCategoryId);
+
+    const filters = await loadOils(0, newCategoryId, null, true);
+
+    setInitialFiltersState(filters);
+    scrollToTop();
+  };
+
+  const onClearFilters = () => {
+    setInitialFiltersState(filters);
+    loadOils(0, categoryId);
+    setPage(0);
+    scrollToTop();
+  };
+
+  const onFiltersChange = (data, page = 0) => {
+    const filtersStateUpdated = {
+      ...filtersState,
+      ...data
+    };
+
+    if (data) {
+      setFiltersState(filtersStateUpdated);
+    }
+
+    const queryString = Object.entries(filtersStateUpdated).reduce((result, [key, value], index) => {
       if (value) {
-        return index === 0 ? result + `${key}=${value}` : result + `&${key}=${value}`;
+        return index === 0 ? result + `${key}=${value.join(',')}` : result + `&${key}=${value.join(',')}`;
       }
 
       return result;
@@ -185,9 +205,10 @@ export default function Catalog() {
 
     loadOils(page, categoryId, queryString);
     setPage(page);
+    scrollToTop();
+  };
 
-    // mainSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
+  const scrollToTop = () => {
     const elementOffset = mainSectionRef.current.offsetTop - 150;
 
     setTimeout(() => {
@@ -212,8 +233,7 @@ export default function Catalog() {
             sx={(theme) => ({
               display: 'flex',
               alignItems: 'flex-start',
-              // flexWrap: 'wrap',
-              gap: '24px',
+              gap: '42px',
               p: 3,
 
               [theme.breakpoints.down('md')]: {
@@ -221,7 +241,17 @@ export default function Catalog() {
               }
             })}
           >
-            {!isTablet && <Filters category={categoryId} onFiltersChangeEmit={onFiltersChange} isLoading={isLoading} />}
+            {!isTablet && (
+              <Filters
+                category={categoryId}
+                onFiltersChangeEmit={onFiltersChange}
+                onClearFiltersClick={onClearFilters}
+                filters={filters}
+                filtersState={filtersState}
+                isCategoriesLoading={isCategoriesLoading}
+                isOilsLoading={isOilsLoading}
+              />
+            )}
 
             <Box sx={{ flex: 1, scrollMargin: '120px' }}>
               <Box
@@ -262,12 +292,20 @@ export default function Catalog() {
                 )}
 
                 <Box sx={{ display: isTablet && isFiltersOpen ? 'block' : 'none', width: '100%' }}>
-                  <Filters category={categoryId} onFiltersChangeEmit={onFiltersChange} isLoading={isLoading} />
+                  <Filters
+                    category={categoryId}
+                    onFiltersChangeEmit={onFiltersChange}
+                    onClearFiltersClick={onClearFilters}
+                    filters={filters}
+                    filtersState={filtersState}
+                    isCategoriesLoading={isCategoriesLoading}
+                    isOilsLoading={isOilsLoading}
+                  />
                 </Box>
               </Box>
 
               <Box sx={{ display: 'flex', justifyContent: 'center' }} ref={mainSectionRef}>
-                {isLoading ? (
+                {isOilsLoading || isCategoriesLoading ? (
                   <Grid container spacing={{ xs: 3, md: 5 }} sx={{ marginTop: '24px', width: '100%' }}>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
                       return (
@@ -323,7 +361,7 @@ export default function Catalog() {
                     })}
                   </Grid>
                 ) : (
-                  <Grid container spacing={{ xs: 3, md: 5 }} sx={{ marginTop: '24px', width: '100%' }}>
+                  <Grid container spacing={{ xs: 3, md: 3 }} sx={{ marginTop: '24px', width: '100%' }}>
                     {items.map((item, index) => {
                       return viewMode === 'grid' ? (
                         <Grid
@@ -347,22 +385,24 @@ export default function Catalog() {
                 )}
               </Box>
 
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Pagination
-                  sx={{ mt: 4 }}
-                  page={page + 1}
-                  count={itemsCount}
-                  onChange={(event, newPage) => {
-                    if (page !== newPage - 1) {
-                      onFiltersChange(filtersData, newPage - 1);
-                    }
-                  }}
-                  color="primary"
-                  variant="outlined"
-                  shape="rounded"
-                  size={isTablet ? 'small' : 'large'}
-                />
-              </Box>
+              {itemsCount > 1 && (
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Pagination
+                    sx={{ mt: 4 }}
+                    page={page + 1}
+                    count={itemsCount}
+                    onChange={(event, newPage) => {
+                      if (page !== newPage - 1) {
+                        onFiltersChange(filtersState, newPage - 1);
+                      }
+                    }}
+                    color="primary"
+                    variant="outlined"
+                    shape="rounded"
+                    size={isTablet ? 'small' : 'large'}
+                  />
+                </Box>
+              )}
             </Box>
           </Box>
 
@@ -483,16 +523,18 @@ export default function Catalog() {
               display: 'flex'
             }}
           >
-            <Button
-              sx={{ textTransform: 'initial' }}
-              size="large"
-              variant="contained"
-              disableElevation
-              onClick={onCloseProductDialogClick}
-            >
-              Скачать TDS
-              <DescriptionOutlinedIcon sx={{ ml: 2 }} />
-            </Button>
+            <Link href={selectedProduct?.documents[0]?.url} target="_blank">
+              <Button
+                sx={{ textTransform: 'initial' }}
+                size="large"
+                variant="contained"
+                disableElevation
+                onClick={onCloseProductDialogClick}
+              >
+                Скачать TDS
+                <DescriptionOutlinedIcon sx={{ ml: 2 }} />
+              </Button>
+            </Link>
           </Box>
 
           <Button

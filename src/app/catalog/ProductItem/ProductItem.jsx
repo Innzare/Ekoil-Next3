@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Product, ProductImg, ProductTitle, ProductSubTitle, PreviewButton } from './style';
-import { Box, Button, IconButton, Card, Grid, Typography, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, Card, Grid, Typography, Tooltip, Link } from '@mui/material';
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -31,7 +31,7 @@ export default function ProductItem(props) {
       ) : (
         <Box
           sx={{
-            height: '155px',
+            height: '200px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -69,11 +69,16 @@ export default function ProductItem(props) {
           width: '100%'
         }}
       >
-        <Tooltip title="Скачать TDS">
-          <Button sx={{ textTransform: 'initial' }} variant="outlined">
-            <DescriptionOutlinedIcon />
-          </Button>
-        </Tooltip>
+        {data.documents && data.documents.length > 0 && (
+          <Tooltip title="Скачать TDS">
+            <Link href={data.documents[0]?.url} target="_blank">
+              <Button sx={{ textTransform: 'initial' }} variant="outlined">
+                <DescriptionOutlinedIcon />
+              </Button>
+            </Link>
+          </Tooltip>
+        )}
+
         <Button
           sx={{ textTransform: 'initial' }}
           variant="outlined"

@@ -208,6 +208,7 @@ export default function (props) {
                   borderRadius: '8px',
                   border: '1px solid #CC2828',
                   px: 2,
+                  pr: 1,
                   py: 1
                 }}
                 variant="outlined"

@@ -95,34 +95,37 @@ export const ITEMS = [
 
 export const CATEGORIES = [
   {
-    id: 'motor-oils',
+    id: 'M',
     // title: 'Легковой транспорт',
     title: 'Моторные масла',
     fullTitle: 'Для легкового транспорта',
     // value: 'passenger',
-    value: 'motor_oils',
+    // value: 'motor_oils',
+    value: 'M',
     icon: Car,
     iconWidth: '45',
     iconHeight: '40'
   },
   {
-    id: 'transmission-oils',
+    id: 'T',
     // title: 'Коммерческий транспорт',
     title: 'Трансмиссионные масла',
     fullTitle: 'Для коммерческого транспорта',
     // value: 'commercial',
-    value: 'transmission_oils',
+    // value: 'transmission_oils',
+    value: 'T',
     icon: TransmissionIcon,
     iconWidth: '30',
     iconHeight: '30'
   },
   {
-    id: 'industrial-oils',
+    id: 'I',
     // title: 'Спец. техника',
     title: 'Индустриальные масла',
     fullTitle: 'Для специальной техники',
     // value: 'special',
-    value: 'industrial_oils',
+    // value: 'industrial_oils',
+    value: 'I',
     icon: IndustryIcon,
     iconWidth: '28',
     iconHeight: '28'
@@ -137,11 +140,12 @@ export const CATEGORIES = [
   //   iconHeight: '35'
   // },
   {
-    id: 'antifreezes',
+    id: 'A',
     title: 'Антифризы',
     fullTitle: 'Антифризы',
     // value: 'antifreeze',
-    value: 'antifreezes',
+    // value: 'antifreezes',
+    value: 'A',
     icon: AntiFreezeIcon,
     iconWidth: '35',
     iconHeight: '35'

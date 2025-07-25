@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function FullLogoIcon() {
+export default function FullLogoIcon({ width = '150px', height = '130px' }) {
   return (
-    <svg width="150px" height="130px" viewBox="0 0 215 163" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 215 163" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M84.4834 102.78L81.1084 115.436H86.7334L100.233 102.78H111.483L91.9717 121.061L103.187 142.155H91.9366L80.7217 121.061H79.5967L73.9366 142.155H64.9366L75.4834 102.78H84.4834Z"
         fill="black"

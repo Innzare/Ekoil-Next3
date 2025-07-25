@@ -21,6 +21,8 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -58,7 +60,7 @@ const slides = [
   },
   {
     image: moto.src,
-    imageMobile: autoMobile2.src,
+    imageMobile: autoMobile3.src,
     title: 'Моторные масла',
     subtitle: 'Для малоразмерной техники',
     description:
@@ -66,7 +68,7 @@ const slides = [
   },
   {
     image: truck.src,
-    imageMobile: autoMobile3.src,
+    imageMobile: autoMobile4.src,
     title: 'Моторные масла',
     subtitle: 'Для грузовых автомобилей и спецтехники',
     description:
@@ -74,7 +76,7 @@ const slides = [
   },
   {
     image: transmission.src,
-    imageMobile: autoMobile4.src,
+    imageMobile: autoMobile2.src,
     title: 'Трансмиссионные масла',
     subtitle: 'Для автоматических и механических коробок передач',
     description:
@@ -149,7 +151,7 @@ export default function HomePageSlider() {
           right: '5%',
           bottom: '10%',
           zIndex: 10,
-          backdropFilter: 'blur(16px)',
+          backdropFilter: 'blur(4px)',
           backgroundColor: '#dfe3e83d',
           p: 4,
           borderRadius: '16px',
@@ -159,7 +161,7 @@ export default function HomePageSlider() {
 
           [theme.breakpoints.down('sm')]: {
             p: '16px',
-            bottom: '2.5%',
+            bottom: '7.5%',
             minHeight: '350px'
           }
         })}
@@ -390,6 +392,35 @@ export default function HomePageSlider() {
           </IconButton>
         </Box>
       )}
+
+      <KeyboardDoubleArrowDownIcon
+        onClick={() => {
+          document.body.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth'
+          });
+        }}
+        sx={{
+          position: 'absolute',
+          bottom: '5px',
+          left: '50%',
+          transform: 'translate(-50%)',
+          color: '#fff',
+          zIndex: '20',
+          fontSize: '40px',
+          cursor: 'pointer',
+          animation: 'bounce 2s infinite',
+
+          '@keyframes bounce': {
+            '0%, 100%': {
+              transform: 'translate(-50%) translateY(0px)'
+            },
+            '50%': {
+              transform: 'translate(-50%) translateY(-10px)'
+            }
+          }
+        }}
+      />
     </Box>
   );
 }

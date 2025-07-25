@@ -5,6 +5,7 @@ import {
   Grid,
   List,
   ListItem,
+  Link as LinkMui,
   ListItemButton,
   ListItemText,
   ListSubheader,
@@ -14,6 +15,7 @@ import FullLogoIcon from '@/components/SvgIcons/FullLogoIcon';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import Link from 'next/link';
 import CallIcon from '@mui/icons-material/Call';
 import { useStore } from '@/store';
 
@@ -27,14 +29,16 @@ export default function Footer() {
           position: 'relative',
           zIndex: 1,
           flex: '0 0 auto',
-          px: 6,
-          py: 2,
+          px: 10,
+          pt: 6,
+          pb: 2,
           borderRadius: '6px',
-          backgroundColor: '#fff',
+          backgroundColor: '#F4F6F8',
           boxShadow: 'rgba(0, 0, 0, 0.07) 0rem 1.25rem 1.6875rem 0rem',
 
           [theme.breakpoints.down('sm')]: {
-            px: 2
+            px: 2,
+            py: 2
           }
         })}
       >
@@ -45,7 +49,8 @@ export default function Footer() {
             justifyContent: 'space-between',
 
             [theme.breakpoints.down('md')]: {
-              flexWrap: 'wrap'
+              flexWrap: 'wrap',
+              gap: 1
             },
 
             '@media(max-width: 500px)': {
@@ -54,29 +59,29 @@ export default function Footer() {
           })}
         >
           <Box
-            sx={{
+            sx={(theme) => ({
               display: 'flex',
               flexDirection: 'column',
-              gap: 2
-            }}
-          >
-            <FullLogoIcon />
+              gap: 2,
+              width: '230px',
+              height: '180px',
 
-            {/* <Button
-              sx={{ textTransform: 'initial' }}
-              variant="text"
-              color="primary"
-              startIcon={<CallIcon sx={{ mr: 1 }} />}
-              onClick={openContactModal}
-            >
-              Обратная связь
-            </Button> */}
+              [theme.breakpoints.down('sm')]: {
+                width: '180px',
+                height: '130px',
+                alignSelf: 'center'
+              }
+            })}
+          >
+            <Link href="/">
+              <FullLogoIcon width="100%" height="100%" />
+            </Link>
           </Box>
 
           <Box
             sx={(theme) => ({
               display: 'flex',
-              gap: 4,
+              gap: 8,
 
               [theme.breakpoints.down('md')]: {
                 flex: 1,
@@ -88,7 +93,6 @@ export default function Footer() {
               },
 
               [theme.breakpoints.down('sm')]: {
-                // flexDirection: 'column',
                 gap: 2
               }
             })}
@@ -97,108 +101,166 @@ export default function Footer() {
               component="nav"
               dense
               subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                  Компания
-                </ListSubheader>
-              }
-            >
-              <ListItemButton>
-                <ListItemText primary="О нас" />
-              </ListItemButton>
-
-              <ListItemButton>
-                <ListItemText primary="Новости" />
-              </ListItemButton>
-
-              <ListItemButton>
-                <ListItemText primary="Документы" />
-              </ListItemButton>
-            </List>
-
-            <List
-              component="nav"
-              dense
-              subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                  Продукция
-                </ListSubheader>
-              }
-            >
-              <ListItemButton>
-                <ListItemText primary="Для легкового транспорта" />
-              </ListItemButton>
-
-              <ListItemButton>
-                <ListItemText primary="Для коммерческого транспорта" />
-              </ListItemButton>
-
-              <ListItemButton>
-                <ListItemText primary="Для специальной техники" />
-              </ListItemButton>
-
-              <ListItemButton>
-                <ListItemText primary="Для индустрии" />
-              </ListItemButton>
-
-              <ListItemButton>
-                <ListItemText primary="Антифризы" />
-              </ListItemButton>
-            </List>
-
-            <List
-              component="nav"
-              dense
-              subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
+                <ListSubheader
+                  component="div"
+                  id="nested-list-subheader"
+                  sx={{
+                    background: 'transparent',
+                    textTransform: 'uppercase',
+                    fontWeight: 700,
+                    color: '#1E284B'
+                  }}
+                >
                   Информация
                 </ListSubheader>
               }
             >
-              <ListItemButton>
-                <ListItemText primary="Каталог" />
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/company">
+                  <ListItemText primary="О компании" />
+                </Link>
               </ListItemButton>
 
-              <ListItemButton>
-                <ListItemText primary="Точки продаж" />
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/catalog">
+                  <ListItemText primary="Каталог" />
+                </Link>
               </ListItemButton>
 
-              <ListItemButton>
-                <ListItemText primary="Контакты" />
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/news">
+                  <ListItemText primary="Новости" />
+                </Link>
+              </ListItemButton>
+
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/location">
+                  <ListItemText primary="Где купить" />
+                </Link>
+              </ListItemButton>
+
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/contacts">
+                  <ListItemText primary="Контакты" />
+                </Link>
               </ListItemButton>
             </List>
-          </Box>
 
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 2,
-              mt: 2
-            }}
-          >
-            {/* <Typography variant="h6" fontWeight="700" sx={{ color: '#666' }}>
-              Контакты
-            </Typography> */}
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-              <LocationOnOutlinedIcon color="primary" />
-              <Typography variant="span" fontWeight="700" sx={{ fontSize: '14px', color: '#666' }}>
-                г. Уфа, 450071, <br /> ул. Менделеева, д. 197/2
-              </Typography>
-            </Box>
+            <List
+              component="nav"
+              dense
+              subheader={
+                <ListSubheader
+                  component="div"
+                  id="nested-list-subheader"
+                  sx={{
+                    background: 'transparent',
+                    textTransform: 'uppercase',
+                    fontWeight: 700,
+                    color: '#1E284B'
+                  }}
+                >
+                  Продукция
+                </ListSubheader>
+              }
+            >
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/catalog">
+                  <ListItemText primary="Моторные масла" />
+                </Link>
+              </ListItemButton>
 
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-              <MailOutlineIcon color="primary" />
-              <Typography variant="span" fontWeight="700" sx={{ fontSize: '14px', color: '#666' }}>
-                oil@td-ekoil.ru
-              </Typography>
-            </Box>
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/catalog">
+                  <ListItemText primary="Трансмиссионные масла" />
+                </Link>
+              </ListItemButton>
 
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-              <LocalPhoneOutlinedIcon color="primary" />
-              <Typography variant="span" fontWeight="700" sx={{ fontSize: '14px', color: '#666' }}>
-                (347) 248-50-53
-              </Typography>
-            </Box>
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/catalog">
+                  <ListItemText primary="Индустриальные масла" />
+                </Link>
+              </ListItemButton>
+
+              <ListItemButton sx={{ borderRadius: '8px' }}>
+                <Link href="/catalog">
+                  <ListItemText primary="Антифризы" />
+                </Link>
+              </ListItemButton>
+            </List>
+
+            <List
+              component="nav"
+              dense
+              subheader={
+                <ListSubheader
+                  component="div"
+                  id="nested-list-subheader"
+                  sx={{
+                    background: 'transparent',
+                    textTransform: 'uppercase',
+                    fontWeight: 700,
+                    color: '#1E284B'
+                  }}
+                >
+                  Контакты
+                </ListSubheader>
+              }
+            >
+              <ListItemButton sx={{ gap: 1, borderRadius: '8px', mb: 1 }}>
+                <LocationOnOutlinedIcon color="primary" />
+                <Typography variant="span" fontWeight="700" sx={{ fontSize: '14px', color: '#666' }}>
+                  г. Уфа, 450071, <br /> ул. Менделеева, д. 197/2
+                </Typography>
+              </ListItemButton>
+
+              <ListItemButton sx={{ gap: 1, borderRadius: '8px', mb: 1 }}>
+                <LinkMui
+                  variant="body1"
+                  href={`mailto:oil@td-ekoil.ru`}
+                  sx={(theme) => ({
+                    display: 'flex',
+                    gap: 1,
+                    cursor: 'pointer',
+                    textDecoration: 'none',
+                    color: '#000',
+
+                    [theme.breakpoints.down('sm')]: {
+                      gap: 1
+                    }
+                  })}
+                >
+                  <MailOutlineIcon color="primary" />
+                  <Typography variant="span" fontWeight="700" sx={{ fontSize: '14px', color: '#666' }}>
+                    oil@td-ekoil.ru
+                  </Typography>
+                </LinkMui>
+              </ListItemButton>
+
+              <ListItemButton sx={{ gap: 1, borderRadius: '8px' }}>
+                <LinkMui
+                  variant="body1"
+                  href={`tel:+7(347) 248-50-53`}
+                  sx={(theme) => ({
+                    display: 'flex',
+                    // flexDirection: 'column',
+                    gap: 1,
+                    cursor: 'pointer',
+                    textDecoration: 'none',
+                    color: '#000',
+
+                    [theme.breakpoints.down('sm')]: {
+                      gap: 1
+                    }
+                  })}
+                >
+                  <LocalPhoneOutlinedIcon color="primary" />
+                  <Typography variant="span" fontWeight="700" sx={{ fontSize: '14px', color: '#666' }}>
+                    (347) 248-50-53
+                  </Typography>
+                </LinkMui>
+              </ListItemButton>
+            </List>
           </Box>
         </Box>
 
@@ -212,7 +274,7 @@ export default function Footer() {
             }
           }}
         >
-          © 2015 - 2024, Все права защищены.{' '}
+          © 2015 - 2025, Все права защищены.{' '}
           <Typography variant="span" fontWeight="900">
             EKOIL
           </Typography>{' '}

@@ -9,112 +9,115 @@ import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 import styled from '@emotion/styled';
 
+const BpIcon = styled('span')(({ theme }) => ({
+  borderRadius: 3,
+  width: 20,
+  height: 20,
+  boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+  backgroundColor: '#f5f8fa',
+  backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
+  '.Mui-focusVisible &': {
+    outline: '2px auto rgba(19,124,189,.6)',
+    outlineOffset: 2
+  },
+  'input:hover ~ &': {
+    backgroundColor: '#ebf1f5',
+    ...theme.applyStyles('dark', {
+      backgroundColor: '#30404d'
+    })
+  },
+  'input:disabled ~ &': {
+    boxShadow: 'none',
+    background: 'rgba(206,217,224,.5)',
+    ...theme.applyStyles('dark', {
+      background: 'rgba(57,75,89,.5)'
+    })
+  },
+  ...theme.applyStyles('dark', {
+    boxShadow: '0 0 0 1px rgb(16 22 26 / 40%)',
+    backgroundColor: '#394b59',
+    backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.05),hsla(0,0%,100%,0))'
+  })
+}));
+
+const BpCheckedIcon = styled(BpIcon)({
+  backgroundColor: 'red',
+  backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
+  '&::before': {
+    display: 'block',
+    width: 20,
+    height: 20,
+    backgroundImage:
+      "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath" +
+      " fillRule='evenodd' clipRule='evenodd' d='M12 5c-.28 0-.53.11-.71.29L7 9.59l-2.29-2.3a1.003 " +
+      "1.003 0 00-1.42 1.42l3 3c.18.18.43.29.71.29s.53-.11.71-.29l5-5A1.003 1.003 0 0012 5z' fill='%23fff'/%3E%3C/svg%3E\")",
+    content: '""'
+  },
+  'input:hover ~ &': {
+    backgroundColor: 'red'
+  }
+});
+
 const FilterFields = (props) => {
-  const { options = [], filtersState, fieldValue, onFilterChangeEmit, isFirstStep = false } = props;
+  const { options = [], fieldValue, filtersState, onFilterChangeEmit, isLoading = false } = props;
+
+  const value = filtersState?.[fieldValue];
 
   const [optionsFormatted, setOptionsFormatted] = useState([]);
 
   const [isFullSize, setIsFullSize] = useState(false);
-  const [isFirstStepChecked, setIsFirstStepChecked] = useState(false);
-
   const isLargeSize = options.length > 3;
 
-  // let optionsFormatted = isLargeSize && !isFullSize ? options.slice(0, 3) : [...options];
-
   const onFilterChange = (event, data) => {
-    if (isFirstStep && event.target.checked) {
-      setIsFirstStepChecked(true);
+    const res = event.target.checked ? [...value, data.id] : value.filter((id) => id !== data.id);
 
-      setOptionsFormatted((prev) => {
-        return prev.filter((item) => item.id === data.id);
-      });
-    } else if (isFirstStep && !event.target.checked) {
-      setIsFirstStepChecked(false);
-
-      setOptionsFormatted(isLargeSize && !isFullSize ? options.slice(0, 3) : [...options]);
-    }
-
-    onFilterChangeEmit(fieldValue, event.target.checked ? data : null);
+    onFilterChangeEmit(fieldValue, res);
   };
 
   useEffect(() => {
-    setOptionsFormatted(isLargeSize && !isFullSize ? options.slice(0, 3) : [...options]);
+    const optionsSortedById = [...options].sort((a, b) => {
+      if (a.id < b.id) return -1;
+      if (a.id > b.id) return 1;
+      return 0;
+    });
+
+    const optionsSortedByAvailbale = [...optionsSortedById].sort((a, b) => {
+      if (a.available && !b.available) return -1;
+      if (!a.available && b.available) return 1;
+      return 0;
+    });
+
+    const optionsSortedByChecked = [...optionsSortedByAvailbale].sort((a, b) => {
+      if (value?.includes(a.id) && !value?.includes(b.id)) return -1;
+      if (!value?.includes(a.id) && value?.includes(b.id)) return 1;
+      return 0;
+    });
+
+    setOptionsFormatted(isLargeSize && !isFullSize ? optionsSortedByChecked.slice(0, 3) : [...optionsSortedByChecked]);
   }, [options, isFullSize]);
-
-  const BpIcon = styled('span')(({ theme }) => ({
-    borderRadius: 3,
-    width: 20,
-    height: 20,
-    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
-    backgroundColor: '#f5f8fa',
-    backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
-    '.Mui-focusVisible &': {
-      outline: '2px auto rgba(19,124,189,.6)',
-      outlineOffset: 2
-    },
-    'input:hover ~ &': {
-      backgroundColor: '#ebf1f5',
-      ...theme.applyStyles('dark', {
-        backgroundColor: '#30404d'
-      })
-    },
-    'input:disabled ~ &': {
-      boxShadow: 'none',
-      background: 'rgba(206,217,224,.5)',
-      ...theme.applyStyles('dark', {
-        background: 'rgba(57,75,89,.5)'
-      })
-    },
-    ...theme.applyStyles('dark', {
-      boxShadow: '0 0 0 1px rgb(16 22 26 / 40%)',
-      backgroundColor: '#394b59',
-      backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.05),hsla(0,0%,100%,0))'
-    })
-  }));
-
-  const BpCheckedIcon = styled(BpIcon)({
-    backgroundColor: 'red',
-    backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
-    '&::before': {
-      display: 'block',
-      width: 20,
-      height: 20,
-      backgroundImage:
-        "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath" +
-        " fillRule='evenodd' clipRule='evenodd' d='M12 5c-.28 0-.53.11-.71.29L7 9.59l-2.29-2.3a1.003 " +
-        "1.003 0 00-1.42 1.42l3 3c.18.18.43.29.71.29s.53-.11.71-.29l5-5A1.003 1.003 0 0012 5z' fill='%23fff'/%3E%3C/svg%3E\")",
-      content: '""'
-    },
-    'input:hover ~ &': {
-      backgroundColor: 'red'
-    }
-  });
 
   return (
     <FormGroup>
       {optionsFormatted.map((option) => {
         return (
           <FormControlLabel
-            key={`${option.id}-${option.field_name}`}
-            title={option.field_name || option.name}
+            key={`${option.id}-${option.name}`}
+            title={option.name}
             sx={{
               '& span': {
                 fontSize: '16px',
                 color: '#1D2939',
                 lineHeight: '18px'
-                // whiteSpace: 'nowrap',
-                // overflow: 'hidden',
-                // textOverflow: 'ellipsis',
-                // maxWidth: '180px',
               }
             }}
             control={
               <Checkbox
                 size="small"
                 color="error"
-                checked={filtersState[fieldValue] === option.id}
+                checked={value?.includes(option.id)}
                 onChange={(event) => onFilterChange(event, option)}
                 icon={<BpIcon />}
+                disabled={!option.available || isLoading}
                 checkedIcon={<BpCheckedIcon />}
                 sx={{
                   mr: 1
@@ -126,7 +129,7 @@ const FilterFields = (props) => {
         );
       })}
 
-      {isLargeSize && !isFirstStepChecked && (
+      {isLargeSize && (
         <Button
           sx={{ textTransform: 'initial', textAlign: 'left' }}
           size="small"
@@ -141,63 +144,17 @@ const FilterFields = (props) => {
 };
 
 export default function Filters(props) {
-  const { category = '', isLoading, onFiltersChangeEmit } = props;
+  const { isCategoriesLoading, isOilsLoading, onFiltersChangeEmit, onClearFiltersClick, filters, filtersState } = props;
+  const isFiltersEmpty = filtersState && Object.values(filtersState).every((value) => value.length === 0);
 
-  const [filters, setFilters] = useState(null);
-  const [filtersState, setFiltersState] = useState(null);
-  const [selectedFilters, setSelectedFilters] = useState(null);
-  const [secondStepFilters, setSecondStepFilters] = useState([]);
-
-  useEffect(() => {
-    setSelectedFilters(null);
-    loadFilters();
-  }, [category]);
-
-  const loadFilters = async () => {
-    const { data } = await axios.get('api/products/filters');
-
-    // setSelectedFilters(null);
-    setFilters(data);
-
-    const categoryStringFormatted = category.split('-').join('_');
-    const selectedFiltersValue = data !== null ? data[categoryStringFormatted] : [];
-
-    setSelectedFilters(selectedFiltersValue);
-    setSecondStepFilters([]);
-
-    setFiltersState({
-      [selectedFiltersValue?.field_value]: null
-    });
+  const onFilterChange = (field, value) => {
+    onFiltersChangeEmit({ [field]: value });
   };
 
-  const onFilterChange = (field, data, isFirstStep) => {
-    setFiltersState((prev) => {
-      let res;
+  const onFilterClearClick = () => {
+    if (isFiltersEmpty) return;
 
-      if (isFirstStep && data === null) {
-        res = {
-          [field]: null
-        };
-      } else {
-        res = {
-          ...prev,
-          [field]: data?.id
-        };
-      }
-
-      if (data?.filters) {
-        data.filters.forEach((item) => {
-          res[item.field_value] = null;
-        });
-      }
-
-      onFiltersChangeEmit(res);
-      return res;
-    });
-
-    if (isFirstStep) {
-      setSecondStepFilters(data ? data.filters : []);
-    }
+    onClearFiltersClick();
   };
 
   return (
@@ -206,66 +163,74 @@ export default function Filters(props) {
         width: '320px',
         minWidth: '320px',
         borderRadius: '6px',
-
-        padding: '16px 20px',
-        backgroundColor: '#eef3fa',
+        padding: '18px',
+        border: '1px solid #d6d6d6',
 
         [theme.breakpoints.down('md')]: {
           width: '100%'
         }
-        // border: '1px solid #d6d6d6'
       })}
     >
-      {!selectedFilters ? (
-        <Box sx={{ textAlign: 'center', py: 4 }}>
-          <CircularProgress />
+      {isCategoriesLoading ? (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100px'
+          }}
+        >
+          <CircularProgress size={24} />
         </Box>
       ) : (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-          <Box>
-            <Typography variant="body1" fontWeight="800" sx={{ mb: 1, color: '#454F5B', textTransform: 'uppercase' }}>
-              {selectedFilters?.field_name}
-            </Typography>
+        <>
+          {filters.map((filter, index, arr) => {
+            return filter.options.length > 0 ? (
+              <Box key={filter?.field_name}>
+                <Box>
+                  <Typography
+                    variant="body1"
+                    fontWeight="800"
+                    sx={{ mb: 1, color: '#454F5B', textTransform: 'uppercase' }}
+                  >
+                    {filter?.field_name}
+                  </Typography>
 
-            {filtersState !== null && selectedFilters !== null && (
-              <FilterFields
-                isFirstStep
-                options={selectedFilters.options || []}
-                filtersState={filtersState}
-                fieldValue={selectedFilters?.field_value}
-                onFilterChangeEmit={(field, data) => onFilterChange(field, data, true)}
-              />
-            )}
-          </Box>
-
-          {secondStepFilters.length > 0 && <Divider></Divider>}
-
-          {secondStepFilters.length > 0 &&
-            secondStepFilters.map((filter, index, arr) => {
-              return (
-                <Box key={filter?.field_name}>
-                  <Box sx={{ mb: index + 1 < arr.length ? 3 : 0 }}>
-                    <Typography
-                      variant="body1"
-                      fontWeight="800"
-                      sx={{ mb: 1, color: '#454F5B', textTransform: 'uppercase' }}
-                    >
-                      {filter?.field_name}
-                    </Typography>
-
-                    <FilterFields
-                      options={filter.options || []}
-                      filtersState={filtersState}
-                      fieldValue={filter?.field_value}
-                      onFilterChangeEmit={onFilterChange}
-                    />
-                  </Box>
-
-                  {index + 1 < arr.length && <Divider></Divider>}
+                  <FilterFields
+                    isLoading={isOilsLoading}
+                    options={filter.options || []}
+                    filtersState={filtersState}
+                    fieldValue={filter?.field_value}
+                    onFilterChangeEmit={onFilterChange}
+                  />
                 </Box>
-              );
-            })}
-        </Box>
+
+                {index + 1 < arr.length && <Divider sx={{ my: 5, mx: '-8px', backgroundColor: '#d6d6d6' }}></Divider>}
+              </Box>
+            ) : null;
+          })}
+
+          {!isFiltersEmpty && (
+            <Button
+              variant="outlined"
+              sx={{
+                position: 'sticky',
+                bottom: '20px',
+                mt: 2,
+                background: '#0000001c',
+                borderColor: '#CD2828',
+                height: '48px',
+                width: '100%',
+                backdropFilter: 'blur(8px)',
+                fontWeight: '600',
+                color: '#CD2828'
+              }}
+              onClick={onFilterClearClick}
+            >
+              Сбросить
+            </Button>
+          )}
+        </>
       )}
     </Box>
   );

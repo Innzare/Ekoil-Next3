@@ -83,26 +83,26 @@ export default function Volvo() {
         <path
           d="M48.7324 1.0437C54.7978 4.28553 59.7128 9.30514 63.0578 15.2659"
           stroke="#A7A79C"
-          stroke-width="0.493827"
-          stroke-linecap="round"
+          strokeWidth="0.493827"
+          strokeLinecap="round"
         />
         <path
           d="M48.7324 1.0437C54.7352 4.32753 59.6708 9.26319 62.9546 15.2659"
           stroke="#C2C2B9"
-          stroke-width="0.342774"
-          stroke-linecap="round"
+          strokeWidth="0.342774"
+          strokeLinecap="round"
         />
         <path
           d="M48.627 1.0437C54.6923 4.28553 59.6073 9.30514 62.9538 15.3705"
           stroke="#E0E0D8"
-          stroke-width="0.191721"
-          stroke-linecap="round"
+          strokeWidth="0.191721"
+          strokeLinecap="round"
         />
         <path
           d="M48.627 1.0437C54.5877 4.39156 59.6073 9.30514 62.8492 15.3705"
           stroke="white"
-          stroke-width="0.0406681"
-          stroke-linecap="round"
+          strokeWidth="0.0406681"
+          strokeLinecap="round"
         />
         <path
           d="M63.0589 0.731201C63.1635 0.731201 63.2695 0.835776 63.2695 1.04493H48.5215C48.5229 0.835776 48.6275 0.731201 48.7321 0.731201H63.0589Z"

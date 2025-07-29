@@ -79,7 +79,11 @@ export default function Catalog() {
       const res = {};
 
       filters.forEach((item) => {
-        res[item?.field_value] = [];
+        if (item.field_value === 'antifreeze_color') {
+          res[item.field_value] = [1];
+        } else {
+          res[item?.field_value] = [];
+        }
       });
 
       return res;
@@ -306,7 +310,7 @@ export default function Catalog() {
 
               <Box sx={{ display: 'flex', justifyContent: 'center' }} ref={mainSectionRef}>
                 {isOilsLoading || isCategoriesLoading ? (
-                  <Grid container spacing={{ xs: 3, md: 5 }} sx={{ marginTop: '24px', width: '100%' }}>
+                  <Grid container spacing={{ xs: 3, md: 3 }} sx={{ marginTop: '24px', width: '100%' }}>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
                       return (
                         <Grid

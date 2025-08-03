@@ -5,6 +5,7 @@ import { Box, Button, IconButton, Typography, Tooltip, Link } from '@mui/materia
 import SubjectOutlinedIcon from '@mui/icons-material/SubjectOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
 import { useRouter } from 'next/navigation';
 
 export default function ProductItem(props) {
@@ -18,13 +19,15 @@ export default function ProductItem(props) {
 
   return (
     <Box
+      onClick={handleNavigate}
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
         gap: '16px',
         borderRadius: '6px',
         padding: '24px',
-        backgroundColor: 'rgb(238, 243, 250)'
+        backgroundColor: 'rgb(238, 243, 250)',
+        cursor: 'pointer'
       }}
     >
       <Box
@@ -34,15 +37,31 @@ export default function ProductItem(props) {
           gap: '42px'
         }}
       >
-        <img
-          width="150"
-          height="150"
-          src={data.img}
-          srcSet={data.img}
-          alt={data.name}
-          loading="lazy"
-          style={{ borderRadius: '8px', backgroundColor: '#fff', objectFit: 'contain' }}
-        />
+        {data?.img ? (
+          <img
+            width="150"
+            height="150"
+            src={data.img}
+            srcSet={data.img}
+            alt={data.name}
+            loading="lazy"
+            style={{ borderRadius: '8px', backgroundColor: '#fff', objectFit: 'contain' }}
+          />
+        ) : (
+          <Box
+            sx={{
+              height: '150px',
+              width: '150px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#fff',
+              borderRadius: '6px'
+            }}
+          >
+            <HideImageOutlinedIcon sx={{ color: '#ccc', fontSize: '46px' }} />
+          </Box>
+        )}
 
         <Box
           sx={{
@@ -57,7 +76,13 @@ export default function ProductItem(props) {
           </Typography>
           <Typography variant="body">{data.subtitle}</Typography>
 
-          <Link href={data.documents[0]?.url} target="_blank">
+          <Link
+            href={data.documents[0]?.url}
+            target="_blank"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
             <Button sx={{ textTransform: 'initial', width: 'fit-content' }} variant="outlined">
               Скачать TDS
               <DescriptionOutlinedIcon sx={{ ml: 2 }} />
@@ -75,7 +100,13 @@ export default function ProductItem(props) {
         }}
       >
         <Tooltip title="Предпросмотр">
-          <IconButton color="primary" onClick={() => onProductPreviewClick(data)}>
+          <IconButton
+            color="primary"
+            onClick={(event) => {
+              event.stopPropagation();
+              onProductPreviewClick(data);
+            }}
+          >
             <VisibilityOutlinedIcon />
           </IconButton>
         </Tooltip>

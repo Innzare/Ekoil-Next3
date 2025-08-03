@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Box,
   Card,
@@ -13,10 +13,13 @@ import {
   Button,
   IconButton,
   Link,
-  Typography
+  Typography,
+  FormControlLabel,
+  Checkbox
 } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { useInView } from '@/hooks/useInView';
 
 import CloseIcon from '@mui/icons-material/Close';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -29,6 +32,8 @@ import ViewModeButtons from './ViewModeButtons/ViewModeButtons';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 import HeaderSection from '@/components/HeaderSection';
 import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Pagination from '@mui/material/Pagination';
 
 import axios from 'axios';
@@ -40,7 +45,7 @@ import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { CATEGORIES } from '@/consts/products';
 import { useRouter } from 'next/navigation';
 
-const LIMIT = 10;
+const LIMIT = 12;
 
 export default function Catalog() {
   const router = useRouter();
@@ -50,9 +55,17 @@ export default function Catalog() {
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   const [items, setItems] = useState([]);
-  const [itemsCount, setItemsCount] = useState(0);
+  const [pagesCount, setPagesCount] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(0);
 
+  const [setRef, inView] = useInView({
+    rootMargin: '200px',
+    threshold: 0.1
+  });
+
+  const [isAutoLoadMore, setIsAutoLoadMore] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isOilsLoading, setIsOilsLoading] = useState(false);
   const [isCategoriesLoading, setIsCategoriesLoading] = useState(false);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -64,6 +77,12 @@ export default function Catalog() {
   const [gridViewMode, setGridViewMode] = useState('grid-three-line');
 
   const [filtersState, setFiltersState] = useState({});
+
+  useEffect(() => {
+    if (inView && isAutoLoadMore && checkHasMore()) {
+      loadMore();
+    }
+  }, [inView, isAutoLoadMore]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,19 +98,25 @@ export default function Catalog() {
       const res = {};
 
       filters.forEach((item) => {
-        if (item.field_value === 'antifreeze_color') {
-          res[item.field_value] = [1];
-        } else {
-          res[item?.field_value] = [];
-        }
+        res[item?.field_value] = [];
       });
 
       return res;
     });
   };
 
-  const loadOils = async (page, categoryId, queryString = '', isLoadingByCategoriesChange = false) => {
-    isLoadingByCategoriesChange ? setIsCategoriesLoading(true) : setIsOilsLoading(true);
+  const loadOils = async (
+    page,
+    categoryId,
+    queryString = '',
+    isLoadingByCategoriesChange = false,
+    isLoadMore = false
+  ) => {
+    if (isLoadMore) {
+      setIsLoadingMore(true);
+    } else {
+      isLoadingByCategoriesChange ? setIsCategoriesLoading(true) : setIsOilsLoading(true);
+    }
 
     const offsetCalculated = page * LIMIT;
 
@@ -102,9 +127,10 @@ export default function Catalog() {
 
       const { products, count, filters, next, previous } = data;
 
-      const countFormatted = Math.ceil(count / LIMIT);
+      const totalPages = Math.ceil(count / LIMIT);
 
-      setItemsCount(countFormatted);
+      setPagesCount(totalPages);
+      setTotalCount(count);
 
       const dataFormatted = products.map((item) => {
         return {
@@ -121,15 +147,36 @@ export default function Catalog() {
       });
 
       setFilters(filters);
-      setItems(dataFormatted);
+
+      const allItems = [...items, ...dataFormatted];
+
+      setItems(isLoadMore ? allItems : dataFormatted);
 
       return filters;
     } catch (error) {
       console.error('Error loading oils:', error);
     } finally {
-      isLoadingByCategoriesChange ? setIsCategoriesLoading(false) : setIsOilsLoading(false);
+      if (isLoadMore) {
+        setIsLoadingMore(false);
+      } else {
+        isLoadingByCategoriesChange ? setIsCategoriesLoading(false) : setIsOilsLoading(false);
+      }
     }
   };
+
+  const loadMore = () => {
+    if (checkHasMore()) {
+      loadOils(page + 1, categoryId, null, false, true);
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const checkHasMore = useCallback(() => {
+    if (items.length < totalCount) {
+      return true;
+    }
+    return false;
+  }, [items.length, totalCount]);
 
   const onViewModeChange = (event, newMode) => {
     if (newMode === null) {
@@ -275,7 +322,7 @@ export default function Catalog() {
                     fontWeight: 800
                   }}
                 >
-                  {CATEGORIES.find((item) => item.id === categoryId)?.title || ''}
+                  {CATEGORIES.find((item) => item.id === categoryId)?.title || ''} ({totalCount})
                 </Typography>
 
                 {isTablet ? (
@@ -311,62 +358,76 @@ export default function Catalog() {
               <Box sx={{ display: 'flex', justifyContent: 'center' }} ref={mainSectionRef}>
                 {isOilsLoading || isCategoriesLoading ? (
                   <Grid container spacing={{ xs: 3, md: 3 }} sx={{ marginTop: '24px', width: '100%' }}>
-                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
-                      return (
-                        <Grid
-                          size={{ xs: 12, sm: 6, md: 6, lg: gridViewMode === 'grid-three-line' ? 4 : 3 }}
-                          key={item}
-                        >
-                          <Stack spacing={1}>
-                            <Skeleton
-                              animation="wave"
-                              variant="rounded"
-                              width="100%"
-                              height={400}
-                              sx={{
-                                position: 'relative',
-                                backgroundColor: 'rgb(238, 243, 250)',
-                                p: 3,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'space-between'
-                              }}
-                            >
-                              <Box
+                    {Array(LIMIT)
+                      .fill(null)
+                      .map((item, index) => {
+                        return (
+                          <Grid
+                            size={{ xs: 12, sm: 6, md: 6, lg: gridViewMode === 'grid-three-line' ? 4 : 3 }}
+                            key={index}
+                          >
+                            <Stack spacing={1}>
+                              <Skeleton
+                                animation="wave"
+                                variant="rounded"
+                                width="100%"
+                                height={400}
                                 sx={{
+                                  position: 'relative',
+                                  backgroundColor: 'rgb(238, 243, 250)',
+                                  p: 3,
                                   display: 'flex',
-                                  justifyContent: 'center',
-                                  alignItems: 'center',
-                                  backgroundColor: '#fff',
-                                  borderRadius: '6px',
-                                  visibility: 'visible !important',
-                                  height: '200px'
+                                  flexDirection: 'column',
+                                  justifyContent: 'space-between'
                                 }}
                               >
-                                <ImageOutlinedIcon
-                                  color="#ccc"
-                                  sx={{ visibility: 'visible !important', fontSize: 64, color: '#ccc' }}
-                                />
-                              </Box>
+                                <Box
+                                  sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: '#fff',
+                                    borderRadius: '6px',
+                                    visibility: 'visible !important',
+                                    height: '200px'
+                                  }}
+                                >
+                                  <ImageOutlinedIcon
+                                    color="#ccc"
+                                    sx={{ visibility: 'visible !important', fontSize: 64, color: '#ccc' }}
+                                  />
+                                </Box>
 
-                              <Box>
-                                <Skeleton variant="text" sx={{ visibility: 'visible', fontSize: '1rem' }} />
-                                <Skeleton variant="text" width="60%" sx={{ visibility: 'visible', fontSize: '1rem' }} />
-                              </Box>
+                                <Box>
+                                  <Skeleton variant="text" sx={{ visibility: 'visible', fontSize: '1rem' }} />
+                                  <Skeleton
+                                    variant="text"
+                                    width="60%"
+                                    sx={{ visibility: 'visible', fontSize: '1rem' }}
+                                  />
+                                </Box>
 
-                              <Box sx={{ display: 'flex', gap: 2 }}>
-                                <Skeleton variant="rounded" height={40} sx={{ visibility: 'visible', width: '100%' }} />
-                                <Skeleton variant="rounded" height={40} sx={{ visibility: 'visible', width: '100%' }} />
-                              </Box>
-                            </Skeleton>
-                          </Stack>
-                        </Grid>
-                      );
-                    })}
+                                <Box sx={{ display: 'flex', gap: 2 }}>
+                                  <Skeleton
+                                    variant="rounded"
+                                    height={40}
+                                    sx={{ visibility: 'visible', width: '100%' }}
+                                  />
+                                  <Skeleton
+                                    variant="rounded"
+                                    height={40}
+                                    sx={{ visibility: 'visible', width: '100%' }}
+                                  />
+                                </Box>
+                              </Skeleton>
+                            </Stack>
+                          </Grid>
+                        );
+                      })}
                   </Grid>
                 ) : (
                   <Grid container spacing={{ xs: 3, md: 3 }} sx={{ marginTop: '24px', width: '100%' }}>
-                    {items.map((item, index) => {
+                    {items.map((item, index, array) => {
                       return viewMode === 'grid' ? (
                         <Grid
                           key={index}
@@ -377,7 +438,9 @@ export default function Catalog() {
                             lg: gridViewMode === 'grid-three-line' ? 4 : 3
                           }}
                         >
-                          <ProductItem data={item} onProductPreviewClick={onProductPreviewClick} />
+                          <div>
+                            <ProductItem data={item} onProductPreviewClick={onProductPreviewClick} />
+                          </div>
                         </Grid>
                       ) : (
                         <Grid key={index} size={{ md: 12 }}>
@@ -389,12 +452,53 @@ export default function Catalog() {
                 )}
               </Box>
 
-              {itemsCount > 1 && (
+              {(checkHasMore() || items.length > LIMIT) && (
+                <Box sx={{ display: 'flex', gap: 2, mt: 4, justifyContent: 'center', alignItems: 'center' }}>
+                  {checkHasMore() && (
+                    <Button
+                      ref={setRef}
+                      variant="outlined"
+                      endIcon={<KeyboardArrowDownIcon />}
+                      onClick={loadMore}
+                      loading={isLoadingMore}
+                      sx={{ textTransform: 'initial' }}
+                    >
+                      Показать еще
+                    </Button>
+                  )}
+
+                  {items.length > LIMIT && (
+                    <Button
+                      variant="outlined"
+                      endIcon={<KeyboardArrowUpIcon />}
+                      onClick={() => {
+                        setItems((prev) => prev.slice(0, LIMIT));
+                        setPage(0);
+                        scrollToTop();
+                      }}
+                      disabled={isLoadingMore}
+                      sx={{ textTransform: 'initial' }}
+                    >
+                      Свернуть
+                    </Button>
+                  )}
+
+                  <FormControlLabel
+                    sx={{ mr: 0, ml: 2 }}
+                    control={<Checkbox />}
+                    disabled={isLoadingMore}
+                    onChange={(event) => setIsAutoLoadMore(event.target.checked)}
+                    label="Подгружать автоматически"
+                  />
+                </Box>
+              )}
+
+              {/* {pagesCount > 1 && (
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                   <Pagination
                     sx={{ mt: 4 }}
                     page={page + 1}
-                    count={itemsCount}
+                    count={pagesCount}
                     onChange={(event, newPage) => {
                       if (page !== newPage - 1) {
                         onFiltersChange(filtersState, newPage - 1);
@@ -406,7 +510,7 @@ export default function Catalog() {
                     size={isTablet ? 'small' : 'large'}
                   />
                 </Box>
-              )}
+              )} */}
             </Box>
           </Box>
 
@@ -470,6 +574,10 @@ export default function Catalog() {
                 position: 'sticky',
                 top: 0,
                 left: 0,
+
+                img: {
+                  objectFit: 'contain'
+                },
 
                 [theme.breakpoints.down('md')]: {
                   position: 'initial'

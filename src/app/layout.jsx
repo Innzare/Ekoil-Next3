@@ -8,9 +8,9 @@ import Sidenav from '@/components/Sidenav/Sidenav';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
-import Loader from '@/components/Loader/Loader';
 import ContactModal from '@/components/ContactModal/ContactModal';
 import { MaterialUIControllerProvider } from '@/context';
+import ScrollTopButton from '@/components/ScrollTopButton';
 import '@/app/styles/global.css';
 
 const MainContent = styled(Box)(({ theme }) => ({
@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
         {/* <Loader /> */}
         <MaterialUIControllerProvider>
           <ThemeRegistry options={{ key: 'mui' }}>
-            <Box sx={{ height: '100%' }}>
+            <Box sx={{ height: '100%', position: 'relative' }}>
               <Sidenav onToggle={onToggleSidenav} isOpen={isOpen} />
 
               <MainContent>
@@ -69,6 +69,8 @@ export default function RootLayout({ children }) {
 
                 <Footer />
               </MainContent>
+
+              <ScrollTopButton />
             </Box>
           </ThemeRegistry>
         </MaterialUIControllerProvider>

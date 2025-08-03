@@ -19,8 +19,13 @@ export default function ProductItem(props) {
     router.push(`/catalog/${data.product_number}`, `/catalog/${data.product_number}`);
   };
 
+  const previewClick = (event, data) => {
+    event.stopPropagation();
+    onProductPreviewClick(data);
+  };
+
   return (
-    <Product>
+    <Product onClick={handleNavigate}>
       {data?.img ? (
         <ProductImg
           src={data.img}
@@ -46,7 +51,7 @@ export default function ProductItem(props) {
       )}
 
       <Tooltip title="Предпросмотр">
-        <PreviewButton className="preview-button" color="primary" onClick={() => onProductPreviewClick(data)}>
+        <PreviewButton className="preview-button" color="primary" onClick={(event) => previewClick(event, data)}>
           <VisibilityOutlinedIcon />
         </PreviewButton>
       </Tooltip>
@@ -71,7 +76,7 @@ export default function ProductItem(props) {
       >
         {data.documents && data.documents.length > 0 && (
           <Tooltip title="Скачать TDS">
-            <Link href={data.documents[0]?.url} target="_blank">
+            <Link href={data.documents[0]?.url} target="_blank" onClick={(e) => e.stopPropagation()}>
               <Button sx={{ textTransform: 'initial' }} variant="outlined">
                 <DescriptionOutlinedIcon />
               </Button>

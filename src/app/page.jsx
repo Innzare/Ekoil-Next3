@@ -4,21 +4,13 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import HomePageSlider from '@/components/HomePageSlider/HomePageSlider';
 import About from '@/components/MainPageBlocks/About/About';
-import HeroSection from '@/components/MainPageBlocks/HeroSection/HeroSection';
-import Production from '@/components/MainPageBlocks/Production/Production';
 import WeProduce from '@/components/MainPageBlocks/WeProduce/WeProduce';
-import Advantages from '@/components/MainPageBlocks/Advantages/Advantages';
 import News from '@/components/MainPageBlocks/News/News';
 import Contacts from '@/components/MainPageBlocks/Contacts/Contacts';
 import OurBuyers from '@/components/MainPageBlocks/OurBuyers/OurBuyers';
 import FeedbackBlock from '@/components/FeedbackBlock/FeedbackBlock';
 import ScrollableSlider from '@/components/ScrollableSlider/ScrollableSlider';
-import Logo from '@/components/SvgIcons/Logo';
-import OnlyTextLogo from '@/components/SvgIcons/OnlyTextLogo';
-import TextLogo from '@/components/SvgIcons/TextLogo';
 import { SectionWrapper } from './mainPageStyles';
-
-import Bmw from '@/components/SvgIcons/Cars/bmw';
 
 export default function Home() {
   return (

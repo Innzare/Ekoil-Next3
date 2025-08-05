@@ -453,7 +453,16 @@ export default function Catalog() {
               </Box>
 
               {(checkHasMore() || items.length > LIMIT) && (
-                <Box sx={{ display: 'flex', gap: 2, mt: 4, justifyContent: 'center', alignItems: 'center' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: 2,
+                    mt: 4,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexWrap: 'wrap'
+                  }}
+                >
                   {checkHasMore() && (
                     <Button
                       ref={setRef}
@@ -484,7 +493,7 @@ export default function Catalog() {
                   )}
 
                   <FormControlLabel
-                    sx={{ mr: 0, ml: 2 }}
+                    sx={{ mr: 0, ml: { sm: 0, md: 2 } }}
                     control={<Checkbox />}
                     disabled={isLoadingMore}
                     onChange={(event) => setIsAutoLoadMore(event.target.checked)}

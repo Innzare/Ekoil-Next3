@@ -50,8 +50,8 @@ export default createTheme({
           maxWidth: '100vw',
           overflowX: 'hidden',
           backgroundColor: 'rgb(26, 32, 53) !important',
-          transition: 'background-color .25s ease',
-          height: '100%'
+          transition: 'background-color .25s ease'
+          // height: '100%'
         },
         a: {
           color: 'inherit',

@@ -395,7 +395,7 @@ export default function HomePageSlider() {
 
       <KeyboardDoubleArrowDownIcon
         onClick={() => {
-          document.body.scrollTo({
+          window.scrollTo({
             top: window.innerHeight,
             behavior: 'smooth'
           });

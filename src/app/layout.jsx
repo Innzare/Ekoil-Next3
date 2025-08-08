@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Inter } from 'next/font/google';
 import { styled } from '@mui/system';
-import { Box } from '@mui/material';
+import { Alert, Box, Snackbar } from '@mui/material';
 import Sidenav from '@/components/Sidenav/Sidenav';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
@@ -11,11 +11,10 @@ import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 import ContactModal from '@/components/ContactModal/ContactModal';
 import { MaterialUIControllerProvider } from '@/context';
 import ScrollTopButton from '@/components/ScrollTopButton';
+import { useStore } from '@/store';
 import '@/app/styles/global.css';
 
 const MainContent = styled(Box)(({ theme }) => ({
-  // marginLeft: '88px',
-  // padding: '16px',
   minHeight: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -24,10 +23,6 @@ const MainContent = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     marginLeft: '0px'
   }
-
-  // [theme.breakpoints.down('sm')]: {
-  //   padding: '8px'
-  // }
 }));
 
 const inter = Inter({ subsets: ['latin'] });
@@ -39,6 +34,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { isSnackbarOpen, closeSnackbar, snackbarType, snackbarText } = useStore();
 
   const onToggleSidenav = () => {
     setIsOpen(!isOpen);
@@ -58,12 +55,22 @@ export default function RootLayout({ children }) {
 
                 <Box sx={{ flex: '1 0 auto' }}>{children}</Box>
 
-                <ContactModal />
-
                 <Footer />
               </MainContent>
 
+              <ContactModal />
               <ScrollTopButton />
+
+              <Snackbar
+                open={isSnackbarOpen}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                autoHideDuration={3000}
+                onClose={closeSnackbar}
+              >
+                <Alert onClose={closeSnackbar} severity={snackbarType} variant="filled" sx={{ width: '100%' }}>
+                  {snackbarText}
+                </Alert>
+              </Snackbar>
             </Box>
           </ThemeRegistry>
         </MaterialUIControllerProvider>

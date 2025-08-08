@@ -263,7 +263,7 @@ export default function Catalog() {
     const elementOffset = mainSectionRef.current.offsetTop - 150;
 
     setTimeout(() => {
-      document.body.scrollTo({
+      window.scrollTo({
         top: elementOffset,
         behavior: 'smooth'
       });

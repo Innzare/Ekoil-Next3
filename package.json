@@ -13,6 +13,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^5.2.1",
     "@mui/icons-material": "^6.1.1",
     "@mui/lab": "^6.0.0-beta.10",
     "@mui/material": "^6.1.1",
@@ -22,7 +23,10 @@
     "next": "^13.5.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.62.0",
+    "react-imask": "^7.6.1",
     "swiper": "^10.2.0",
+    "zod": "^4.0.15",
     "zustand": "^5.0.1"
   }
 }

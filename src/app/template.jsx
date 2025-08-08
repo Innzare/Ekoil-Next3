@@ -9,7 +9,7 @@ export default function Template({ children }) {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    document.body.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0 });
   }, [pathname, searchParams]);
 
   return (

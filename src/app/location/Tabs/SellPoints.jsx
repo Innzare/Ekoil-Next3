@@ -45,7 +45,7 @@ export default function SellPoints(props) {
 
     const elementOffset = mapContainerRef.current.offsetTop - 150;
 
-    document.body.scrollTo({
+    window.scrollTo({
       top: elementOffset,
       behavior: 'smooth'
     });

@@ -1,58 +1,56 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Card,
-  Grid,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  Button,
-  IconButton,
-  TextField,
-  Typography,
-  Tab,
-  Tabs,
-  tabClasses
-} from '@mui/material';
+import { Box, Dialog, DialogTitle, DialogContent, IconButton, Typography, Tab, Tabs, tabClasses } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { useStore } from '@/store';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+
+import ContactByCallbackForm from './ContactByCallbackForm';
+import ContactByEmailForm from './ContactByEmailForm';
+
+const TabPanel = (props) => {
+  const { children, index, value, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Box>{children}</Box>
+        </Box>
+      )}
+    </div>
+  );
+};
 
 export default function ContactModal() {
   const [value, setValue] = useState(0);
   const { isContactModalOpen, closeContactModal } = useStore();
 
-  function TabPanel(props) {
-    const { children, id, ...other } = props;
-
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== id}
-        id={`vertical-tabpanel-${id}`}
-        aria-labelledby={`vertical-tab-${id}`}
-        {...other}
-      >
-        {value === id && (
-          <Box sx={{ p: 3 }}>
-            <Box>{children}</Box>
-          </Box>
-        )}
-      </div>
-    );
-  }
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const onClose = () => {
+    closeContactModal();
+    setValue(0);
+  };
+
   return (
     <Dialog
+      fullScreen={isTablet}
       open={isContactModalOpen}
-      onClose={closeContactModal}
+      onClose={onClose}
       scroll="paper"
       maxWidth="sm"
       disableScrollLock
@@ -92,93 +90,50 @@ export default function ContactModal() {
             label="Написать на почту"
             icon={<MailOutlineIcon />}
             iconPosition="start"
-            sx={{
+            sx={(theme) => ({
               flex: 1,
               minHeight: '50px',
 
               [`&.${tabClasses.selected}`]: {
                 backgroundColor: '#0072e526'
+              },
+
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '12px',
+                p: 1
               }
-            }}
+            })}
           />
 
           <Tab
             id={1}
-            label="Заказать обратный звонок"
+            label="Обратный звонок"
             icon={<LocalPhoneOutlinedIcon />}
             iconPosition="start"
-            sx={{
+            sx={(theme) => ({
               flex: 1,
               minHeight: '50px',
 
               [`&.${tabClasses.selected}`]: {
                 backgroundColor: '#0072e526'
+              },
+
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '12px',
+                p: 1
               }
-            }}
+            })}
           />
         </Tabs>
 
-        <TabPanel id={0}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 3,
-              py: 2
-            }}
-          >
-            <TextField fullWidth required id="filled-required" label="Имя" variant="outlined" />
-            <TextField fullWidth required id="filled-required" label="Телефон" variant="outlined" />
-            <TextField fullWidth required id="filled-required" label="Email" variant="outlined" />
-
-            <TextField
-              fullWidth
-              id="outlined-multiline-static"
-              multiline
-              required
-              rows={4}
-              label="Введите ваше сообщение"
-              variant="outlined"
-            />
-          </Box>
+        <TabPanel index={0} value={value}>
+          <ContactByEmailForm close={onClose} />
         </TabPanel>
 
-        <TabPanel id={1}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 3,
-              py: 2
-            }}
-          >
-            <TextField fullWidth required id="filled-required" label="Имя" variant="outlined" />
-            <TextField fullWidth required id="filled-required" label="Телефон" variant="outlined" />
-          </Box>
+        <TabPanel index={1} value={value}>
+          <ContactByCallbackForm close={onClose} />
         </TabPanel>
       </DialogContent>
-
-      <DialogActions
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          px: 3,
-          py: 2
-        }}
-      >
-        <Button
-          sx={{ textTransform: 'initial' }}
-          size="large"
-          variant="outlined"
-          disableElevation
-          onClick={closeContactModal}
-        >
-          Закрыть
-        </Button>
-        <Button sx={{ textTransform: 'initial' }} size="large" variant="contained" disableElevation>
-          Отправить
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 }

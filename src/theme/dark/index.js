@@ -48,7 +48,7 @@ export default createTheme({
         },
         'html, body': {
           maxWidth: '100vw',
-          overflowX: 'hidden',
+          // overflowX: 'hidden',
           backgroundColor: 'rgb(26, 32, 53) !important',
           transition: 'background-color .25s ease'
           // height: '100%'

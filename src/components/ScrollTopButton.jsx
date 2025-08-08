@@ -6,15 +6,15 @@ export default function ScrollTopButton() {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
-    document.body.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      document.body.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const handleScroll = () => {
-    if (document.body.scrollTop > 300) {
+    if (window.scrollY > 300) {
       setIsButtonVisible(true);
     } else {
       setIsButtonVisible(false);
@@ -22,7 +22,7 @@ export default function ScrollTopButton() {
   };
 
   const scrollToTop = () => {
-    document.body.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

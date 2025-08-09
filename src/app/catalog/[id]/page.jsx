@@ -36,9 +36,6 @@ export default function CatalogItem() {
 
   useEffect(() => {
     loadOil();
-
-    // const product = ITEMS.find((item) => item.id === Number(params.id));
-    // setData(product);
   }, []);
 
   const loadOil = async () => {
@@ -46,33 +43,22 @@ export default function CatalogItem() {
 
     const { data } = await axios.get(`/api/products/search/${params.id}`);
 
-    setData(data);
+    const dataFormatted = {
+      ...data,
+      tare: [...data.tare].sort((a, b) => {
+        const numA = parseFloat(a.name.replace(',', '.'));
+        const numB = parseFloat(b.name.replace(',', '.'));
+        return numA - numB;
+      })
+    };
+
+    setData(dataFormatted);
     setIsLoading(false);
   };
 
   const onGoBackClick = () => {
     router.back();
   };
-
-  const handleChange = (event, newValue) => {
-    setTabValue(newValue);
-  };
-
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-      </div>
-    );
-  }
 
   function createData() {
     if (data) {

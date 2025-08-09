@@ -166,7 +166,9 @@ export default function Catalog() {
 
   const loadMore = () => {
     if (checkHasMore()) {
-      loadOils(page + 1, categoryId, null, false, true);
+      const queryString = getQueryString(filtersState);
+
+      loadOils(page + 1, categoryId, queryString, false, true);
       setPage((prevPage) => prevPage + 1);
     }
   };
@@ -236,6 +238,16 @@ export default function Catalog() {
     scrollToTop();
   };
 
+  const getQueryString = (filters) => {
+    return Object.entries(filters).reduce((result, [key, value], index) => {
+      if (value.length > 0) {
+        return index === 0 ? result + `${key}=${value.join(',')}` : result + `&${key}=${value.join(',')}`;
+      }
+
+      return result;
+    }, '');
+  };
+
   const onFiltersChange = (data, page = 0) => {
     const filtersStateUpdated = {
       ...filtersState,
@@ -246,13 +258,7 @@ export default function Catalog() {
       setFiltersState(filtersStateUpdated);
     }
 
-    const queryString = Object.entries(filtersStateUpdated).reduce((result, [key, value], index) => {
-      if (value) {
-        return index === 0 ? result + `${key}=${value.join(',')}` : result + `&${key}=${value.join(',')}`;
-      }
-
-      return result;
-    }, '');
+    const queryString = getQueryString(filtersStateUpdated);
 
     loadOils(page, categoryId, queryString);
     setPage(page);

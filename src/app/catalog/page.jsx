@@ -93,7 +93,7 @@ export default function Catalog() {
     fetchData();
   }, []);
 
-  const setInitialFiltersState = (filters) => {
+  const setInitialFiltersState = (filters = []) => {
     setFiltersState(() => {
       const res = {};
 
@@ -132,7 +132,7 @@ export default function Catalog() {
       setPagesCount(totalPages);
       setTotalCount(count);
 
-      const dataFormatted = products.map((item) => {
+      const dataFormatted = products?.results.map((item) => {
         return {
           id: item.id,
           name: item.name,

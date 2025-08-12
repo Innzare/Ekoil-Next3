@@ -34,7 +34,7 @@ import HeaderSection from '@/components/HeaderSection';
 import HideImageOutlinedIcon from '@mui/icons-material/HideImageOutlined';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Pagination from '@mui/material/Pagination';
+// import Pagination from '@mui/material/Pagination';
 
 import axios from 'axios';
 
@@ -43,12 +43,13 @@ import Stack from '@mui/material/Stack';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 
 import { CATEGORIES } from '@/consts/products';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const LIMIT = 12;
 
 export default function Catalog() {
   const router = useRouter();
+  const params = useSearchParams();
   const mainSectionRef = useRef(null);
 
   const theme = useTheme();
@@ -86,19 +87,31 @@ export default function Catalog() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const filters = await loadOils(page, categoryId, null, true);
+      const queryObject = Object.fromEntries(params.entries());
+      const initialCategoryId = queryObject.usage || 'M';
+      setCategoryId(initialCategoryId);
+
+      const filters = await loadOils(page, initialCategoryId, params.toString(), true);
       setInitialFiltersState(filters);
     };
 
     fetchData();
   }, []);
 
-  const setInitialFiltersState = (filters = []) => {
+  const setInitialFiltersState = (filters = [], isClear = false) => {
     setFiltersState(() => {
       const res = {};
 
+      const queryObject = Object.fromEntries(params.entries());
+
       filters.forEach((item) => {
-        res[item?.field_value] = [];
+        if (!isClear && queryObject[item.field_value]) {
+          res[item.field_value] = queryObject[item.field_value].split(',').map((i) => Number(i));
+        } else {
+          res[item.field_value] = [];
+        }
+
+        // res[item?.field_value] = [];
       });
 
       return res;
@@ -227,13 +240,17 @@ export default function Catalog() {
 
     const filters = await loadOils(0, newCategoryId, null, true);
 
-    setInitialFiltersState(filters);
+    window.history.replaceState({}, '', `/catalog?usage=${newCategoryId}`);
+
+    setInitialFiltersState(filters, true);
     scrollToTop();
   };
 
   const onClearFilters = () => {
-    setInitialFiltersState(filters);
+    window.history.replaceState({}, '', `/catalog`);
+
     loadOils(0, categoryId);
+    setInitialFiltersState(filters, true);
     setPage(0);
     scrollToTop();
   };
@@ -258,7 +275,12 @@ export default function Catalog() {
       setFiltersState(filtersStateUpdated);
     }
 
-    const queryString = getQueryString(filtersStateUpdated);
+    const queryString =
+      categoryId === 'M'
+        ? getQueryString(filtersStateUpdated)
+        : `usage=${categoryId}&${getQueryString(filtersStateUpdated)}`;
+
+    window.history.replaceState({}, '', `/catalog?${queryString}`);
 
     loadOils(page, categoryId, queryString);
     setPage(page);

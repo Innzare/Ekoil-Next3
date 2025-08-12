@@ -265,7 +265,7 @@ export default function (props) {
                   Скачать каталог
                 </MenuItem>
 
-                <MenuItem
+                {/* <MenuItem
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
@@ -276,7 +276,7 @@ export default function (props) {
                 >
                   <EmailIcon color="primary" />
                   Отправить каталог на почту
-                </MenuItem>
+                </MenuItem> */}
               </Menu>
 
               <Button

@@ -120,7 +120,7 @@ export default function CatalogItem() {
     const tareId = data?.tare[activeTara].id;
 
     if (data) {
-      return data?.images.find((item) => Number(item.tare.id) === Number(tareId))?.url;
+      return data?.images.find((item) => Number(item.tare?.id) === Number(tareId))?.url || data?.images[0].url;
     }
 
     return null;

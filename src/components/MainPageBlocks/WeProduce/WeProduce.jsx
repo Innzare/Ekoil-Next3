@@ -45,18 +45,22 @@ import {
 
 const weProduceItems = [
   {
+    categoryValue: 'M',
     title: 'Моторные масла',
     icon: Tara
   },
   {
+    categoryValue: 'T',
     title: 'Трансмиссионные масла',
     icon: Tara2
   },
   {
+    categoryValue: 'I',
     title: 'Индустриальные масла',
     icon: Tara3
   },
   {
+    categoryValue: 'A',
     title: 'Антифризы',
     icon: Tara4
   }
@@ -76,6 +80,7 @@ const products = [
   {
     badge: 'Passenger Vehicle Lubricant',
     title: 'Масла для легкового транспорта',
+    link: '/catalog?usage=M&vehicle_types=1',
     list: [
       'Для бензиновых и дизельных двигателей легковых автомобилей, микроавтобусов и лёгких грузовиков',
       'Для двухтактных бензиновых двигателей',
@@ -87,6 +92,7 @@ const products = [
   {
     badge: 'Commercial Vehicle Lubricants',
     title: 'Масла для коммерческого транспорта',
+    link: '/catalog?usage=M&vehicle_types=2',
     list: [
       'Для дизельных двигателей тяжёлых грузовиков, шоссейной и внедорожной техники',
       'Для использования в механических и автоматических трансмиссиях грузовых автомобилей и другой мобильной техники',
@@ -97,6 +103,7 @@ const products = [
   {
     badge: 'Small-sized Vehicle Lubricants',
     title: 'Масла для малоразмерной техники',
+    link: '/catalog?usage=M&vehicle_types=3',
     list: [
       'Для использования в двухтактных и четырехтактных бензиновых двигателях мотоциклов, мопедов, скутеров, снегоходов, квадроциклов, гидроциклов и другой техники.'
     ],
@@ -105,6 +112,7 @@ const products = [
   {
     badge: 'Industrial Lubricants',
     title: 'Индустриальные масла',
+    link: '/catalog?usage=I',
     list: [
       'Для применения в различном промышленном оборудовании — гидравлических системах, станках, редукторах, прессах, прокатных станах и т.д.'
     ],
@@ -355,7 +363,7 @@ export default function About() {
                 }
               })}
             >
-              <Link href="/catalog">
+              <Link href={product.link}>
                 <Chip
                   label={product.badge}
                   variant="filled"
@@ -437,7 +445,7 @@ export default function About() {
                 }
               })}
             >
-              <Link href="/catalog">
+              <Link href={product.link}>
                 <Button
                   rounded
                   endIcon={<ArrowOutwardIcon />}

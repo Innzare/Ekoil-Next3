@@ -165,25 +165,25 @@ export default function Footer() {
               }
             >
               <ListItemButton sx={{ borderRadius: '8px' }}>
-                <Link href="/catalog">
+                <Link href="/catalog?usage=M">
                   <ListItemText primary="Моторные масла" />
                 </Link>
               </ListItemButton>
 
               <ListItemButton sx={{ borderRadius: '8px' }}>
-                <Link href="/catalog">
+                <Link href="/catalog?usage=T">
                   <ListItemText primary="Трансмиссионные масла" />
                 </Link>
               </ListItemButton>
 
               <ListItemButton sx={{ borderRadius: '8px' }}>
-                <Link href="/catalog">
+                <Link href="/catalog?usage=I">
                   <ListItemText primary="Индустриальные масла" />
                 </Link>
               </ListItemButton>
 
               <ListItemButton sx={{ borderRadius: '8px' }}>
-                <Link href="/catalog">
+                <Link href="/catalog?usage=A">
                   <ListItemText primary="Антифризы" />
                 </Link>
               </ListItemButton>

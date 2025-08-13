@@ -11,6 +11,7 @@ import {
   InputAdornment,
   Menu,
   MenuItem,
+  Link as MuiLink,
   TextField,
   List,
   ListItemButton,
@@ -40,7 +41,7 @@ export default function (props) {
   // const [isSticky, setIsSticky] = useState(false);
   const theme = useTheme();
   const isMinWidth1400 = useMediaQuery('(min-width:1400px)');
-  const isMinWidth1060 = useMediaQuery('(min-width:1060px)');
+  const isMinWidth1120 = useMediaQuery('(min-width:1120px)');
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -132,7 +133,7 @@ export default function (props) {
         Свяжитесь с нами!
       </Button> */}
 
-        {isMinWidth1060 && (
+        {isMinWidth1120 && (
           <List component="nav" dense sx={{ display: 'flex' }}>
             {sidenav.map((item) => {
               const isCurrentPath = pathname === item.path;
@@ -195,7 +196,7 @@ export default function (props) {
 
           {/* <Link href="/products">
           </Link> */}
-          {isMinWidth1060 ? (
+          {isMinWidth1120 ? (
             <>
               <Button
                 onClick={handleClick}
@@ -252,18 +253,24 @@ export default function (props) {
                   </MenuItem>
                 </Link>
 
-                <MenuItem
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    p: 2
-                  }}
-                  onClick={handleClose}
+                <MuiLink
+                  href="https://s3.ru1.storage.beget.cloud/f0129501231a-ekoil/Экойл каталог 2024.pdf"
+                  target="_blank"
+                  sx={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <FileDownloadIcon color="primary" />
-                  Скачать каталог
-                </MenuItem>
+                  <MenuItem
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      p: 2
+                    }}
+                    onClick={handleClose}
+                  >
+                    <FileDownloadIcon color="primary" />
+                    Скачать каталог
+                  </MenuItem>
+                </MuiLink>
 
                 {/* <MenuItem
                   sx={{

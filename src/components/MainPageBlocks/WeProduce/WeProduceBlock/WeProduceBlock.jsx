@@ -11,23 +11,24 @@ import {
 } from './styles';
 
 export default function WeProduceBlock({ item }) {
-  const { icon: Icon } = item;
+  const { icon: Icon, categoryValue = 'M' } = item;
 
   return (
-    <WeProduceBlockWrapper image={Icon}>
-      <WeProduceBlockTitle variant="h6">{item.title}</WeProduceBlockTitle>
+    <Link href={`/catalog?usage=${categoryValue}`}>
+      <WeProduceBlockWrapper image={Icon}>
+        <WeProduceBlockTitle variant="h6">{item.title}</WeProduceBlockTitle>
 
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: '-20%',
-          right: '-10%',
-          width: '75%'
-        }}
-      >
-        <img src={Icon.src} alt="ekoil-product" width="100%" />
-      </Box>
-      <Link href="/catalog">
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: '-20%',
+            right: '-10%',
+            width: '75%'
+          }}
+        >
+          <img src={Icon.src} alt="ekoil-product" width="100%" />
+        </Box>
+
         <Button
           rounded
           endIcon={<ArrowOutwardIcon />}
@@ -63,7 +64,7 @@ export default function WeProduceBlock({ item }) {
         >
           {/* Каталог */}
         </Button>
-      </Link>
-    </WeProduceBlockWrapper>
+      </WeProduceBlockWrapper>
+    </Link>
   );
 }

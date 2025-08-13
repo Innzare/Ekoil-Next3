@@ -350,7 +350,8 @@ export default function Catalog() {
                     fontWeight: 800
                   }}
                 >
-                  {CATEGORIES.find((item) => item.id === categoryId)?.title || ''} ({totalCount})
+                  {CATEGORIES.find((item) => item.id === categoryId)?.title || ''} (
+                  {isCategoriesLoading || isOilsLoading ? 0 : totalCount})
                 </Typography>
 
                 {isTablet ? (
